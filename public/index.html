@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rohit Mittal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./homepage/index.css">
+    <link rel="stylesheet" href="./blog/index.css">
+    <link rel="stylesheet" href="./video/index.css">
+    <link rel="stylesheet" href="./login/index.css">
+    <link rel="stylesheet" href="./testimonial/index.css">
+    <link rel="stylesheet" href="./connect/index.css">
+    <link rel="stylesheet" href="./about/index.css">
+    <!--<link rel="stylesheet" href="./school/index.css">
+    <link rel="stylesheet" href="./college/index.css">
+    <link rel="stylesheet" href="./oneOnOne/index.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js" type="text/javascript"></script>-->
+    
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-route.min.js" type="text/javascript"></script>
+    
+    <!-- Firebase -->
+    <!--<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+    
+    <!-- AngularFire -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.min.js"></script>
+    
+    <!--Quill Editor-->
+    
+    <!-- Theme included stylesheets -->
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!--<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">-->
+    
+    <!-- Main Quill library -->
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    
+    <!-- Core build with no theme, formatting, non-essential modules -->
+    <!--<link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet">
+    <script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script>-->
+    
+    <!--fb plugin-->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
+    
+    <script src="./index.js" type="text/javascript"></script>
+    <script src="./homepage/index.js" type="text/javascript"></script>
+    <script src="./blog/index.js" type="text/javascript"></script>
+    <script src="./video/index.js" type="text/javascript"></script>
+    <script src="./login/index.js" type="text/javascript"></script>
+    <script src="./testimonial/index.js" type="text/javascript"></script>
+    <script src="./connect/index.js" type="text/javascript"></script>
+    <script src="./about/index.js" type="text/javascript"></script>
+    <script src="./school/index.js" type="text/javascript"></script>
+    <script src="./college/index.js" type="text/javascript"></script>
+    <script src="./oneOnOne/index.js" type="text/javascript"></script>
+  </head>
+  <body ng-app="rohitMittal">
+    <div ng-controller="appController">
+      <div ng-controller="topnav" ng-show="isVisible()" class="rm-topnav-container" ng-class="{'rm-topnav-fixed': !pixelsScrolled}">
+        <div id="top-header" style="background-color: orange;" class="">
+          <div class="container clearfix">
+            <div id="et-info">
+              <!--<span id="et-info-phone">
+                <i class="fas fa-phone-alt"></i>
+                +91 99999 99999
+              </span>
+              <a href="mailto:mail@mail.com">
+                <span id="et-info-email">
+                  <i class="fas fa-envelope"></i>
+                  mail@mail.com
+                </span>
+              </a>-->
+            </div> <!-- #et-info -->
+            <div class="et-social-media">
+              <span><i class="fab fa-facebook-square"></i></span>
+              <span><i class="fab fa-youtube-square"></i></span>
+              <span id="et-info-phone">
+                <i class="fas fa-phone-alt"></i>
+                +91 99999 99999
+              </span>
+              <a href="mailto:mail@mail.com">
+                <span id="et-info-email">
+                  <i class="fas fa-envelope"></i>
+                  mail@mail.com
+                </span>
+              </a>
+            </div>
+            <!--<div id="et-secondary-menu">
+              <a href="https://priya-kumar.com/cart/" class="et-cart-info">
+                <span>0 Items</span>
+              </a>
+            </div>--> <!-- #et-secondary-menu -->
+    
+          </div> <!-- .container -->
+        </div>
+        <div class="rm-menu-items">
+          <div ng-click="redirectToUrl('/modifyData')"  onclick="toggleMenu();" ng-if="isLoggedIn" class="rm-topnav-title">
+              Modify Data
+          </div>
+          <div ng-repeat="path in paths" ng-click="redirectTo(path)"  onclick="toggleMenu();" ng-if="(path.title=='Connect Results' &&  isLoggedIn) || path.title!=='Connect Results'" class="rm-topnav-title">
+              {{path.title}}
+              <div ng-if="path.subs" class="sub-paths">
+                <div class="sub-path" ng-repeat="subpath in path.subs"  ng-click="redirectTo(subpath)">{{subpath.title}}</div>
+              </div>
+          </div>
+        </div>
+        <div onclick="toggleMenu();" class="rm-menu-icon"><i class="fas fa-bars"></i></div>
+      </div>
+      <header ng-show="isVisible('/')" class="main-banner main-banner_home clearfix" style="    background-color: #000000;">
+        <section class="banner-text banner-home">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-offset-4 col-md-7 ">
+                      <div class="slide-text">
+                          <!--<img class="banner-plus" src="assets/images/template/banner-plus.png" alt="">-->
+                          <div class="row">
+                              <div class=" banner-content-rsp" ng-controller="homeController">
+                                  <h1 style="word-break: break-word;" class="text-normal">{{mainHeader}}</h1>
+                                  <h2 style="word-break: break-word;" class="sub-heading" ng-model="subHeader">{{subHeader}}</h2>
+                                  <a href="" class="btn btn-primary-banner ">
+                                      {{headerButton}} <!--<span class="fa fa-chevron-right"></span>-->
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <img class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal">
+        </section>
+        <div ng-click="shouldScrollDown()" class="scroll-down-please text-center" id="scrollDownPlease">
+            <!--<a href="#">-->
+                <span class="fa fa-chevron-down fa-2x"></span>
+            <!--</a>-->
+        </div>
+      </header>
+      <div ng-view></div>
+      <div class="rm-popup-parent" ng-if="confirm">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Confirmation</div>
+            <div>Do you wish to proceed?</div>
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="canAddNew()">No</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewTestimonial()">Yes</button>
+            </div>
+        </div>
+      </div>
+      <div class="rm-popup-parent" ng-if="canConnect">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Connect with us</div>
+            <input placeholder="Name" type="text" required ng-model="newConnect.author">
+            <input placeholder="Occupation" type="text" required ng-model="newConnect.occupation">
+            <input placeholder="Phone Number" type="text" required ng-model="newConnect.phone">
+            <input placeholder="Message" required type="text" ng-model="newConnect.message">
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="toggleConnect()">Cancel</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewConnect()">Send</button>
+            </div>
+        </div>
+      </div>
+      <div aria-live="polite" aria-atomic="true" style="position: fixed;top: 10px;height: 80px;left: 20px;width: 210px;">
+        <div data-delay="8000" class="toast" id="toast" style="position: absolute; top: 0; right: 0;">
+          <!--<div class="toast-header">
+            <strong class="mr-auto">Alert&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+            <small>Just Now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>-->
+          <div class="toast-body">
+            Hi, please fill all the values to proceed!
+          </div>
+        </div>
+      </div>
+      <div class="scroll-top-anchor" ng-click="scrollToTop()" ng-if="canScrollTop"><i class="fas fa-chevron-up"></i></div>
+      <footer>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-4">
+                    <div class="fb-page" data-href="https://www.facebook.com/channelvindia/" data-tabs="timeline" data-width="" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                      <blockquote cite="https://www.facebook.com/channelvindia/" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/channelvindia/">Facebook</a>
+                      </blockquote>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div name=iframe style="width:100%; height:200px; border:2px solid grey; overflow:hidden">
+                      <!--<iframe src="https://www.youtube.com/channel/UCP1iRaFlS5EYjJBryFV9JPw" style="width:100%; height:200px; margin-top: -65px" scrolling=true>
+                         If you can see this, your browser doesn't support iframes. Click <a href=http://mychannel.url>here to
+                         see my YouTube channel.</a>-->
+                    </div> 
+                  </div>
+                  <div class="col-md-4">
+                    <div class="footer-text" style="padding: 0px 70px;">
+                      <div id="et-info-phone" style="padding: 5px;">
+                        <i class="fas fa-phone-alt"></i>
+                        +91 99999 99999
+                      </div>
+                      <div style="padding: 5px;">
+                        <a href="mailto:mail@mail.com" style="color: rgba(255, 255, 255, 0.5);">
+                          <span id="et-info-email">
+                            <i class="fas fa-envelope"></i>
+                            mail@mail.com
+                          </span>
+                        </a>
+                      </div>
+                      <div style="padding: 5px;">
+                        © All rights reserved.
+                      </div>
+                        <!--<a href="/terms-and-conditions">Terms of Use</a> | <a href="/privacy-policy">Privacy Policy</a> | <a href="http://forlogis.com/" target="_blank">Created by Forlogis</a>-->
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </footer>
+    </div>
+  </body>
+</html>

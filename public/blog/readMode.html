@@ -1,0 +1,24 @@
+<div ng-controller="blogReadController" class="rm-blog-page">
+    <section class="articles latest-articles" id="blogdiv" data-page="1" data-category="">
+        <div class="container blog-read-container">
+            <div class="row">
+                <div class="blog-container">
+                    <a href="blog/index">
+                        <img ng-src={{blog.imgUrl}}>
+                    </a>
+                    <div class="blog-text blog-body">
+                        <div class="title">
+                            <a href="blog/indexl">
+                                {{blog.title}}
+                            </a>
+                        </div>
+                        <div id="toolbar" style="display: none;"></div>
+                        <div id="editor-view" style="border: none;"></div>
+                        <!--<span > 
+                            {{blog.text}}
+                        </span>-->
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>

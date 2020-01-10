@@ -1,0 +1,45 @@
+<div ng-controller="blogController" class="rm-blog-page page" style="margin-top: 0px;">
+<!--<div ng-controller="blogController" class="page">-->
+    <section class="row rm-section" style="min-height: 300px;">
+        <div class="about-main-heading"style="padding: 50px;font-size: 30px;height: auto;">
+            Rohit’s blog is one of the best resources for a young mind with a fire to become something. It is an
+            absolute must for an aspirant of any competitive exam. Here you can learn how to manage your
+            inner self for the highest levels of productivity, enhanced creativity, roaring confidence and
+            everlasting happiness.
+        </div>
+    </section>
+    <div class="blog-cat-container">
+        <div class="blog-cat" ng-class="{'blog-cat-selected': catFilter==cat}" ng-click="getFilteredBlogs(cat)" ng-repeat="cat in blogCats">{{cat}}</div>
+    </div>
+    <section class="articles latest-articles" id="blogdiv" data-page="1" data-category="">
+        <div class="container">
+            <div id="blogItems" class="row">
+                <div ng-repeat="blog in blogs" class="col-sm-6 col-md-4">
+                    <div class="item-article-blog edit-blog">
+                        <!--<a ng-href="/#!/blog/{{$index}}">-->
+                            <img ng-src={{blog.imgUrl}}>
+                        <!--</a>-->
+                        <div class="item-head">
+                            <!--<a >-->
+                               {{blog.title}}
+                            <!--</a>-->
+                        </div>
+                        <div class="rm-blog-sub-body">
+                            <div></div>
+                            <div>
+                                {{blog.text.substring(0,200)+"..."}}
+                            </div>
+                            <span class="rm-blog-readmore"><a ng-href="/#!/blog/{{$index}}">Read more</a></span>
+                        </div>
+                        <div class="edit-delete-buttons" ng-if="isLoggedIn">
+                            <button class="btn btn-primary btn-ghost" ng-click="editBlog($index)">Edit</button>
+                            <button class="btn btn-primary btn-ghost" ng-click="deleteBlog($index)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="isLoggedIn">
+                    <i ng-click="editBlog()" style="cursor: pointer;font-size: 70px; margin-top: 145px; margin-left: 80px; background: -webkit-linear-gradient(#EC6C01, #FFAE01);-webkit-background-clip: text;-webkit-text-fill-color: transparent;" class="fas fa-plus"></i>
+                </div>
+            </div>
+    </section>
+</div>

@@ -1,0 +1,292 @@
+<div ng-controller="homeController">
+    <div class="rm-home-about"></div>
+    <div class="rm-home-ebook">
+        <div class="header">Receive “The Little Black Book for Stunning Success” for free [$29 value]</div>
+        <div class="sub-header">Please enter your name and email to get Rohit’s best-selling eBook + absolutely premium video content for your professional and personal acceleration.</div>
+        <div class="social-media">
+            <a class="facebook"><img>Join our 4M+ Movement</a>
+            <a class="youtube"><img>Mastery Sessions</a>
+        </div>
+    </div>
+    <section class="blogs-videos">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5ths">
+                    <div class="item-article-heading">
+                        <h4 class="sub-heading">High-Value<span></span></h4>
+                        <h3>Articles</h3>
+                        <a href="/#!/blog" class="btn btn-primary btn-ghost">Read more</a>
+                    </div>
+                </div>
+                <div ng-repeat="tile in jsonData.data.blogs" class="col-sm-6 col-md-5ths">
+                    <div class="item-article">
+                        <a ng-href="/#!/blog/{{$index}}">
+                            <div class="item-img_md">
+                                <img src={{tile.imgUrl}}>
+                            </div>
+                            <div class="item-head">
+                                <div>
+                                    {{tile.title}}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!--<div ng-repeat="tile in jsonData.data.blogs" class="tile">
+                    <a>
+                        <div class="img-container"></div>
+                        <div class="title-container"><div style="height: 63px;line-height: 20px;overflow: hidden;">{{tile.title}}</div></div>
+                    </a>
+                </div>-->
+            </div>
+            <div class="row videos">
+                <div class="col-md-5ths">
+                    <div class="item-article-heading">
+                        <h4 class="sub-heading">Premium<span></span></h4>
+                        <h3>Videos</h3>
+                        <a href="/#!/videos" class="btn btn-primary btn-ghost">View more</a>
+                    </div>
+                </div>
+                <div ng-repeat="tile in jsonData.data.videos" class="col-sm-6 col-md-4ths">
+                    <div class="item-article" ng-init="link = getUrl($index)" ng-if="$index<3" >
+                        <!--<a href="article/60-tips-for-a-stunningly-great-life">
+                            <div class="item-img_md">
+                                <img src={{tile.imgUrl}} >
+                            </div>
+                            <div class="item-head">
+                                <div>
+                                    {{tile.title}}
+                                </div>
+                            </div>
+                        </a>-->
+                        <iframe width="100%" height="230px" ng-src="{{trustSrc(link)}}" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!--<div ng-repeat="tile in jsonData.data.blogs" class="tile">
+                    <a>
+                        <div class="img-container"></div>
+                        <div class="title-container"><div style="height: 63px;line-height: 20px;overflow: hidden;">{{tile.title}}</div></div>
+                    </a>
+                </div>-->
+            </div>
+        </div>
+    </section>
+    <section class="my-story">
+        <img src="./../img/my_story.jpg">
+        <h1>
+            <span>My Story</span>
+        </h1>
+        <div class="quote">
+             "I believe that success is finding our purpose, and then 
+            designing a life that embraces it." 
+        </div>
+        <div class="download-btns">
+            <div class="stry-btn">
+                <a href="blog" class="btn btn-primary btn-ghost">My Story</a>
+            </div>
+            <div class="stry-btn">
+                <a href="blog" class="btn btn-primary btn-ghost">Quick Bio</a>
+            </div>
+            <div class="stry-btn">
+                <a href="blog" class="btn btn-primary btn-ghost">LinkedIn Profile</a>
+            </div>
+            <div class="stry-btn">
+                <a href="blog" class="btn btn-primary btn-ghost">Download Profile</a>
+            </div>
+        </div>
+    </section>
+    <section class="live-events">
+        <div class="container">
+        <h2 class="events-heading text-normal">Live Events with Rohit</h2>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="item-event item-1">
+                    <img class="hover-plus" >
+                    <div class="hover-item">
+                        <img class="cover-img img-responsive center-block">
+                        <div class="properties-event">
+                            <h3 class="heading-event">
+                                Personal Mastery Academy<span>™</span>
+                            </h3>
+                            <div class="text-event">
+                                Do you want to learn how the most succesful people on the planet bulletproof their minds
+                                to achieve epic results?
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="info-event event-date">
+                                        <h4>Date</h4>
+                                        June 8-9
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-event">
+                                        <h4>Place</h4>
+                                        Toronto (Canada)
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="col-xs-6 col-sm-4">
+                                    <div class="info-event">
+                                        <h4>Tuition fee</h4>
+                                        $5,000
+                                    </div>
+                                </div>
+                                -->
+                            </div>
+                            <div class="text-center">
+                                <!--<a href="#" class="btn btn-primary">Secure Seat</a>-->
+                                <a href="/" target="_blank" class="btn btn-primary btn-ghost">Details + Waiting List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="item-event item-2 hide-event-item">
+                    <img class="hover-plus" src="assets/images/template/plus.png" alt="Plus">
+                    <div class="hover-item">
+                        <img class="cover-img img-responsive center-block" >
+                        <div class="properties-event">
+                            <h3 class="heading-event">
+                                The Titan Summit<span>™</span>
+                            </h3>
+                            <div class="text-event">
+                                Only for people interested in becoming empire-builders+history-makers. <br><br>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="info-event event-date">
+                                        <h4>Date</h4>
+                                        December 8-11
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-event">
+                                        <h4>Place</h4>
+                                        Toronto (Canada)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="/" target="_blank" class="btn btn-primary btn-ghost">Details + Waiting List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 item-3 hide-event-item">
+                <div class="item-event">
+                    <img class="hover-plus" src="assets/images/template/plus.png" alt="Plus">
+                    <div class="hover-item">
+                        <div class="item-event_img">
+                            <img class="cover-img img-responsive center-block" >
+                        </div>
+                        <div class="properties-event">
+                            <h3 class="heading-event">
+                                IconX<span>™</span>
+                            </h3>
+                            <div class="text-event">
+                                IconX is Rohit’s super elite private mentorship program for industry leaders + global influencers by application only.
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="info-event event-date">
+                                        <h4>Duration</h4>
+                                        1 year
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-event">
+                                        <h4>Place</h4>
+                                        Toronto (Canada)
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="col-xs-6 col-sm-4">
+                                    <div class="info-event">
+                                        <h4>Tuition fee</h4>
+                                        $150,000
+                                    </div>
+                                </div>
+                                -->
+                            </div>
+                            <div class="text-center">
+                                <!--<a href="#" class="btn btn-primary">Buy tickets</a>-->
+                                <a href="/" class="btn btn-primary btn-ghost">Details + Waiting List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="row">
+            <div class="col-sm-12">
+                <div class="pagination pagination-live-events">
+
+
+                    <div class="pagination-numbers">
+
+                        <a class="pagination-1 active" href="#">1</a>
+                        <a class="pagination-2" href="#">2</a>
+                        <a class="pagination-3" href="#">3</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>-->
+    </div>
+    </section>
+    <section id="carousel" class="testimonials">
+        <h1>
+            <span>Testimonials</span>
+        </h1>
+        <div class="container"> 
+          <div class="row"> 
+            <div class="col-md-10 offset-md-1"> 
+              <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="indicator active"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="1" class="indicator "></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="2" class="indicator "></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active item">
+                        <div>
+                            <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                        </div>
+                      </div>
+                      <div class="carousel-item item">
+                        <div>
+                            <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                        </div>
+                      </div>
+                      <div class="carousel-item item">
+                        <div>
+                            <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</div>

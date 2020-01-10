@@ -1,0 +1,15 @@
+<div ng-controller="connectionController" class="rm-blog-page">
+    <div class="rm-popup-parent" ng-if="canConnect">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Connect with us</div>
+            <input placeholder="Name" type="text" required ng-model="newConnect.author">
+            <input placeholder="Occupation" type="text" required ng-model="newConnect.occupation">
+            <input placeholder="Phone Number" type="text" required ng-model="newConnect.phone">
+            <input placeholder="Message" required type="text" ng-model="newConnect.message">
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="toggleConnect()">Cancel</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewConnect()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>

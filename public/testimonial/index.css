@@ -1,0 +1,43 @@
+.testimonial-card-container{
+    float: left;
+    position: relative;
+    z-index: 0;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-between;
+    padding-top: 20px!important;
+    padding-right: 25px!important;
+    padding-bottom: 20px!important;
+    padding-left: 25px!important;
+    box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.3);
+    margin-right: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    height: 300px;
+    overflow-y: auto;
+}
+.testi-1{
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin: auto;
+    border-radius: 100%;
+    background-color: grey;
+}
+.testi-1 img{
+    object-fit: cover;
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    background-color: grey;
+}
+@media only screen and  (max-width:768px){
+    .item{
+        width: 100%;
+        max-width: 100%;
+        flex: auto;
+    }
+}

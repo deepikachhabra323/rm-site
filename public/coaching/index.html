@@ -1,0 +1,217 @@
+<div ng-controller="schoolController" class="rm-blog-page">
+    <section class="row rm-section">
+        <div class="col-5" style="background: black;"><img class="" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal"></div>
+        <div class="col-7 about-main-heading" style="font-size: 34px;line-height: 34px;">
+            Imagine a coaching institute
+            Where success is a habit. Where the students understand why is it that even
+            after the same hard work, only a few succeed. Where the students know how
+            to break free from their inner barriers and perform better than what they think
+            they can.<br/>
+            Where the teaches understand their role as not just academic tutors but as
+            mentors, as guiding light houses to the dream ships of so many students.
+            <br/><br/>
+            If you want your Institution to move in that direction.. Rohit can help you…
+            <div>
+                <button class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Book Rohit</button>
+            </div>
+        </div>
+    </section>
+    <section class="rm-section rm-collaborate"style=" height: auto;">
+        <h1>
+            <span><a style="color:#333333;" href="/#!/testimonials">How can Rohit help you as a speaker?</a></span>
+        </h1>
+        <div class="col-md-6">
+            <div class="rm-sub-title">For Students</div>
+            Most students want to get a selection but
+            don’t want to study and those who do study
+            don’t know how to maximise their
+            productivity and study consistently.
+            That is where Rohit comes in.
+            With more than 3000 hours of study and
+            experience in understanding the dynamics of
+            the human mind and 11 years of experience
+            in preparing and coaching for various
+            competitive exams, he has simplified and
+            decoded the principles of peak performance
+            in any exam. These principles when applied
+            meticulously have proved to yield great
+            results.
+            If you want your students to have that edge
+            over everybody else, Book a workshop with
+            Rohit and feel the difference.
+        </div>
+        <div class="col-md-6">
+            <div class="rm-sub-title">For Teachers</div>
+            A teacher in a coaching institute bears the
+            huge responsibility of making or breaking a
+            child&#39;s future.
+            Every teacher does the best he thinks he
+            can.
+            But is it enough?
+            Competition is increasing day by day. More
+            and more students are joining the race.
+            If you want your institute to stand out, you
+            need to have teachers who want a student&#39;s
+            selection more than the student himself.
+            And more importantly they need to know
+            how to inspire the student to aim for
+            selection as a hungry lion aims for a deer.
+            A session with Rohit can truly entertain your
+            faculty. High morale, increased sincerity,
+            selfless commitment to results and an
+            increase in team spirit are some side
+            effects.
+        </div>
+        <!--<div>
+            <button class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Book Rohit</button>
+        </div>-->
+    </section>
+    <section ng-controller="homeController" id="carousel" class="testimonials">
+        <h1>
+            <span><a style="color:#333333;" href="/#!/testimonials">Testimonials</a></span>
+        </h1>
+        <div class="container"> 
+          <div class="row"> 
+            <div class="col-md-10 offset-md-1"> 
+              <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li ng-repeat="testimonial in testimonials" data-target="#carouselExampleIndicators" data-slide-to={{$index}} ng-if="$index<9" class="indicator" ng-class="{'active':$index==0}"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                      <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" ng-if="$index<9">
+                        <div class="content">
+                            <div style="height: 70%;overflow-y: auto;padding-bottom: 20px;">
+                                <span>{{testimonial.text}}</span>
+                            </div>
+                            <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
+                            <div style="text-align: center;">{{testimonial.author}}</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section class="rm-collaborate rm-section" style="min-height: 720px;">
+        <h1 class="mb-5">The 4 step process to change your life</h1>
+        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
+                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
+                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
+                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <!--</a>-->
+                <div class="icon-box-details">
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
+                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                </div>
+            </div>    
+        </div>
+    </section>
+    <section class="rm-section" style="text-align: center;background-color: #e7eaec;display: none;">
+        <iframe width="70%" height="500px" src="http://www.youtube.com/embed/6nFYtsQBKAk"></iframe>
+    </section>
+    <section class="rm-section rm-collaborate"style=" height: auto; min-height: auto;">
+        <h1>
+            <span><a style="color:#333333;" href="/#!/testimonials">Heading</a></span>
+        </h1>
+        <div class="">Imagine a world in which the vast majority of us wake up inspired, feel safe at work and return home fulfilled at the end of the day.</div>
+        <div>
+            <button class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 50px;" ng-click="">Book</button>
+        </div>
+    </section>
+    <!--<section class="row rm-section">
+        <h1>
+            <span><a style="color:#333333;" href="/#!/testimonials">Heading</a></span>
+        </h1>
+        <div class="col-4">Imagine a world in which the vast majority of us wake up inspired, feel safe at work and return home fulfilled at the end of the day.</div>
+        <div>
+            <button class="btn btn-primary btn-ghost" ng-click="">Book Rohit</button>
+        </div>
+    </section>-->
+</div>

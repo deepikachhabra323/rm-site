@@ -1,0 +1,35 @@
+<div ng-controller="loginController" class="loginPage_left">
+    <div>
+        <img src="/images/rsn-logo.svg">
+    </div>
+    <h2>
+        Welcome back, <br>
+        please login to your account.
+    </h2>
+    <form>
+        <div>
+            <div class="loginPage_input">
+                <label>Email Address</label>
+                <input type="email" name="email" value="" ng-model="email">
+            </div>
+            <div class="loginPage_input">
+                <label>Password</label>
+                <input type="password" name="password" value="" ng-model="password">
+            </div>
+        </div>
+        <div class="loginPage_left_buttons clearfix">
+            <!--<div class="loginPage_forgot">
+                <a href="/forgotten-password">
+                    <span>Forgot your password?</span>
+                </a>
+            </div>-->
+            <div class="clearfix">
+                <div class="loginPage_fll loginPage_buttonsWrapper">
+                    <button class="loginPage_button " ng-click="onLogin()" type="submit">
+                        <span>Sign In</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

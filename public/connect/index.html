@@ -1,0 +1,25 @@
+<div ng-controller="connectController" class="container">
+    <div class="row page">
+        <div>Responses</div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Author</th>
+                <th scope="col">Occupation</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="res in result">
+                <th scope="row">{{$index+1}}</th>
+                <td>{{res.author}}</td>
+                <td>{{res.occupation}}</td>
+                <td>{{res.phone}}</td>
+                <td style="width: 50%">{{res.message}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

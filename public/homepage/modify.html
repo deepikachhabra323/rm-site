@@ -1,0 +1,38 @@
+<div ng-controller="homeController" class="modify-page-container">
+    <div>
+        <div>My Story Quote</div>
+        <textarea ng-model="myStory.title"></textarea>
+        <textarea ng-model="myStory.quote"></textarea>
+    </div>
+    <div>
+        <div>Home Header Section</div>
+        <textarea ng-model="mainHeader" placeholder="Main header"></textarea>
+        <textarea ng-model="subHeader" placeholder="Sub header"></textarea>
+        <textarea ng-model="headerButton" placeholder="Header Button"></textarea>
+    </div>
+    <div>
+        <div>Section Titles</div>
+        <textarea ng-model="blogTitle" placeholder="Articles Title"></textarea>
+        <textarea ng-model="videoTitle" placeholder="Video Title"></textarea>
+    </div>
+    <div>
+        <div>Media Titles</div>
+        <textarea ng-model="fb" placeholder="Facebook Title"></textarea>
+        <textarea ng-model="yt" placeholder="Youtube Title"></textarea>
+    </div>
+    <div>
+        <div>Free Ebook header</div>
+        <!--<textarea ng-model="courseHeader" placeholder="Course Header"></textarea>-->
+        <textarea ng-model="courseSubheader" placeholder="Enter text here"></textarea>
+    </div>
+    <div>
+        <div>Speaker Section</div>
+        <textarea ng-model="speakerHeader" placeholder="Speaker Header"></textarea>
+        <input ng-model="speakerText" placeholder="Speaker Text"></input>
+        <input type="file" ng-model="speakerImage" accept="image/*" app-filereader>
+        <textarea ng-model="speakerButton" placeholder="Button Text"></textarea>
+    </div>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.rm-section{
+    max-height: 500px;
+    min-height: 400px;
+}
+.rm-section div{
+    height: 100%;
+}
+.rm-section img {
+    max-height: 500px;
+}
+.rm-section .about-main-heading{
+    font-size: 54px;
+    line-height: 60px;
+    font-weight: 700;
+}

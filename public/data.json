@@ -1,0 +1,28 @@
+{
+    "blogs":[
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":"./img/blog.jpg"},
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":""},
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":""},
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":""}
+    ],
+    "videos":[
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":"./img/video.jpg",
+        "link":"https://www.youtube.com/watch?v=rrvFv6j3-sM"
+        },
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":"",
+        "link":"https://www.youtube.com/watch?v=Z7dQGXZV1Qk&feature=youtu.be"},
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":"",
+        "link":"https://www.youtube.com/watch?v=Z7dQGXZV1Qk&feature=youtu.be"},
+        {"title":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "imgUrl":"",
+        "link":"https://www.youtube.com/watch?v=Z7dQGXZV1Qk&feature=youtu.be"}
+    ]
+}

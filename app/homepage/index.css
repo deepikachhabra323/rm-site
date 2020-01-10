@@ -1,0 +1,272 @@
+.rm-home-ebook{
+    background: #EC6C01;
+    background: -webkit-linear-gradient(right, #EC6C01, #FFAE01);
+    background: -o-linear-gradient(left, #EC6C01, #FFAE01);
+    background: -moz-linear-gradient(left, #EC6C01, #FFAE01);
+    background: linear-gradient(to left, #EC6C01, #FFAE01);
+    position: relative;
+    padding: 10px 15px;
+    padding-right: 430px;
+    color:#fff;
+    font-size: 18px;
+    padding-left: 100px;
+    height: 320px;
+    box-sizing: border-box;
+}
+.rm-home-ebook .header{
+    font-size: 30px;
+}
+.rm-home-ebook .social-media{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.rm-home-ebook .social-media a {
+    display: block;
+    height: 160px;
+    line-height: 160px;
+    color: #fff;
+    font-size: 25px;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    padding: 0 45px;
+    text-transform: uppercase;
+}
+.rm-home-ebook .social-media a:hover {
+    color: #fff;
+}
+.rm-home-ebook .social-media .facebook{
+    background-color: #fff;
+    color: #39579A;
+}
+.rm-home-ebook .social-media .facebook:hover{
+    background-color: #39579A;
+}
+.rm-home-ebook .social-media .youtube{
+    background-color: #fff;
+    color: #CE1312;
+}
+.rm-home-ebook .social-media .youtube:hover{
+    background-color: #CE1312;
+}
+
+.blogs-videos {
+    padding-top: 100px;
+    padding-bottom: 150px;
+    background-color: #E7EAEC;
+}
+.blogs-videos .blogs{
+    padding: 0px 15px;
+}
+.blogs-videos .videos {
+    margin-top: 100px;
+}
+.item-article {
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.45);
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.blogs-videos .item-article img {
+    max-height: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+.item-article .item-head {
+    padding: 25px 15px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #333333;
+    background-color: #fff;
+    position: relative;
+}
+.item-article .item-head > div {
+    height: 60px;
+    overflow: hidden;
+    line-height: 20px;
+}
+.blogs-videos .item-article-heading {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.blogs-videos .sub-heading,footer .sub-heading {
+    margin-bottom: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    font-style: italic;
+    color: #989BAA;
+}
+.blogs-videos .sub-heading span:after,footer .sub-heading span:after {
+    margin-left: 10px;
+    position: relative;
+    top: -5px;
+    content: ' ';
+    display: inline-block;
+    height: 2px;
+    width: 35px;
+    background-color: #989BAA;
+}
+.blogs-videos h3 {
+    margin-bottom: 35px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #333333;
+}
+.blogs-videos .btn {
+    padding: 12px 20px;
+    text-transform: inherit;
+    font-weight: bold;
+}
+
+.my-story{
+    background-color: #000;
+    color: #fff;
+    padding: 18em 0;
+    position: relative;
+}
+.my-story img{
+    height: 100%;
+    /* width: 33%; */
+    object-fit: contain;
+    bottom: 0px;
+    position: absolute;
+}
+.my-story h1{
+    position: absolute;
+    top: 15%;
+    text-align: center;
+    /* left: 44%; */
+    width: 100%;
+    text-transform: uppercase;
+}
+.my-story .quote{
+    font-size: 30px;
+    text-align: right;
+    padding-left: 43%;
+    padding-right: 5%;
+}
+.my-story .download-btns{
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+}
+.my-story .download-btns div{
+    display: inline-block;
+    margin-left: 20px;
+    text-transform: uppercase;
+}
+
+.live-events {
+    padding-top: 40px;
+    padding-bottom: 120px;
+    background-color: #E7EAEC;
+}
+.live-events .events-heading {
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 0;
+    font-weight: bold;
+    color: #333333;
+}
+.live-events .item-event {
+    margin-bottom: 30px;
+    position: relative;
+}
+.live-events .item-event .hover-plus {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    display: none;
+}
+.live-events .item-event .hover-item {
+    position: relative;
+    overflow: hidden;
+}
+.live-events .item-event:hover, .live-events .item-event:focus {
+    overflow: visible;
+}
+.live-events .item-event .properties-event {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+    color: #fff;
+    -webkit-box-shadow: inset 0px -320px 50px -20px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: inset 0px -320px 50px -20px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0px -320px 50px -20px rgba(0, 0, 0, 0.4);
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+.live-events .img-responsive{
+    height: 550px;
+    background: #878990;
+    width: 360px;
+}
+.live-events .item-event .properties-event .heading-event {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+.live-events .item-event .properties-event .heading-event span {
+    font-size: 15px;
+    position: relative;
+    top: -10px;
+}
+.live-events .item-event .properties-event .text-event {
+    margin-bottom: 25px;
+    font-size: 16px;
+    line-height: 25px;
+}
+.live-events .item-event .properties-event .info-event.event-date {
+    white-space: nowrap;
+}
+.live-events .item-event .properties-event .info-event {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.live-events .item-event .properties-event .info-event h4 {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #C2C1C1;
+}
+.live-events .item-event .btn.btn-ghost {
+    padding: 10px 20px;
+    margin-left: 6px;
+}
+.live-events .item-event .btn {
+    /* width: 48%; */
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px 20px;
+    text-transform: inherit;
+    font-weight: bold;
+}
+
+
+.testimonials {
+    padding: 40px;
+}
+.testimonials .item div{
+    height: 300px;
+    background-color:#e7eaec;
+    border-radius: 6px;
+    margin: auto;
+    max-width: 550px;
+    padding: 50px 25px;
+}
+.testimonials .indicator{
+    background-color: #e7eaec;
+}
+.testimonials .carousel-control-next-icon, .carousel-control-prev-icon{
+    background-color: #e7eaec;
+}
+.testimonials .carousel-indicators{
+    bottom: -40px;
+}
+.testimonials h1{
+    margin: 20px 0px 40px 0px;
+    text-align: center;
+}
+

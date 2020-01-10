@@ -1,0 +1,88 @@
+<div ng-controller="videoController" class="rm-blog-page">
+    <section class="row rm-section" style="min-height: 300px;">
+        <div class="about-main-heading"style="padding: 50px;font-size: 30px;height: auto;">
+            Rohit’s blog is one of the best resources for a young mind with a fire to become something. It is an
+            absolute must for an aspirant of any competitive exam. Here you can learn how to manage your
+            inner self for the highest levels of productivity, enhanced creativity, roaring confidence and
+            everlasting happiness.
+        </div>
+    </section>
+    <div class="blog-cat-container">
+        <div ng-click="changeTab('videos')" ng-class="{'blog-cat-selected':visibleTab=='videos'}" class="blog-cat">Videos</div>
+        <div ng-click="changeTab('playlists')" ng-class="{'blog-cat-selected':visibleTab=='playlists'}" class="blog-cat">Playlists</div>
+    </div>
+    <section class="articles latest-articles" id="blogdiv" style="padding-bottom: 150px;padding-top: 30px;" data-page="1" data-category="">
+        <div class="container">
+            <div ng-show="!showPlaylist" ng-click="togglePlaylistVisibility()"><i class="fas fa-long-arrow-alt-left" style="padding: 5px 10px;font-size: 20px;"></i>back</div>
+            <div class="rm-video-player" id="rm-video-player" ng-show="shouldPlay">
+                <iframe width="100%" height="600px" ng-src="{{currentLink}}" allowfullscreen></iframe>
+            </div>
+            <div id="blogItems" class="row" ng-if="visibleTab=='videos'">
+                <div ng-repeat="item in videos" class="col-sm-6 col-md-4">
+                    <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link)">
+                        <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
+                        <img ng-src="{{item.thumbnail.url}}">
+                        <i class="fas fa-play rm-play-button"></i>
+                        <div>{{item.title}}</div>
+                        <div ng-if="isLoggedIn" style="padding: 10px;">
+                            <textarea style="width: 100%;" ng-model="item.url"></textarea>
+                        </div>
+                        <div ng-if="isLoggedIn" class="edit-delete-buttons">
+                            <button class="btn btn-primary btn-ghost" ng-click="editVideo(item,$index)">Update</button>
+                            <button class="btn btn-primary btn-ghost" ng-click="deleteVideo($index)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="isLoggedIn">
+                    <i ng-click="canAddNew()" style="font-size: 70px; margin-top: 145px; margin-left: 80px; background: -webkit-linear-gradient(#EC6C01, #FFAE01);-webkit-background-clip: text;-webkit-text-fill-color: transparent;" class="fas fa-plus"></i>
+                </div>
+            </div>
+            <div class="playlist-body" ng-if="visibleTab=='playlists'">
+                <div ng-show="showPlaylist">
+                    <div ng-repeat = "playlist in playlists" class="col-sm-6 col-md-4 " ng-click="togglePlaylistVideos(playlist)">
+                        <div class="item-article">
+                            <img ng-src="{{playlist.thumbnail}}">
+                            <i class="fas fa-play rm-play-button"></i>
+                            <div>{{playlist.pName}}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div ng-show="!showPlaylist" class="rm-playlist-videos">
+                    <div ng-repeat="video in currentPlaylist.videos" class="col-sm-6 col-md-4"  >
+                        <div class="item-article" ng-init="link = getPlaylistVideoUrl(video.snippet.resourceId.videoId)"  ng-click="playVideo(link)">
+                            <img ng-src="{{video.snippet.thumbnails.medium.url}}">
+                            <i class="fas fa-play rm-play-button"></i>
+                            <div>{{video.snippet.title}}</div>
+                            <!--<iframe width="100%" height="260px" ng-bind="video" ng-src="{{link}}" allowfullscreen></iframe>-->
+                        </div>
+                    </div>
+                </div>
+                <!--<div ng-if="isLoggedIn">-->
+                    <i ng-click="canAddNewPlaylist()" style="font-size: 70px; margin-top: 145px; margin-left: 80px; background: -webkit-linear-gradient(#EC6C01, #FFAE01);-webkit-background-clip: text;-webkit-text-fill-color: transparent;" class="fas fa-plus"></i>
+                <!--</div>-->
+            </div>
+        </div>
+    </section>
+    <div class="rm-popup-parent" ng-if="addNew">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Add new YouTube Url</div>
+            <input placeholder="Enter Url" type="text" ng-model="newUrl.url">
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="canAddNew()">Cancel</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewUrl()">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="rm-popup-parent" ng-if="addNewPlaylist">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Add new YouTube Playlist</div>
+            <input placeholder="Enter Playlist Name" type="text" ng-model="newPlaylist.name">
+            <input placeholder="Enter playlist Url" type="text" ng-model="newPlaylist.url">
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="canAddNewPlaylist()">Cancel</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewPlaylist()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

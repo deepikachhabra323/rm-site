@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Rohit Mittal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./homepage/index.css">
+    <link rel="stylesheet" href="./blog/index.css">
+    <link rel="stylesheet" href="./video/index.css">
+    <link rel="stylesheet" href="./login/index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js" type="text/javascript"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-route.min.js" type="text/javascript"></script>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <script src="./index.js" type="text/javascript"></script>
+    <script src="./homepage/index.js" type="text/javascript"></script>
+    <script src="./blog/index.js" type="text/javascript"></script>
+    <script src="./video/index.js" type="text/javascript"></script>
+    <script src="./login/index.js" type="text/javascript"></script>
+  </head>
+  <body ng-app="rohitMittal">
+    <div ng-controller="appController">
+      <div ng-controller="topnav" ng-show="isVisible()" class="rm-topnav-container" ng-class="{'rm-topnav-fixed': !pixelsScrolled}">
+        <div ng-repeat="path in paths" ng-click="redirectTo(path)" class="rm-topnav-title">
+            {{path.title}}
+        </div>
+      </div>
+      <header ng-show="isVisible('/')" class="main-banner main-banner_home clearfix" style="background-color: #000;">
+        <section class="banner-text banner-home">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-offset-4 col-md-7 ">
+                      <div class="slide-text">
+                          <!--<img class="banner-plus" src="assets/images/template/banner-plus.png" alt="">-->
+                          <div class="row">
+                              <div class="col-md-offset-3 col-md-9 banner-content-rsp">
+                                  <h2 class="sub-heading">Begin your personal mastery + leadership journey with me here</h2>
+                                  <h1 class="text-normal">Own Your Genius. Lead <br class="hidden-lg hidden-md hidden-xs"> Your Field.
+                                      Impact the World.</h1>
+                                  <a href="" class="btn btn-primary ">
+                                      Learn more <span class="fa fa-chevron-right"></span>
+                                  </a>
+                                  <div class="slide-text-signature">
+                                      
+                                      <p>Celebrated Leadership Expert + Advisor to Business Titans + Humanitarian</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <img class="person-banner img-responsive center-block" src="./img/home.jpg" alt="Rohit Mittal">
+        </section>
+        <div class="scroll-down-please text-center" id="scrollDownPlease">
+            <a href="#">
+                <span class="fa fa-chevron-down fa-2x"></span>
+            </a>
+        </div>
+      </header>
+      <div ng-view></div>
+      <footer>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8">
+                      <h4 class="sub-heading" style="margin-bottom: 10px;">Why Rohit Mittal is a leader to leaders<span></span></h4>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <p class="footer-about-robin">
+                                  Rohit Mittal is one of the top leadership experts in the world. His work is embraced by rock
+                                  stars, royalty, billionaires and many celebrity CEOs. With over 15,000,000 books sold,
+                                  clients such as Starbucks, Nike, GE, The Coca-Cola Company, NASA and Microsoft are using
+                                  his leadership methods to drive real growth + top performance.
+                              </p>
+                          </div>
+                          
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <h4 class="sub-heading">Stay connected with Rohit daily<span></span></h4>
+                      <ul class="social-icons">
+                          <li><a href="" target="_blank"><span class="fa fa-instagram"></span></a></li>
+                          <li><a href="" target="_blank"><span class="fa fa-facebook-official"></span></a></li>
+                          <li><a href="" target="_blank"><span class="fa fa-youtube-play"></span></a></li>
+                          <li><a href="" target="_blank"><span class="fa fa-twitter"></span></a></li>
+                      </ul>
+                      <div class="footer-text">
+                          © All rights reserved.<br>
+                          <!--<a href="/terms-and-conditions">Terms of Use</a> | <a href="/privacy-policy">Privacy Policy</a> | <a href="http://forlogis.com/" target="_blank">Created by Forlogis</a>-->
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </footer>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/6.6.2/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<div ng-controller="testimonialController" class="container">
+    <section class="rm-section" style="margin-top: 150px;">
+        <iframe width="100%" height="500px" src="http://www.youtube.com/embed/6nFYtsQBKAk?autoplay=1&mute=1"></iframe>
+    </section>
+    <div class="row page">
+        <div ng-repeat="testimonial in testimonials track by $index" class=" item col-4">
+            <div class="testimonial-card testimonial-card-container " style="width:100%;">
+                <div class="et_pb_text_inner" ng-click="toggleReadMode(testimonial)">
+                    <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
+                    <div class="testi-2">“{{testimonial.text}}”</div>
+                    <div class="blank"></div>
+                    <div class="testi-3">{{testimonial.author}}</div>
+                </div>
+                <div ng-if="isLoggedIn" class="edit-delete-buttons">
+                    <button class="btn btn-primary btn-ghost" ng-click="canAddNew(testimonial,$index)">Edit</button>
+                    <!--<button class="btn btn-primary btn-ghost" ng-click="deleteTestimonial($index)">Delete</button>-->
+                    <button class="btn btn-primary btn-ghost" ng-click="getConfirmation()">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div ng-if="isLoggedIn">
+            <i ng-click="canAddNew()" style="font-size: 70px; margin-top: 145px; margin-left: 80px; background: -webkit-linear-gradient(#EC6C01, #FFAE01);-webkit-background-clip: text;-webkit-text-fill-color: transparent; cursor: pointer;" class="fas fa-plus"></i>
+        </div>
+    </div>
+    <div class="rm-popup-parent" ng-if="addNew">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Testimonial</div>
+            <input placeholder="Enter Content" type="text" ng-model="newTestimonial.text">
+            <input placeholder="Enter Name" type="text" ng-model="newTestimonial.author">
+            <span ng-if="!newTestimonial.id">Add Photo</span>
+            <input ng-if="!newTestimonial.id" type="file" ng-model="newTestimonial.img" accept="image/*" app-filereader >
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="canAddNew()">Cancel</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewTestimonial()">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="rm-popup-parent" ng-if="canRead" style="z-index: 1004">
+        <div class="rm-popup-container" style="width: 700px;height: 300px;overflow-y: auto;">
+            <div class="close" ng-click="toggleReadMode()">&times;</div>
+            <div class="rm-popup-header">Testimonial</div>
+            <div>{{testimonial.text}}</div>
+            <div class="testi-1" style="margin-top: 30px;"><img alt="" src={{testimonial.img}}></div>
+            <div style="text-align: center;">{{testimonial.author}}</div>
+        </div>
+    </div>
+</div>
