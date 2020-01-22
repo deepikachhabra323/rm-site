@@ -14,16 +14,17 @@
     <section class="articles latest-articles" id="blogdiv" style="padding-bottom: 150px;padding-top: 30px;" data-page="1" data-category="">
         <div class="container">
             <div ng-show="!showPlaylist" ng-click="togglePlaylistVisibility()"><i class="fas fa-long-arrow-alt-left" style="padding: 5px 10px;font-size: 20px;"></i>back</div>
-            <div class="rm-video-player" id="rm-video-player" ng-show="shouldPlay">
+            <!-- <div class="rm-video-player" id="rm-video-player" ng-show="shouldPlay">
                 <iframe width="100%" height="600px" ng-src="{{currentLink}}" allowfullscreen></iframe>
-            </div>
+            </div> -->
             <div id="blogItems" class="row" ng-if="visibleTab=='videos'">
-                <div ng-repeat="item in videos" class="col-sm-6 col-md-4">
-                    <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link)">
+                <div ng-repeat="item in videos" class=" col-sm-6 col-md-4" ng-attr-id="{{'ytvideo'+$index}}">
+                    <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link,$index)">
                         <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
+                        <div style="position: absolute;padding: 10px;color: #fff;">{{item.title}}</div>
                         <img ng-src="{{item.thumbnail.url}}">
                         <i class="fas fa-play rm-play-button"></i>
-                        <div>{{item.title}}</div>
+                        
                         <div ng-if="isLoggedIn" style="padding: 10px;">
                             <textarea style="width: 100%;" ng-model="item.url"></textarea>
                         </div>
@@ -33,6 +34,9 @@
                         </div>
                     </div>
                 </div>
+                <!-- <div class="rm-video-player" id="rm-video-player" ng-if="shouldPlay">
+                    <iframe width="100%" height="600px" ng-src="{{currentLink}}" allowfullscreen></iframe>
+                </div> -->
                 <div ng-if="isLoggedIn">
                     <i ng-click="canAddNew()" style="font-size: 70px; margin-top: 145px; margin-left: 80px; background: -webkit-linear-gradient(#EC6C01, #FFAE01);-webkit-background-clip: text;-webkit-text-fill-color: transparent;" class="fas fa-plus"></i>
                 </div>
@@ -41,19 +45,27 @@
                 <div ng-show="showPlaylist">
                     <div ng-repeat = "playlist in playlists" class="col-sm-6 col-md-4 " ng-click="togglePlaylistVideos(playlist)">
                         <div class="item-article">
+                            <div style="position: absolute;padding: 10px;color: #fff;">{{playlist.pName}}</div>
                             <img ng-src="{{playlist.thumbnail}}">
                             <i class="fas fa-play rm-play-button"></i>
-                            <div>{{playlist.pName}}</div>
+                            <div ng-if="isLoggedIn" style="padding: 10px;">
+                                <textarea style="width: 100%;" ng-model="playlist.url"></textarea>
+                            </div>
+                            <div ng-if="isLoggedIn" class="edit-delete-buttons">
+                                <button class="btn btn-primary btn-ghost" ng-click="editPlaylist(playlist,$index)">Update</button>
+                                <button class="btn btn-primary btn-ghost" ng-click="deletePlaylist($index)">Delete</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div ng-show="!showPlaylist" class="rm-playlist-videos">
-                    <div ng-repeat="video in currentPlaylist.videos" class="col-sm-6 col-md-4"  >
-                        <div class="item-article" ng-init="link = getPlaylistVideoUrl(video.snippet.resourceId.videoId)"  ng-click="playVideo(link)">
+                    <div ng-repeat="video in currentPlaylist.videos" class="col-sm-6 col-md-4"  ng-attr-id="{{'ytvideo'+$index}}" >
+                        <div class="item-article" ng-init="link = getPlaylistVideoUrl(video.snippet.resourceId.videoId)"  ng-click="playVideo(link,$index)">
+                            <div style="position: absolute;padding: 10px;color: #fff;">{{video.snippet.title}}</div>
                             <img ng-src="{{video.snippet.thumbnails.medium.url}}">
                             <i class="fas fa-play rm-play-button"></i>
-                            <div>{{video.snippet.title}}</div>
+                            
                             <!--<iframe width="100%" height="260px" ng-bind="video" ng-src="{{link}}" allowfullscreen></iframe>-->
                         </div>
                     </div>

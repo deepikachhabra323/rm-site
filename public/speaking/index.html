@@ -1,5 +1,31 @@
 <div ng-controller="schoolController" class="rm-blog-page">
-    <section class="row rm-section">
+    <header class="main-banner main-banner_home clearfix" style=" background-color: #000000;">
+        <section class="banner-text banner-home">
+            <img style="z-index: auto;" class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4037%20a%20copy%20(1).jpg?alt=media&token=a049995e-bbeb-429f-b6b2-b140a60484b1" alt="Rohit Mittal">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-7 ">
+                        <div class="slide-text">
+                            <div class="row">
+                                <div class=" banner-content-rsp" ng-controller="homeController">
+                                        <h2 style="word-break: break-word;color: #fff;" class="sub-heading">
+                                            If you want your students to excel at such a level that their success becomes
+                                            inevitable, invite Rohit for a workshop. His deep and transformative yet simple
+                                            insights when delivered in his riveting humorous way have the power to make
+                                            dreams come true.
+                                        </h2>
+                                        <div>
+                                            <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="">Book Rohit</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+    <!-- <section class="row rm-section">
         <div class="col-5" style="background: black;"><img class="" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal"></div>
         <div class="col-7 about-main-heading" style="font-size: 40px;">
             If you want your students to excel at such a level that their success becomes
@@ -10,14 +36,14 @@
                 <button class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Book Rohit</button>
             </div>
         </div>
-    </section>
+    </section> -->
     <section class="rm-section rm-collaborate"style=" height: auto;">
-        <h1>
-            <span><a style="color:#333333;" href="/#!/testimonials">How can Rohit help you as a speaker?</a></span>
+        <h1 style="margin-bottom: 40px;">
+            <span><a style="color:#333333;">How can Rohit help you as a speaker?</a></span>
         </h1>
-        <div class="col-md-4">
-            <div class="rm-sub-title">For Schools</div>
-            Our education system
+        <div class="col-md-4 bigsc" style="position: relative;">
+            <div class="rm-sub-title" style="height: auto;">For Schools</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;">Our education system
             surprisingly misses some key
             components of a child&#39;s
             education when it comes to
@@ -30,11 +56,14 @@
             holistic development of a child.
             Rohit can act as an instrument to
             bring these principles to life at
-            you school.
+            you school.</div>
+            <div class="sp-bigsc">
+                <a  href="/#!/school" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Read more</a>
+            </div >
         </div>
-        <div class="col-md-4">
-            <div class="rm-sub-title">For Coaching Institutions</div>
-            A coaching&#39;s success is
+        <div class="col-md-4 bigsc help-middle-section" style="  position: relative;  ">
+            <div class="rm-sub-title" style="height: auto;">For Coaching Institutions</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;">A coaching&#39;s success is
             measured by the selection
             ratio of its students. In this
             world of cut-throat
@@ -49,11 +78,14 @@
             succeed.
             Rohit can help your students
             take leaps where others are
-            only walking.
+            only walking.</div style="text-align: justify;-moz-text-align-last: justify;">
+            <div class="sp-bigsc">
+                <a  href="/#!/coaching" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Read more</a>
+            </div>
         </div>
-        <div class="col-md-4">
-            <div class="rm-sub-title">For Colleges</div>
-            Today, students are very
+        <div class="col-md-4 bigsc" style="position: relative;">
+            <div class="rm-sub-title" style="height: auto;">For Colleges</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;">Today, students are very
             intelligent but don&#39;t know
             what to do with it.
             They are full of energy but
@@ -69,7 +101,10 @@
             what they want to do.
             Rohit can help your students
             get that clarity and create a
-            world-class life.
+            world-class life.</div style="text-align: justify;-moz-text-align-last: justify;">
+            <div class="sp-bigsc">
+                <a  href="/#!/college" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Read more</a>
+            </div>
         </div>
         <!--<div>
             <button class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Book Rohit</button>
@@ -90,11 +125,13 @@
                     <div class="carousel-inner">
                       <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" ng-if="$index<9">
                         <div class="content">
-                            <div style="height: 70%;overflow-y: auto;padding-bottom: 20px;">
-                                <span>{{testimonial.text}}</span>
+                            <div style="height: 60%;overflow-y: hidden;padding-bottom: 20px;">
+                                <span>{{testimonial.text.substring(0,250)}}</span>
+                                <a href="/#!/testimonials" ng-if="testimonial.text.length>250">read more...</a>
                             </div>
                             <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
                             <div style="text-align: center;">{{testimonial.author}}</div>
+                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">designation</div>
                         </div>
                       </div>
                     </div>
@@ -105,7 +142,7 @@
     </section>
     <section class="rm-collaborate rm-section" style="min-height: 720px;">
         <h1 class="mb-5">The 4 step process to change your life</h1>
-        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+        <div class="col-xs-12 col-sm-6 col-md-4 mb-3">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
@@ -117,7 +154,7 @@
                 </div>
             </div>    
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+        <div class="col-xs-12 col-sm-6 col-md-4 mb-3">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
@@ -129,7 +166,7 @@
                 </div>
             </div>    
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+        <div class="col-xs-12 col-sm-6 col-md-4 mb-3">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
@@ -141,7 +178,7 @@
                 </div>
             </div>    
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 mb-3">
+        <div class="col-xs-12 col-sm-6 col-md-4 mb-3">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
@@ -153,7 +190,7 @@
                 </div>
             </div>    
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="col-xs-12 col-sm-6 col-md-4 mb-3">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
@@ -165,7 +202,7 @@
                 </div>
             </div>    
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="col-xs-12 col-sm-6 col-md-4 mb-3">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
@@ -177,37 +214,31 @@
                 </div>
             </div>    
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3">
+        <!-- <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
-                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
-                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
-                <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
                     <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
                 </div>
             </div>    
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
-                <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
-                <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
-                <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
                     <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
                 </div>
             </div>    
-        </div>
+        </div> -->
     </section>
     <section class="rm-section" style="text-align: center;background-color: #e7eaec;display: none;">
         <iframe width="70%" height="500px" src="http://www.youtube.com/embed/6nFYtsQBKAk"></iframe>
     </section>
-    <section class="rm-section rm-collaborate"style=" height: auto; min-height: auto;">
-        <h1>
-            <span><a style="color:#333333;" href="/#!/testimonials">Heading</a></span>
+    <section class="rm-section rm-collaborate"style="background-color:#fff; height: auto; min-height: auto;">
+        <h1 style="margin-bottom: 40px;">
+            <span><a style="color:#333333;" >Heading</a></span>
         </h1>
         <div class="">Imagine a world in which the vast majority of us wake up inspired, feel safe at work and return home fulfilled at the end of the day.</div>
         <div>

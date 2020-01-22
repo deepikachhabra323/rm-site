@@ -1,6 +1,7 @@
 .rm-section{
     max-height: 570px;
     min-height: 500px;
+    
 }
 .rm-section div{
     height: 100%;
@@ -50,16 +51,20 @@ body {
 
 .blue-bg {
   background-color: #4D4545;
-  color: #ED8D8D;
+  background-color: #E7EAEC;
+  color: #ec6d01;
   height: 100%;
+  padding: 20px;
 }
-
+.blue-bg p{
+  font-style: italic;
+}
 .circle {
   font-weight: bold;
   padding: 15px 20px;
   border-radius: 50%;
-  background-color: #ED8D8D;
-  color: #4D4545;
+  background-color: #ffac00;
+  color: #fff;
   max-height: 50px;
   z-index: 2;
 }
@@ -76,7 +81,7 @@ body {
 .how-it-works.row .col-2::after {
   content: "";
   position: absolute;
-  border-left: 3px solid #ED8D8D;
+  border-left: 3px solid #ffac00;
   z-index: 1;
 }
 .how-it-works.row .col-2.bottom::after {
@@ -108,7 +113,7 @@ body {
   height: 40px;
 }
 .timeline hr {
-  border-top: 3px solid #ED8D8D;
+  border-top: 3px solid #ffac00;
   margin: 0;
   top: 17px;
   position: relative;
@@ -118,7 +123,7 @@ body {
   overflow: hidden;
 }
 .timeline .corner {
-  border: 3px solid #ED8D8D;
+  border: 3px solid #ffac00;
   width: 100%;
   position: relative;
   border-radius: 15px;
@@ -422,3 +427,59 @@ body {
     margin: 0 auto;
 }
 /*plans*/
+
+
+.sp-bigsc{
+  position: absolute; 
+  bottom: 0px;
+  margin: auto;
+  left: calc(50% - 135px);
+  height: auto;
+}
+.help-middle-section{
+  border-left: solid 2px #d6d6d6;
+  border-right: solid 2px #d6d6d6;
+}
+@media only screen and  (min-width:992px){
+  .bigsc{
+    height: 354px!important;
+  }
+  .sp-bigsc{
+    height: auto!important;
+  }
+
+  /* .rm-section{
+    min-height: auto;
+    max-height: auto;
+  } */
+}
+@media only screen and  (max-width:992px){
+  .h1, h1 {
+    font-size: 1.5rem;
+  }
+  .fa-4x{
+    font-size: 2rem !important;
+  }
+  /* .rm-section {
+    max-height: initial!important;
+    min-height: initial!important;
+} */
+  .main-banner{
+    height: auto;
+  }
+  .sp-bigsc{
+    position: relative;
+    left: auto;
+  }
+  .sp-bigsc a{
+    margin-top: 20px !important;
+    padding: 8px 20px !important;
+  }
+  .help-middle-section{
+    border: none;
+    border-top: solid 2px #d6d6d6;
+    border-bottom: solid 2px #d6d6d6;
+    margin: 10px 0px;
+    padding: 10px 0px;
+  }
+}

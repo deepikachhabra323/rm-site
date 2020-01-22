@@ -38,7 +38,7 @@ function isValidated(vals){
 myApp.controller("appController",function($scope,$http,$document,$window,$location,$rootScope,$timeout){
     $scope.pixelsScrolled = true ;
     var db = firebase.firestore();
-    $scope.canConnect = false;
+    $scope.canConnect = false;$scope.canBook = false;
     $scope.confirm = false;
     $scope.canScrollTop = false;
     $scope.scrollToContent = false;
@@ -68,6 +68,12 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
             
         }
     });
+    $rootScope.$watch('canBook', (newVal,oldVal)=>{
+        if(newVal!=oldVal){
+            $scope.canBook = $rootScope.canBook;
+            console.log('root')
+        }
+    });
     $scope.scrollToTop = function(){
       window.scrollTo({
         top: 0,
@@ -78,11 +84,15 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
     
     //connect
     
-    $scope.newConnect = {};
+    $scope.newConnect = {};$scope.newBook = {};
     
-    $scope.toggleConnect = function(){
-      $scope.canConnect = !$scope.canConnect;
-      $scope.newConnect = {};
+    $scope.toggleBooking = function(){
+      $scope.canBook = !$scope.canBook;
+      $rootScope.canBook = !$rootScope.canBook;
+      $scope.newBook = {};
+      $timeout(function(){
+        $scope.$apply()
+    },1);
     };
     $rootScope.toggleConnect=$scope.toggleConnect;
     $scope.updateNewConnect = function(){
@@ -106,6 +116,28 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
           $('#toast').toast('show');
       }
     };
+    $scope.updateNewBooking = function(){
+        if(isValidated([$scope.newBook.author,$scope.newBook.email,$scope.newBook.phone,$scope.newBook.message])){
+          console.log($scope);
+          db.collection("book").add({
+          ...$scope.newBook,
+          page:window.location.hash
+          })
+          .then(function(docRef) {
+            $scope.toggleBooking();
+            $timeout(function(){
+                  $scope.$apply()
+              },1);
+              console.log("Document written with ID: ", docRef.id,docRef);
+          })
+          .catch(function(error) {
+              console.error("Error adding document: ", error);
+          });
+        }
+        else{
+            $('#toast').toast('show');
+        }
+      };
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
             $scope.isLoggedIn = $rootScope.isLoggedIn;
@@ -272,10 +304,10 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
                         title:"Testimonials",
                         path:"/testimonials"
                     },
-                    {
-                        title:"One on One",
-                        path:"/one-on-one"
-                    },
+                    // {
+                    //     title:"One on One",
+                    //     path:"/one-on-one"
+                    // },
                     {
                         title:"Speaking",
                         path:"/speaking",
@@ -294,10 +326,10 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
                               },
                             ]
                     },
-                    //{
-                    //    title:"Personnal Mentoring",
-                    //    path:"/personnal_mentoring"
-                    //},
+                    {
+                       title:"Personnal Mentoring",
+                       path:"/personnal_mentoring"
+                    },
                     {
                         title:"Contact",
                         path:"/connect"
@@ -312,7 +344,7 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
                     //}
                     ];
     $scope.redirectTo=(path)=>{
-      if(path.path && !path.subs)
+      if(path.path )
         $location.url(path.path);
       //else if(path.title=="Connect"){
       //  $rootScope.toggleConnect();

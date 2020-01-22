@@ -54,12 +54,44 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
             console.error("Error removing document: ", error);
         });
     };
-    $scope.playVideo=function(link){
+    $scope.deletePlaylist = (index) =>{
+        db.collection("playlists").doc($scope.playlists[index].id).delete().then(function() {
+            $scope.playlists.splice(index,1);
+            $timeout(function(){
+                $scope.$apply()
+            },1);
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    };
+    $scope.playVideo=function(link,index){
         $scope.currentLink = link;
         $scope.shouldPlay = true;
         var ele = document.getElementById('rm-video-player');
+        // if(index+1%3==0){
+
+        // }
+        var ind = index+(index+1)%3-1;
+        if(index==0){
+            ind = 2;
+        }
+        else if((index+1)%3==0){
+            ind = index;
+        }
+        else if(index%3==0){
+            ind = index-1;
+        }
+        var toAdd = document.getElementById('ytvideo'+ind);
+        $scope.ind = ind;
+        if(ele){
+            ele.parentNode.removeChild(ele);
+        }
+        ele = toAdd.insertAdjacentHTML('afterend','<div class="rm-video-player" style="width:100%;" id="rm-video-player"><iframe width="100%" height="600px" src="'+link+'" allowfullscreen></iframe></div>')
+        console.log(toAdd,toAdd.getBoundingClientRect());
         window.scrollTo({
-          top: ele.getBoundingClientRect().y+30,
+          //top: toAdd.getBoundingClientRect().y+toAdd.getBoundingClientRect().height+50,
+          top:toAdd.offsetTop+toAdd.offsetHeight,
           behavior: 'smooth',
         });
     };
@@ -69,6 +101,20 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
             url : item.url
             }).then(function() {
             $scope.videos[index] = item;
+            $timeout(function(){
+                $scope.$apply()
+            },1);
+            console.log("Document successfully updated!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    };
+    $scope.editPlaylist = (item,index) => {
+        //$location.url('/editBlog/'+$scope.blogs[index].id)
+        db.collection("playlists").doc(item.id).update({
+            url : item.url
+            }).then(function() {
+            $scope.playlists[index] = item;
             $timeout(function(){
                 $scope.$apply()
             },1);

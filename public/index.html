@@ -66,20 +66,8 @@
   <body ng-app="rohitMittal">
     <div ng-controller="appController">
       <div ng-controller="topnav" ng-show="isVisible()" class="rm-topnav-container" ng-class="{'rm-topnav-fixed': !pixelsScrolled}">
-        <div id="top-header" style="background-color: orange;" class="">
+        <div id="top-header" style="" class="">
           <div class="container clearfix">
-            <div id="et-info">
-              <!--<span id="et-info-phone">
-                <i class="fas fa-phone-alt"></i>
-                +91 99999 99999
-              </span>
-              <a href="mailto:mail@mail.com">
-                <span id="et-info-email">
-                  <i class="fas fa-envelope"></i>
-                  mail@mail.com
-                </span>
-              </a>-->
-            </div> <!-- #et-info -->
             <div class="et-social-media">
               <span><i class="fab fa-facebook-square"></i></span>
               <span><i class="fab fa-youtube-square"></i></span>
@@ -87,18 +75,13 @@
                 <i class="fas fa-phone-alt"></i>
                 +91 99999 99999
               </span>
-              <a href="mailto:mail@mail.com">
+              <a href="mailto:mail@mail.com&mailfrom:dc4n999@gmail.com">
                 <span id="et-info-email">
                   <i class="fas fa-envelope"></i>
                   mail@mail.com
                 </span>
               </a>
             </div>
-            <!--<div id="et-secondary-menu">
-              <a href="https://priya-kumar.com/cart/" class="et-cart-info">
-                <span>0 Items</span>
-              </a>
-            </div>--> <!-- #et-secondary-menu -->
     
           </div> <!-- .container -->
         </div>
@@ -108,8 +91,9 @@
           </div>
           <div ng-repeat="path in paths" ng-click="redirectTo(path)"  onclick="toggleMenu();" ng-if="(path.title=='Connect Results' &&  isLoggedIn) || path.title!=='Connect Results'" class="rm-topnav-title">
               {{path.title}}
-              <div ng-if="path.subs" class="sub-paths">
-                <div class="sub-path" ng-repeat="subpath in path.subs"  ng-click="redirectTo(subpath)">{{subpath.title}}</div>
+              <span style="font-size: 12px;" ng-if="path.subs" onclick="document.getElementById('sub-paths-visible').style.display = document.getElementById('sub-paths-visible').style.display=='block'?'none':'block';event.stopPropagation()" class="fa fa-chevron-down fa-2x"></span>
+              <div ng-if="path.subs" id="sub-paths-visible" class="sub-paths">
+                <div class="sub-path" ng-repeat="subpath in path.subs"  ng-click="redirectTo(subpath)" onclick="event.stopPropagation();">{{subpath.title}}</div>
               </div>
           </div>
         </div>
@@ -126,7 +110,7 @@
                               <div class=" banner-content-rsp" ng-controller="homeController">
                                   <h1 style="word-break: break-word;" class="text-normal">{{mainHeader}}</h1>
                                   <h2 style="word-break: break-word;" class="sub-heading" ng-model="subHeader">{{subHeader}}</h2>
-                                  <a href="" class="btn btn-primary-banner ">
+                                  <a href="" class="btn btn-primary btn-ghost " style="color: #fff;">
                                       {{headerButton}} <!--<span class="fa fa-chevron-right"></span>-->
                                   </a>
                               </div>
@@ -154,16 +138,16 @@
             </div>
         </div>
       </div>
-      <div class="rm-popup-parent" ng-if="canConnect">
+      <div class="rm-popup-parent" ng-if="canBook">
         <div class="rm-popup-container">
             <div class="rm-popup-header">Connect with us</div>
-            <input placeholder="Name" type="text" required ng-model="newConnect.author">
-            <input placeholder="Occupation" type="text" required ng-model="newConnect.occupation">
-            <input placeholder="Phone Number" type="text" required ng-model="newConnect.phone">
-            <input placeholder="Message" required type="text" ng-model="newConnect.message">
+            <input placeholder="Name*" type="text" required ng-model="newBook.author">
+            <input placeholder="Phone No.*" type="text" required ng-model="newBook.phone">
+            <input placeholder="Email*" type="text" required ng-model="newBook.email">
+            <input placeholder="Preparing for*" required type="text" ng-model="newBook.message">
             <div style="text-align: right;">
-                <button class="btn btn-primary btn-ghost" ng-click="toggleConnect()">Cancel</button>
-                <button class="btn btn-primary btn-ghost" ng-click="updateNewConnect()">Send</button>
+                <button class="btn btn-primary btn-ghost" ng-click="toggleBooking()">Cancel</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewBooking()">Send</button>
             </div>
         </div>
       </div>
@@ -185,7 +169,7 @@
       <footer>
           <div class="container">
               <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4" style="text-align: center;margin-bottom: 40px;">
                     <div class="fb-page" data-href="https://www.facebook.com/channelvindia/" data-tabs="timeline" data-width="" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                       <blockquote cite="https://www.facebook.com/channelvindia/" class="fb-xfbml-parse-ignore">
                         <a href="https://www.facebook.com/channelvindia/">Facebook</a>
@@ -193,7 +177,7 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div name=iframe style="width:100%; height:200px; border:2px solid grey; overflow:hidden">
+                    <div name=iframe style="margin:auto;width:340px; height:200px; border:2px solid grey; overflow:hidden">
                       <!--<iframe src="https://www.youtube.com/channel/UCP1iRaFlS5EYjJBryFV9JPw" style="width:100%; height:200px; margin-top: -65px" scrolling=true>
                          If you can see this, your browser doesn't support iframes. Click <a href=http://mychannel.url>here to
                          see my YouTube channel.</a>-->

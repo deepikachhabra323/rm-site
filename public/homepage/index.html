@@ -1,7 +1,9 @@
 <div ng-controller="homeController">
     <div class="rm-home-about"></div>
     <div id="sample3" class="rm-home-ebook">
-        <div class="ebook-img-cntnr"><img class="" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal"></div>
+        <div class="ebook-img-cntnr">
+            <!-- <img class="" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal"> -->
+        </div>
         <div class="ebook-div">
             <!--<div class="header">{{courseHeader}}</div>-->
             <div class="sub-header">{{courseSubheader}}</div>
@@ -68,10 +70,10 @@
         </div>
     </section>
     <section class="my-story">
-        <div class="my-story-container" style="max-width: 1200px;margin: 0px auto;padding: 18em 0;position: relative;">
-            <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fmy_story.jpg?alt=media&token=40d65732-1667-4191-9fd3-9aa61d3f16c2">
+        <div class="my-story-container" style="max-width: 1200px;margin: 0px auto;padding: 7em 0;position: relative;">
+            <img width="24%" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fmy_story.jpg?alt=media&token=40d65732-1667-4191-9fd3-9aa61d3f16c2">
             <div class="my-story-text-container">
-                <h1>
+                <h1 style="font-size: 36px;">
                     <span>{{myStory.title}}</span>
                 </h1>
                 <div class="quote">
@@ -90,34 +92,36 @@
                 </div>-->
                 <div class="download-btns">
                     <div class="stry-btn">
-                        <a href="/#!/comming_soon" class="btn btn-primary btn-ghost">Read More about Rohit</a>
+                        <a style="padding: 6px 15px;" href="/#!/about" class="btn btn-primary btn-ghost">Read More</a>
                     </div>
                 </div
             </div>
         </div>
     </section>
-    <section class="row rm-section">
-        <div class="col-5" style="padding: 100px 0px;">
-            <div class="logo-center"><img height="370px" src="http://174.128.9.250/static/media/BULLETIN.a86a7f9e.png" alt="" class="landing-bulletin-img"></div>
+    <section class="row rm-section rm-section-home rm-section-home-speaking" style="min-height:350px;max-width: 1200px;
+    margin: auto;">
+        <div class="col-md-5" style="padding: 50px 0px;">
+            <div class="logo-center"><img height="300px" src="../img/square-xxl.png" alt="" class="landing-bulletin-img"></div>
         </div>
-        <div class="col-7" style="padding: 150px;padding-left: 10%;">
-            <div class="sub-heading">Speaking</div>
-            <div class="content">Imagine an India where the youth have clear
+        <div class="col-md-7" style="padding: 100px;padding-left: 10%;">
+            <div class="sub-heading" style="height: auto;">Speaking</div>
+            <div class="content" style="height: auto;">Imagine an India where the youth have clear
                 dreams,courage to pursue them.
             </div>
         </div>
     </section>
-    <section class="row rm-section">
-        <div class="col-7" style="padding: 150px 0px;padding-left: 10%;">
-            <div class="sub-heading">Personnal Mentoring</div>
-            <div class="content">Every child needs a chance. The child of today is our future. I am
+    <section class="row rm-section rm-section-home" style="min-height:350px;max-width: 1200px;
+    margin: auto;">
+        <div class="col-md-7" style="padding: 100px 0px;padding-left: 10%;">
+            <div class="sub-heading" style="height: auto;">Personnal Mentoring</div>
+            <div class="content" style="height: auto;">Every child needs a chance. The child of today is our future. I am
                 deeply passionate about helping underprivileged children lead
                 better, healthier and happier lives. Education is the only way it is
                 possible. And guess what? I need your help.
             </div>
         </div>
-        <div class="col-5" style="padding: 100px 0px;">
-            <div class="logo-center"><img height="370px" src="http://174.128.9.250/static/media/BULLETIN.a86a7f9e.png" alt="" class="landing-bulletin-img"></div>
+        <div class="col-md-5" style="padding: 50px 0px;">
+            <div class="logo-center"><img height="300px" src="../img/square-xxl.png" alt="" class="landing-bulletin-img"></div>
         </div>
     </section>
     <!--<section class="speaker-mentor">
@@ -255,11 +259,13 @@
                     <div class="carousel-inner">
                       <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" ng-if="$index<9">
                         <div class="content">
-                            <div style="height: 70%;overflow-y: auto;padding-bottom: 20px;">
-                                <span>{{testimonial.text}}</span>
+                            <div style="height: 60%;overflow-y: hidden;padding-bottom: 20px;">
+                                <span>{{testimonial.text.substring(0,250)}}</span>
+                                <a href="/#!/testimonials" ng-if="testimonial.text.length>250">read more...</a>
                             </div>
                             <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
                             <div style="text-align: center;">{{testimonial.author}}</div>
+                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">designation</div>
                         </div>
                       </div>
                     </div>

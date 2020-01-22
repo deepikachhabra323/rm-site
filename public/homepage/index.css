@@ -1,5 +1,5 @@
 .rm-home-ebook{
-    background: #EC6C01;
+    /* background: #EC6C01; */
     background: -webkit-linear-gradient(right, #EC6C01, #FFAE01);
     background: -o-linear-gradient(left, #EC6C01, #FFAE01);
     background: -moz-linear-gradient(left, #EC6C01, #FFAE01);
@@ -166,27 +166,27 @@
 }
 .my-story h1{
     position: absolute;
-    top: 15%;
+    top: 10%;
     text-align: center;
     /* left: 44%; */
     width: 100%;
     text-transform: uppercase;
 }
 .my-story .quote{
-    font-size: 30px;
-    text-align: right;
-    padding-left: 43%;
-    padding-right: 5%;
+    font-size: 23px;
+    text-align: center;
+    padding-left: 23%;
+    padding-right: 1%;
 }
 .my-story .download-btns{
     position: absolute;
-    bottom: 20%;
+    bottom: 3%;
     right: 5%;
     right: calc((100% - 600px)/2);
 }
 .my-story .download-btns div{
     display: inline-block;
-    margin-left: 20px;
+    margin-right: 102px;
     text-transform: uppercase;
 }
 
@@ -317,7 +317,14 @@
 .names.rights {
     text-align: right;
 }
+.rm-section-home{
+    height:350px;
+}
 @media only screen and (max-width: 767px){
+.rm-section-home{
+    height:auto !important;
+    text-align: center;
+}
 .testimonials-right {
     text-align: center!important;
 }
@@ -360,11 +367,11 @@
     padding: 40px;
 }
 .testimonials .item .content{
-    height: 300px;
+    height: 245px;
     background-color:#e7eaec;
     border-radius: 6px;
     margin: auto;
-    max-width: 550px;
+    max-width: 780px;
     padding: 50px 25px;
 }
 .testimonials .indicator{
@@ -504,7 +511,7 @@
   }
   .rm-home-ebook{
     height: auto;
-    padding-top: 170px;
+    /* padding-top: 170px; */
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -523,8 +530,11 @@
     margin: 5px;    
   }
   .ebook-form .btn {
-    display: block;
+    display: inline-block;
     margin: 5px;
+  }
+  .ebook-div {
+      padding: 0px !important;
   }
   .blogs-videos .row > .col-sm-6 {
     width: 50%;
@@ -534,6 +544,9 @@
   }
   .videos .col-sm-6{
     width: 100% !important;
+  }
+  .rm-section-home-speaking{
+      background-color: #e7eaec;
   }
   .my-story-container{
     padding: 7em 0 5px 0 !important;

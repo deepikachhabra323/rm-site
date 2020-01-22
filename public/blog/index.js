@@ -160,10 +160,10 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
     var db = firebase.firestore();
     var storage = firebase.storage().ref();
     $scope.blogs = [{"imgUrl":"./img/blog.jpg","text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.","title":"1Lorem Ipsum is simply dummy text of the printing and typesetting industry."}];
-    $scope.blogCats = blogCats;
+    $scope.blogCats = blogCats;$scope.loadedBlogs=[];
     $scope.filteredBlogs = {All:[]};$scope.catFilter = 'All';
     db.collection("blogs").get().then(function(querySnapshot) {
-        $scope.blogs = [];
+        $scope.blogs = []; $scope.filteredBlogs = {All:[]};
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             var data = doc.data();
@@ -177,10 +177,12 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
                         $scope.filteredBlogs[data.categ] = [];
                         console.log(1);
                     }
-                    if(data.categ!==undefined){
+                    if(data.categ!==undefined && data.categ!=='All'){
                         $scope.filteredBlogs[data.categ].push({...data,id:doc.id});
                         console.log("filtered",$scope.filteredBlogs);
                     }
+                    $scope.loadedBlogs = $scope.filteredBlogs[$scope.catFilter].slice(0,6);
+                    console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs);
                     $timeout(function(){
                         $scope.$apply();
                     },1);
@@ -195,13 +197,23 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
                 if(data.categ!==undefined){
                     $scope.filteredBlogs[data.categ].push({...data,id:doc.id});
                 }
+                $scope.loadedBlogs = $scope.filteredBlogs[$scope.catFilter].slice(0,6);
+                console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs);
+                $timeout(function(){
+                    $scope.$apply()
+                },1);
             }
-            $timeout(function(){
-                $scope.$apply()
-            },1);
+            
             console.log(doc.id, " => ", doc.data());
+            
         });
-        
+        //$scope.loadedBlogs = $scope.blogs.slice(0,6);
+        // $scope.loadedBlogs = $scope.filteredBlogs[cat].slice(0,6);
+        // console.log($scope.loadedBlogs,$scope.blogs);
+        $timeout(function(){
+            $scope.$apply();
+            
+        },1);
     });
     $scope.deleteBlog = (index) =>{
         db.collection("blogs").doc($scope.blogs[index].id).delete().then(function() {
@@ -221,9 +233,20 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
         else
         $location.url('/editBlog/')
     };
+    $scope.loadBlogs = () => {
+        if($scope.loadedBlogs.length<$scope.filteredBlogs[$scope.catFilter].length){
+            var loadedBlogs = $scope.loadedBlogs;
+            $scope.loadedBlogs = loadedBlogs.concat($scope.filteredBlogs[$scope.catFilter].slice($scope.loadedBlogs.length,($scope.loadedBlogs.length+6)));
+            $timeout(function(){
+                $scope.$apply();
+                console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs[$scope.catFilter].slice($scope.loadedBlogs.length,($scope.loadedBlogs.length+6)));
+            },1);
+        }
+    };
     $scope.getFilteredBlogs = (cat) => {
         $scope.blogs = $scope.filteredBlogs[cat];
         $scope.catFilter = cat;
+        $scope.loadedBlogs = $scope.filteredBlogs[cat].slice(0,6);
         console.log($scope);
         $timeout(function(){
             $scope.$apply()

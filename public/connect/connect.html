@@ -1,15 +1,40 @@
 <div ng-controller="connectionController" class="rm-blog-page">
-    <div class="rm-popup-parent" ng-if="canConnect">
-        <div class="rm-popup-container">
-            <div class="rm-popup-header">Connect with us</div>
-            <input placeholder="Name" type="text" required ng-model="newConnect.author">
-            <input placeholder="Occupation" type="text" required ng-model="newConnect.occupation">
-            <input placeholder="Phone Number" type="text" required ng-model="newConnect.phone">
-            <input placeholder="Message" required type="text" ng-model="newConnect.message">
-            <div style="text-align: right;">
-                <button class="btn btn-primary btn-ghost" ng-click="toggleConnect()">Cancel</button>
-                <button class="btn btn-primary btn-ghost" ng-click="updateNewConnect()">Send</button>
-            </div>
-        </div>
+    <div class="rm-connect-page">
+        <table class="table table-borderless table-responsive-sm">
+            <tbody>
+                <tr >
+                    <td >Name* :</td>
+                    <td><input placeholder="Name*" type="text" required ng-model="newConnect.author"></td>
+                </tr>
+                <tr >
+                    <td >Occupation* :</td width="20%">
+                    <td><input placeholder="Occupation*" type="text" required ng-model="newConnect.occupation"></td>
+                </tr>
+                <tr >
+                    <td >Contact Number* :</td width="20%">
+                    <td><input placeholder="Phone Number*" type="text" required ng-model="newConnect.phone"></td>
+                </tr>
+                <tr >
+                    <td >Message* :</td>
+                    <td><input placeholder="Message*" required type="text" ng-model="newConnect.message"></td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td colspan="2" style="text-align: right;"><button class="btn btn-primary btn-ghost" ng-click="updateNewConnect()" style=" padding: 8px 15px;">Send</button></td colspan="2">
+                </tr style="text-align: right;">
+            </tbody>
+        </table>
+
+        <!--<div class="rm-popup-container"> -->
+            <!-- <div class="rm-popup-header">Connect with us</div>
+            <div>Name* : <input placeholder="Name*" type="text" required ng-model="newConnect.author"></div>
+            <div>Occupation* :<input placeholder="Occupation*" type="text" required ng-model="newConnect.occupation"></div>
+            <div>Contact Number* : <input placeholder="Phone Number*" type="text" required ng-model="newConnect.phone"></div>
+            <div>Message* : <input placeholder="Message*" required type="text" ng-model="newConnect.message"></div>
+             -->
+            <!-- <div style="text-align: right;"> -->
+                <!-- <button class="btn btn-primary btn-ghost" ng-click="toggleConnect()">Cancel</button> -->
+                <!-- <button class="btn btn-primary btn-ghost" ng-click="updateNewConnect()">Send</button>
+            </div> -->
+        <!-- </div>-->
     </div>
 </div>
