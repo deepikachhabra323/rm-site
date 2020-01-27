@@ -22,32 +22,54 @@
             </tbody>
         </table>
     </div>
+    <div ng-repeat="page in readable">
+      <hr><hr>
+      !--!
+      <hr><hr>
+      <div class="row page">
+        <div>Responses for {{page}} Booking</div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Author</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Page</th>
+                <th scope="col">Preparing For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="res in data[page]">
+                <th scope="row">{{$index+1}}</th>
+                <td>{{res.author}}</td>
+                <td>{{res.email}}</td>
+                <td>{{res.phone}}</td>
+                <td>{{res.page}}</td>
+                <td style="width: 50%">{{res.message}}</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
     <hr><hr>
-    !--!
-    <hr><hr>
-    <div class="row page">
-      <div>Responses for Booking</div>
-      <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Author</th>
-              <th scope="col">Email</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Page</th>
-              <th scope="col">Preparing For</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="res in bookings">
-              <th scope="row">{{$index+1}}</th>
-              <td>{{res.author}}</td>
-              <td>{{res.email}}</td>
-              <td>{{res.phone}}</td>
-              <td>{{res.page}}</td>
-              <td style="width: 50%">{{res.message}}</td>
-            </tr>
-          </tbody>
-      </table>
-  </div>
+      !--!
+      <hr><hr>
+      <div class="row page">
+        <div>Mailing List</div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="res in bookings">
+                <th scope="row">{{$index+1}}</th>
+                <td>{{res.email}}</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
 </div>

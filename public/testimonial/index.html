@@ -10,7 +10,7 @@
                     <div class="testi-2"style="margin-bottom:10px;">“{{testimonial.text.substring(0,250)}}<a href="" ng-if="testimonial.text.length>20"> read more...</a>”</div>
                     <div class="blank"></div>
                     <div class="testi-3"> - {{testimonial.author}}</div>
-                    <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">designation</div>
+                    <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
                 </div>
                 <div ng-if="isLoggedIn" class="edit-delete-buttons">
                     <button class="btn btn-primary btn-ghost" ng-click="canAddNew(testimonial,$index)">Edit</button>
@@ -28,6 +28,7 @@
             <div class="rm-popup-header">Testimonial</div>
             <input placeholder="Enter Content" type="text" ng-model="newTestimonial.text">
             <input placeholder="Enter Name" type="text" ng-model="newTestimonial.author">
+            <input placeholder="Enter Designation" type="text" ng-model="newTestimonial.designation">
             <span ng-if="!newTestimonial.id">Add Photo</span>
             <input ng-if="!newTestimonial.id" type="file" ng-model="newTestimonial.img" accept="image/*" app-filereader >
             <div style="text-align: right;">
@@ -43,7 +44,7 @@
             <div style="position: absolute;top: -6%;"><img src="../img/quote.jpg"></div>
             <div class="testi-1" style="margin-top: 30px;"><img alt="" src={{testimonial.img}}></div>
             <div style="text-align: center;">{{testimonial.author}}</div>
-            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">designation</div>
+            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
             <div style="height: calc(100% - 150px); overflow: auto;">{{testimonial.text}}</div>
             
         </div>

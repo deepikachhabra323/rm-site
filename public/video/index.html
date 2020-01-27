@@ -1,17 +1,37 @@
 <div ng-controller="videoController" class="rm-blog-page">
-    <section class="row rm-section" style="min-height: 300px;">
-        <div class="about-main-heading"style="padding: 50px;font-size: 30px;height: auto;">
-            Rohit’s blog is one of the best resources for a young mind with a fire to become something. It is an
-            absolute must for an aspirant of any competitive exam. Here you can learn how to manage your
-            inner self for the highest levels of productivity, enhanced creativity, roaring confidence and
-            everlasting happiness.
-        </div>
-    </section>
+    <header class="main-banner main-banner_home clearfix" style=" background-color: #000000;">
+        <section class="banner-text banner-home">
+            <img style="z-index: auto;left: 0%;right: auto;" class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4079%20copy%20(1).jpg?alt=media&token=5251d557-5ab4-4aae-bab4-67e8d485417a" alt="Rohit Mittal">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-7 " style="margin-left: 40%;">
+                        <div class="slide-text">
+                            <div class="row">
+                                <div class=" banner-content-rsp" ng-controller="homeController">
+                                        <h2 style="word-break: break-word;color: #fff; font-style: normal;" class="sub-heading">
+                                            Rohit Youtube channel is the go-to place for
+                                            anyone with a fire to achieve their dreams.
+                                            Subscribe below to receive some simple yet
+                                            extraordinary insights and powerful tools to
+                                            reach your goals and create the life of your
+                                            dreams.
+                                        </h2>
+                                        <div>
+                                            <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="">Subscribe on Youtube</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
     <div class="blog-cat-container">
         <div ng-click="changeTab('videos')" ng-class="{'blog-cat-selected':visibleTab=='videos'}" class="blog-cat">Videos</div>
         <div ng-click="changeTab('playlists')" ng-class="{'blog-cat-selected':visibleTab=='playlists'}" class="blog-cat">Playlists</div>
     </div>
-    <section class="articles latest-articles" id="blogdiv" style="padding-bottom: 150px;padding-top: 30px;" data-page="1" data-category="">
+    <section class="articles latest-articles videos-page" id="blogdiv" style="padding-bottom: 150px;padding-top: 30px;" data-page="1" data-category="">
         <div class="container">
             <div ng-show="!showPlaylist" ng-click="togglePlaylistVisibility()"><i class="fas fa-long-arrow-alt-left" style="padding: 5px 10px;font-size: 20px;"></i>back</div>
             <!-- <div class="rm-video-player" id="rm-video-player" ng-show="shouldPlay">
@@ -21,10 +41,10 @@
                 <div ng-repeat="item in videos" class=" col-sm-6 col-md-4" ng-attr-id="{{'ytvideo'+$index}}">
                     <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link,$index)">
                         <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
-                        <div style="position: absolute;padding: 10px;color: #fff;">{{item.title}}</div>
+                        
                         <img ng-src="{{item.thumbnail.url}}">
                         <i class="fas fa-play rm-play-button"></i>
-                        
+                        <div class="yt-video-title">{{item.title}}</div>
                         <div ng-if="isLoggedIn" style="padding: 10px;">
                             <textarea style="width: 100%;" ng-model="item.url"></textarea>
                         </div>
@@ -45,9 +65,9 @@
                 <div ng-show="showPlaylist">
                     <div ng-repeat = "playlist in playlists" class="col-sm-6 col-md-4 " ng-click="togglePlaylistVideos(playlist)">
                         <div class="item-article">
-                            <div style="position: absolute;padding: 10px;color: #fff;">{{playlist.pName}}</div>
                             <img ng-src="{{playlist.thumbnail}}">
                             <i class="fas fa-play rm-play-button"></i>
+                            <div class="yt-video-title">{{playlist.pName}}</div>
                             <div ng-if="isLoggedIn" style="padding: 10px;">
                                 <textarea style="width: 100%;" ng-model="playlist.url"></textarea>
                             </div>

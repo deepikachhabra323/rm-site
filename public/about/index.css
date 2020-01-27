@@ -150,6 +150,7 @@ body {
 .icon-box {
     padding: 20px;
     border-radius: 6px;
+    height: 261px !important;
 }
 .icon-box-title{
     font-weight: bold;

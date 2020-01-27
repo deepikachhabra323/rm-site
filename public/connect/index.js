@@ -1,6 +1,8 @@
 myApp.controller("connectController",function($scope,$rootScope,$timeout){
     var db = firebase.firestore();
     $scope.result = [];$scope.bookings = [];
+    $scope.readable = ['school','speaking','college','personal_mentoring','coaching','about'];
+    $scope.data = {'school':[],'speaking':[],'college':[],'personal_mentoring':[],'coaching':[],'about':[]};
     db.collection("connect").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             $scope.result.push({...doc.data(),id:doc.id});
@@ -9,7 +11,17 @@ myApp.controller("connectController",function($scope,$rootScope,$timeout){
             $scope.$apply()
         },1);
     });
-    db.collection("book").get().then((querySnapshot) => {
+    $scope.readable.forEach(page => {
+        db.collection(page).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                $scope.data[page].push({...doc.data(),id:doc.id});
+            });
+            $timeout(function(){
+                $scope.$apply()
+            },1);
+        });
+    });
+    db.collection("mail-subscription").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             $scope.bookings.push({...doc.data(),id:doc.id});
         });

@@ -1,3 +1,5 @@
-myApp.controller("schoolController",function($scope,$location,$rootScope,$timeout){
-  
+myApp.controller("speakingController",function($scope,$location,$rootScope,$timeout){
+    $scope.book = function(){
+        $rootScope.canBook = true;
+    }
 });

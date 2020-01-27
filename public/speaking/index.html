@@ -1,4 +1,4 @@
-<div ng-controller="schoolController" class="rm-blog-page">
+<div ng-controller="speakingController" class="rm-blog-page">
     <header class="main-banner main-banner_home clearfix" style=" background-color: #000000;">
         <section class="banner-text banner-home">
             <img style="z-index: auto;" class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4037%20a%20copy%20(1).jpg?alt=media&token=a049995e-bbeb-429f-b6b2-b140a60484b1" alt="Rohit Mittal">
@@ -8,14 +8,14 @@
                         <div class="slide-text">
                             <div class="row">
                                 <div class=" banner-content-rsp" ng-controller="homeController">
-                                        <h2 style="word-break: break-word;color: #fff;" class="sub-heading">
+                                        <h2 style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
                                             If you want your students to excel at such a level that their success becomes
                                             inevitable, invite Rohit for a workshop. His deep and transformative yet simple
                                             insights when delivered in his riveting humorous way have the power to make
                                             dreams come true.
                                         </h2>
                                         <div>
-                                            <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="">Book Rohit</button>
+                                            <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="book()">Book Rohit</button>
                                         </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
             bring these principles to life at
             you school.</div>
             <div class="sp-bigsc">
-                <a  href="/#!/school" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Read more</a>
+                <a  href="/#!/school" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Know more</a>
             </div >
         </div>
         <div class="col-md-4 bigsc help-middle-section" style="  position: relative;  ">
@@ -80,7 +80,7 @@
             take leaps where others are
             only walking.</div style="text-align: justify;-moz-text-align-last: justify;">
             <div class="sp-bigsc">
-                <a  href="/#!/coaching" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Read more</a>
+                <a  href="/#!/coaching" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Know more</a>
             </div>
         </div>
         <div class="col-md-4 bigsc" style="position: relative;">
@@ -103,7 +103,7 @@
             get that clarity and create a
             world-class life.</div style="text-align: justify;-moz-text-align-last: justify;">
             <div class="sp-bigsc">
-                <a  href="/#!/college" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Read more</a>
+                <a  href="/#!/college" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Know more</a>
             </div>
         </div>
         <!--<div>
@@ -141,7 +141,7 @@
         </div>
     </section>
     <section class="rm-collaborate rm-section" style="min-height: 720px;">
-        <h1 class="mb-5">The 4 step process to change your life</h1>
+        <h1 class="mb-5">Why should you choose Rohit?</h1>
         <div class="col-xs-12 col-sm-6 col-md-4 mb-3">
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
@@ -149,8 +149,8 @@
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
                 <!--</a>-->
                 <div class="icon-box-details">
-                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
-                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Laugh and Learn</h4>
+                    <p class="text-gray font-13 mb-0">Rohit has a great sense of humour. You can be assured that you’ll be laughing hard for the whole session.</p>
                 </div>
             </div>    
         </div>
@@ -161,8 +161,9 @@
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
                 <!--</a>-->
                 <div class="icon-box-details">
-                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
-                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Participative Learning</h4>
+                    <p class="text-gray font-13 mb-0">A session with Rohit is not a lecture from the books, it’s a dynamic conversation that evolves according to the
+                        needs of the participants.</p>
                 </div>
             </div>    
         </div>
@@ -173,8 +174,9 @@
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
                 <!--</a>-->
                 <div class="icon-box-details">
-                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
-                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Capacity Building</h4>
+                    <p class="text-gray font-13 mb-0">Rohit believes not in giving ready-made solutions to the problems but enabling the participants to meet them
+                        head-on and come out victorious.</p>
                 </div>
             </div>    
         </div>
@@ -185,8 +187,9 @@
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
                 <!--</a>-->
                 <div class="icon-box-details">
-                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
-                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Knowledge that sticks</h4>
+                    <p class="text-gray font-13 mb-0">Rohit’s sessions lead to not just outside motivation that wanes but realisations from the depths that change
+                        the course of life.</p>
                 </div>
             </div>    
         </div>
@@ -197,8 +200,9 @@
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
                 <!--</a>-->
                 <div class="icon-box-details">
-                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
-                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Implementable knowledge</h4>
+                    <p class="text-gray font-13 mb-0">Rohit believes that any amount of knowledge without implementation is a waste. His sessions include
+                        small incremental steps that make the learnings a way of life.</p>
                 </div>
             </div>    
         </div>
@@ -209,8 +213,9 @@
                 <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
                 <!--</a>-->
                 <div class="icon-box-details">
-                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Free demo classes</h4>
-                    <p class="text-gray font-13 mb-0">We provide free demo classes for new aspirants so as to enable them to have the extraordinary JB experience firsthand.</p>
+                    <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Multifaceted evolution</h4>
+                    <p class="text-gray font-13 mb-0">Although Rohit’s sessions aim at achieving success. They take into account the various aspects of life. With
+                        Rohit, you grow mentally, spiritually, economically, socially and physically.</p>
                 </div>
             </div>    
         </div>
@@ -237,12 +242,12 @@
         <iframe width="70%" height="500px" src="http://www.youtube.com/embed/6nFYtsQBKAk"></iframe>
     </section>
     <section class="rm-section rm-collaborate"style="background-color:#fff; height: auto; min-height: auto;">
-        <h1 style="margin-bottom: 40px;">
+        <!-- <h1 style="margin-bottom: 40px;">
             <span><a style="color:#333333;" >Heading</a></span>
         </h1>
-        <div class="">Imagine a world in which the vast majority of us wake up inspired, feel safe at work and return home fulfilled at the end of the day.</div>
+        <div class="">Imagine a world in which the vast majority of us wake up inspired, feel safe at work and return home fulfilled at the end of the day.</div> -->
         <div>
-            <button class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 50px;" ng-click="">Book</button>
+            <button class="btn btn-primary btn-ghost"style="padding: 8px 50px;" ng-click="book()">Book Rohit</button>
         </div>
     </section>
     <!--<section class="row rm-section">

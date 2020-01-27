@@ -39,7 +39,7 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
     $scope.pixelsScrolled = true ;
     var db = firebase.firestore();
     $scope.canConnect = false;$scope.canBook = false;
-    $scope.confirm = false;
+    $scope.confirm = false;$scope.emailSub = '';
     $scope.canScrollTop = false;
     $scope.scrollToContent = false;
     $scope.shouldScrollDown = ()=>{
@@ -81,7 +81,17 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
       });
       $scope.canScrollTop = false;
     };
-    
+    $scope.mailSubscribe = function(){
+        db.collection("mail-subscription").add({
+            'email':$scope.emailSub
+        })
+        .then(function(docRef) {
+            $scope.emailSub = ''
+            $timeout(function(){
+                $scope.$apply()
+            },1);
+        });
+    }
     //connect
     
     $scope.newConnect = {};$scope.newBook = {};
@@ -119,9 +129,9 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
     $scope.updateNewBooking = function(){
         if(isValidated([$scope.newBook.author,$scope.newBook.email,$scope.newBook.phone,$scope.newBook.message])){
           console.log($scope);
-          db.collection("book").add({
+          db.collection(window.location.hash.split('#!/')[1]).add({
           ...$scope.newBook,
-          page:window.location.hash
+          //page:window.location.hash
           })
           .then(function(docRef) {
             $scope.toggleBooking();
@@ -257,7 +267,7 @@ myApp.config(function($routeProvider){
                     templateUrl:"/school/index.html",
                     controller:"schoolController"
                     })
-                .when("/personnal_mentoring",{
+                .when("/personal_mentoring",{
                     templateUrl:"/mentoring/index.html",
                     controller:"schoolController"
                     })
@@ -311,24 +321,24 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
                     {
                         title:"Speaking",
                         path:"/speaking",
-                        subs:[
-                              {
-                                  title:"School",
-                                  path:"/school"
-                              },
-                              {
-                                  title:"College",
-                                  path:"/college"
-                              },
-                              {
-                                  title:"Coaching",
-                                  path:"/coaching"
-                              },
-                            ]
+                        // subs:[
+                        //       {
+                        //           title:"School",
+                        //           path:"/school"
+                        //       },
+                        //       {
+                        //           title:"College",
+                        //           path:"/college"
+                        //       },
+                        //       {
+                        //           title:"Coaching",
+                        //           path:"/coaching"
+                        //       },
+                        //     ]
                     },
                     {
-                       title:"Personnal Mentoring",
-                       path:"/personnal_mentoring"
+                       title:"Personal Mentoring",
+                       path:"/personal_mentoring"
                     },
                     {
                         title:"Contact",

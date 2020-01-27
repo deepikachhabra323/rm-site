@@ -4,14 +4,14 @@
             <div id="blogItems" class="modify-blog-container">
                 <div ng-if="!id"> Cover Image : <input type="file" accept="image/*" ng-model="imgUrl.img" app-filereader></input></div>
                 <div> Title : <textarea ng-model="title"></textarea></div>
-                <div> Content : <textarea ng-model="text"></textarea></div>
+                <!-- <div> Content : <textarea ng-model="text"></textarea></div> -->
                 <!--<div id="toolbar"></div>-->
-                <!--<div> Content :-->
-                    <div style="display: none;" id="editor"></div>
-                <!--</div>-->
+                <div> Content :
+                    <div id="editor"></div>
+                </div>
                 <div> Category :
                     <select ng-model="categ">
-                        <option ng-repeat = "cat in blogCats" value={{cat}}>{{cat}}</option>
+                        <option ng-repeat = "cat in blogCats" ng-if="cat!=='All'" value={{cat}}>{{cat}}</option>
                     </select>
                 </div>
             </div>

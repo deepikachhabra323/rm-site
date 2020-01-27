@@ -13,7 +13,8 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
     $scope.events = [];$scope.canModifyEvent = false;
     $scope.videos = [];$scope.newEvent = {};$scope.mainHeader = "";
     $scope.subHeader = "";$scope.headerButton = "";$scope.fb = "";$scope.yt = "";
-    $scope.courseHeader = "";$scope.courseSubheader = "";
+    $scope.courseHeader = "";$scope.courseSubheader = "";$scope.currentLink = '';
+    $scope.shouldPlay = false;
     $scope.speakerHeader = "";$scope.speakerText = "";$scope.speakerButton="";$scope.speakerImage="";
     db.collection("blogs").get().then(function(querySnapshot) {
         $scope.blogs = [];
@@ -39,13 +40,17 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
     db.collection("videos").get().then(function(querySnapshot) {
         $scope.videos = [];
         querySnapshot.forEach(function(doc) {
-          $http.get("https://www.youtube.com/oembed?url="+doc.data().url+"&format=json",{'Access-Control-Allow-Origin': '*'}).then(resp => {
-            console.log(resp)
-            },err=>{});
-          var title = "https://www.youtube.com/oembed?url="+getVideoId(doc.data().url)+"&format=json";
-            // doc.data() is never undefined for query doc snapshots
-            $scope.videos.push({...doc.data(),id:doc.id,title:title.title});
-            console.log(doc.id, " => ", {...doc.data(),id:doc.id,title:title.title},title);
+            $http.get('https://www.googleapis.com/youtube/v3/videos?id='+getVideoId(doc.data().url)+'&key=AIzaSyDyURH-EjyXA2-TItNWjyJSRV4KRr6_9f0&part=snippet').then(function(res){
+                console.log(res);
+                var resp = res.data.items[0].snippet;
+                $scope.videos.push({...doc.data(),id:doc.id,title:resp.title,thumbnail:resp.thumbnails.medium});
+                console.log($scope.videos);
+                $timeout(function(){
+                    $scope.$apply();
+                },1);
+            });// doc.data() is never undefined for query doc snapshots
+            //$scope.videos.push({...doc.data(),id:doc.id,title:title.title});
+            console.log(doc.id, " => ", {...doc.data(),id:doc.id,});
         });
         $timeout(function(){
             $scope.$apply()
@@ -157,6 +162,13 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
             $scope.$apply()
         },1);
     });
+    $scope.playVideo = function(link){
+        $scope.currentLink = link;
+        $scope.shouldPlay = true;
+    }
+    $scope.toggleViewMode = function(){
+        $scope.shouldPlay = false;
+    }
     $scope.saveData = () => {
         var speaker = db.collection("speaker");
         var speakerH = speaker.doc("speakerHeader");

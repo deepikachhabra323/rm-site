@@ -18,15 +18,10 @@ myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeou
         theme: 'snow'
     };
     var editor = new Quill(container,options);
-    db.collection("blogs").get().then(function(querySnapshot) {
-        $scope.blogs = [];
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            $scope.blogs.push(doc.data());
-            console.log(doc.id, " => ", doc.data());
-        });
+    db.collection("blogs").doc($routeParams.topicId).get().then(function(doc) {
+        
         $scope.blogId = $routeParams.topicId;
-        $scope.blog = $scope.blogs[$scope.blogId];
+        $scope.blog =doc.data();
         if(typeof $scope.blog.text == 'string'){
             $scope.blog.text = [{insert:$scope.blog.text}];
         }
@@ -81,10 +76,10 @@ myApp.controller("blogEditController",function($scope,$http,$routeParams,$locati
         //readOnly: true,
         theme: 'snow'
     };
-    //var editor = new Quill(container,options);
-    //editor.on('text-change', function(delta, oldDelta, source) {
-    //    $scope.text = editor.getContents().ops;
-    //});
+    var editor = new Quill(container,options);
+    editor.on('text-change', function(delta, oldDelta, source) {
+       $scope.text = editor.getContents().ops;
+    });
     if($routeParams.topicId!=undefined){
         db.collection("blogs").doc($routeParams.topicId).get().then((doc) => {
             var obj = doc.data();
@@ -100,7 +95,7 @@ myApp.controller("blogEditController",function($scope,$http,$routeParams,$locati
     }
     
     $scope.saveBlog = () => {
-        if(isValidated([$scope.title,$scope.text])){
+        if(isValidated([$scope.title,$scope.text,$scope.categ,$scope.categ!=='All'])){
             // Add a new document with a generated id.
             if($routeParams.topicId!=undefined){
                 db.collection("blogs").doc($routeParams.topicId).update({

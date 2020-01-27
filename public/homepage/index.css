@@ -9,7 +9,7 @@
     /*padding-right: 430px;*/
     color:#fff;
     font-size: 18px;
-    padding-left: 300px;
+    padding-right: 300px;
     max-height: 240px;
     box-sizing: border-box;
     height: 160px;
@@ -88,8 +88,14 @@
     overflow: hidden;
     
 }
-.videos .item-article{
-    height: 258px;
+.videos .item-article,.videos-page .item-article{
+    height: 275px;
+    background-color: #fff;
+}
+.yt-video-title{
+    background-color: #fff;
+    padding: 10px;
+    text-align: justify;
 }
 .blogs-videos .item-article img {
     max-height: 150px;
@@ -159,7 +165,7 @@
 }
 .my-story img{
     height: 100%;
-    /* width: 33%; */
+    width: 33%;
     object-fit: contain;
     bottom: 0px;
     position: absolute;
@@ -175,21 +181,24 @@
 .my-story .quote{
     font-size: 23px;
     text-align: center;
-    padding-left: 23%;
+    padding-left: 35%;
     padding-right: 1%;
 }
 .my-story .download-btns{
     position: absolute;
     bottom: 3%;
-    right: 5%;
-    right: calc((100% - 600px)/2);
+    /* right: 5%; */
+    left: calc(50% - 80px);
+    /* right: calc((100% - 600px)/2); */
 }
 .my-story .download-btns div{
     display: inline-block;
-    margin-right: 102px;
+    /* margin-right: 102px; */
     text-transform: uppercase;
 }
-
+.rm-testimonial-text{
+    text-align: center;
+}
 .live-events {
     padding-top: 40px;
     padding-bottom: 120px;
@@ -485,7 +494,7 @@
 }
 @media (min-width: 1400px){
     .rm-home-ebook{
-        text-align: right;
+        /* text-align: right; */
     }
     .ebook-div{
       max-width: 1400px;
@@ -499,6 +508,9 @@
     }
     .testimonials .item .content{
         max-width: 950px;
+    }
+    .videos .item-article, .videos-page .item-article{
+        height: 370px;
     }
   /*.main-banner .person-banner {
     left: 3%;

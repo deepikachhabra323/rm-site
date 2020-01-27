@@ -1,9 +1,6 @@
 <div ng-controller="homeController">
     <div class="rm-home-about"></div>
     <div id="sample3" class="rm-home-ebook">
-        <div class="ebook-img-cntnr">
-            <!-- <img class="" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal"> -->
-        </div>
         <div class="ebook-div">
             <!--<div class="header">{{courseHeader}}</div>-->
             <div class="sub-header">{{courseSubheader}}</div>
@@ -14,12 +11,23 @@
                 <button class="btn btn-primary btn-ghost" ng-click="">Send</button>
             </div>
         </div>
+        <div class="ebook-img-cntnr">
+            <!-- <img class="" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal"> -->
+        </div>
         <!--<div class="social-media">
             <a class="facebook"><span class="without-hover">{{fb}}</span><span class="with-hover"><img style="height: 50px;margin-top: -10px;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Ffb.png?alt=media&token=d2c75877-9a89-4540-9628-bcff8c283b4a">Facebook</span></a>
             <a class="youtube"><span class="without-hover">{{yt}}</span><span class="with-hover"><img style="height: 50px;margin: -6px 5px 0px 0px;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fyoutube-red-square.png?alt=media&token=89a4a37c-2aa3-49b9-bf55-0ba2247e5a02">Youtube</span></a>
         </div>-->
     </div>
     <section id="main-content" class="blogs-videos">
+        <div class="rm-popup-parent" ng-show="shouldPlay">
+            <div class="rm-popup-container">
+                <div class="close" ng-click="toggleViewMode()">&times;</div>
+                <div style="min-width: 600px;min-height: 350px;">
+                    <iframe width="700px" height="350px" ng-src="{{currentLink}}" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="">
                 <div class="item-article-heading">
@@ -30,9 +38,17 @@
             </div>
             <div class="row videos">
                 <div ng-repeat="tile in videos" class="col-sm-6 col-md-4ths" ng-if="$index<3">
-                    <div class="item-article" ng-init="link = getUrl($index)" >
-                        <iframe width="100%" height="260px" ng-src="{{link}}" allowfullscreen></iframe>
+                    <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link,$index)">
+                        <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
+                        
+                        <img style="height: auto;max-height: initial;" ng-src="{{tile.thumbnail.url}}">
+                        <i class="fas fa-play rm-play-button"></i>
+                        <div class="yt-video-title">{{tile.title}}</div>
                     </div>
+                    
+                    <!-- <div class="item-article" ng-init="link = getUrl($index)" >
+                        <iframe width="100%" height="260px" ng-src="{{link}}" allowfullscreen></iframe>
+                    </div> -->
                 </div>
                 
             </div>
@@ -71,7 +87,7 @@
     </section>
     <section class="my-story">
         <div class="my-story-container" style="max-width: 1200px;margin: 0px auto;padding: 7em 0;position: relative;">
-            <img width="24%" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fmy_story.jpg?alt=media&token=40d65732-1667-4191-9fd3-9aa61d3f16c2">
+            <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fmy_story.jpg?alt=media&token=40d65732-1667-4191-9fd3-9aa61d3f16c2">
             <div class="my-story-text-container">
                 <h1 style="font-size: 36px;">
                     <span>{{myStory.title}}</span>
@@ -92,36 +108,55 @@
                 </div>-->
                 <div class="download-btns">
                     <div class="stry-btn">
-                        <a style="padding: 6px 15px;" href="/#!/about" class="btn btn-primary btn-ghost">Read More</a>
+                        <a style="padding: 6px 15px;" href="/#!/about" class="btn btn-primary btn-ghost">Know More</a>
                     </div>
                 </div
             </div>
         </div>
     </section>
-    <section class="row rm-section rm-section-home rm-section-home-speaking" style="min-height:350px;max-width: 1200px;
+    <section class="row rm-section rm-section-home" style="min-height:550px;max-width: 1200px;
     margin: auto;">
-        <div class="col-md-5" style="padding: 50px 0px;">
-            <div class="logo-center"><img height="300px" src="../img/square-xxl.png" alt="" class="landing-bulletin-img"></div>
-        </div>
-        <div class="col-md-7" style="padding: 100px;padding-left: 10%;">
-            <div class="sub-heading" style="height: auto;">Speaking</div>
-            <div class="content" style="height: auto;">Imagine an India where the youth have clear
-                dreams,courage to pursue them.
+        <div class="col-md-7" style="padding: 100px 0px;padding-left: 10%;height: auto;">
+            <div class="sub-heading" style="height: auto;">Personnal Mentoring</div>
+            <div class="content" style="height: auto;">Are you a <b>Student</b> who has big dreams?
+                Do you have the courage to pursue your dreams?
+                Do you want to become so good that your success becomes inevitable?
+                If Yes, I can help you. I can help in making your dreams come true.
             </div>
+        </div>
+        <div class="col-md-5" style="padding: 50px 0px;height: auto;">
+            <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4079%20copy%20(1).jpg?alt=media&token=5251d557-5ab4-4aae-bab4-67e8d485417a" alt="" class="landing-bulletin-img"></div>
+        </div>
+        <div class="testimonials-right" style="height: auto;"> 
+            <div class="col-lg-10 col-md-10 col-xs-12 testimonials-rights">“Rohit Sir made me believe I can become an officer. He showed me the way to success” 
+              <div class="names rights"><span class="clnt-name rights">Arpit Sharma</span><br>
+                Probationary Officer, SBI</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12"><img src="images/ahmed.png" alt="Ahmed"></div>
         </div>
     </section>
-    <section class="row rm-section rm-section-home" style="min-height:350px;max-width: 1200px;
+    <section class="row rm-section rm-section-home rm-section-home-speaking" style="min-height:550px;max-width: 1200px;
     margin: auto;">
-        <div class="col-md-7" style="padding: 100px 0px;padding-left: 10%;">
-            <div class="sub-heading" style="height: auto;">Personnal Mentoring</div>
-            <div class="content" style="height: auto;">Every child needs a chance. The child of today is our future. I am
-                deeply passionate about helping underprivileged children lead
-                better, healthier and happier lives. Education is the only way it is
-                possible. And guess what? I need your help.
+        <div class="col-md-5" style="padding: 50px 0px;height: auto;">
+            <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4037%20a%20copy%20(1).jpg?alt=media&token=a049995e-bbeb-429f-b6b2-b140a60484b1" alt="" class="landing-bulletin-img"></div>
+        </div>
+        <div class="col-md-7" style="padding: 100px;padding-left: 10%;height: auto;">
+            <div class="sub-heading" style="height: auto;">Speaking</div>
+            <div class="content" style="height: auto;">Are you an institute who wants to increase its business by giving more
+                selections?
+                Are you a school looking for an improvement in your X/XII standard result?
+                Are you a college who wants to give your students an edge in building a
+                dream career?
+                If Yes, I can help you. I can get you the results you want.
             </div>
         </div>
-        <div class="col-md-5" style="padding: 50px 0px;">
-            <div class="logo-center"><img height="300px" src="../img/square-xxl.png" alt="" class="landing-bulletin-img"></div>
+        <div class="testimonials-right" style="height: auto;"> 
+            <div class="col-lg-10 col-md-10 col-xs-12 testimonials-rights">“Rohit is just WOW. He made us laugh and delivered what was promised. My students
+                are highly inspired to do their best and yield great results.” 
+              <div class="names rights"><span class="clnt-name rights">Meetu Sharma</span><br>
+                Principal, Blooming Dales International School, Sri Ganganagar</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-xs-12"><img src="images/ahmed.png" alt="Ahmed"></div>
         </div>
     </section>
     <!--<section class="speaker-mentor">
@@ -260,7 +295,7 @@
                       <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" ng-if="$index<9">
                         <div class="content">
                             <div style="height: 60%;overflow-y: hidden;padding-bottom: 20px;">
-                                <span>{{testimonial.text.substring(0,250)}}</span>
+                                <span class="rm-testimonial-text">{{testimonial.text.substring(0,250)}}</span>
                                 <a href="/#!/testimonials" ng-if="testimonial.text.length>250">read more...</a>
                             </div>
                             <div class="testi-1"><img alt="" src={{testimonial.img}}></div>

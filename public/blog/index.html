@@ -1,13 +1,34 @@
-<div ng-controller="blogController" class="rm-blog-page page" style="margin-top: 0px;">
+<div ng-controller="blogController" class="rm-blog-page page" style="padding-top: 0px;">
 <!--<div ng-controller="blogController" class="page">-->
-    <section class="row rm-section" style="min-height: 300px;">
-        <div class="about-main-heading"style="padding: 50px;font-size: 30px;height: auto;">
-            Rohit’s blog is one of the best resources for a young mind with a fire to become something. It is an
-            absolute must for an aspirant of any competitive exam. Here you can learn how to manage your
-            inner self for the highest levels of productivity, enhanced creativity, roaring confidence and
-            everlasting happiness.
-        </div>
-    </section>
+    <header class="main-banner main-banner_home clearfix" style=" background-color: #000000;">
+        <section class="banner-text banner-home">
+            <img style="z-index: auto;" class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4079%20copy%20(1).jpg?alt=media&token=5251d557-5ab4-4aae-bab4-67e8d485417a" alt="Rohit Mittal">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-7 " style="">
+                        <div class="slide-text">
+                            <div class="row">
+                                <div class=" banner-content-rsp" ng-controller="homeController">
+                                        <h2 style="word-break: break-word;color: #fff; font-style: normal;" class="sub-heading">
+                                            Rohit’s blog is one of the best resources for a
+                                            young mind with a fire to become something. It is
+                                            an absolute must for an aspirant of any competitive
+                                            exam. Here you can learn how to manage your
+                                            inner self for the highest levels of productivity,
+                                            enhanced creativity, roaring confidence and
+                                            everlasting happiness.
+                                        </h2>
+                                        <!-- <div>
+                                            <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="">Subscribe on Youtube</button>
+                                        </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
     <div class="blog-cat-container">
         <div class="blog-cat" ng-class="{'blog-cat-selected': catFilter==cat}" ng-click="getFilteredBlogs(cat)" ng-repeat="cat in blogCats">{{cat}}</div>
     </div>
@@ -29,7 +50,7 @@
                             <div>
                                 {{blog.text.substring(0,200)+"..."}}
                             </div>
-                            <span class="rm-blog-readmore"><a ng-href="/#!/blog/{{$index}}">Read more</a></span>
+                            <span class="rm-blog-readmore"><a ng-href="/#!/blog/{{blog.id}}">Read more</a></span>
                         </div>
                         <div class="edit-delete-buttons" ng-if="isLoggedIn">
                             <button class="btn btn-primary btn-ghost" ng-click="editBlog($index)">Edit</button>
