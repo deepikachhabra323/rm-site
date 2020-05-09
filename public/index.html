@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rohit Mittal</title>
+    <link rel="shortcut icon" href="./img/favicon.jpg">
+    <title>Top Motivational Speaker | Study Expert | Rohit Mittal</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="./homepage/index.css">
@@ -13,9 +14,14 @@
     <link rel="stylesheet" href="./testimonial/index.css">
     <link rel="stylesheet" href="./connect/index.css">
     <link rel="stylesheet" href="./about/index.css">
+
+    <link rel="stylesheet" href="./social/index.css">
     <!--<link rel="stylesheet" href="./school/index.css">
     <link rel="stylesheet" href="./college/index.css">
     <link rel="stylesheet" href="./oneOnOne/index.css">-->
+
+    <script src="https://apis.google.com/js/platform.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
@@ -24,6 +30,7 @@
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-route.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
     
     <!-- Firebase -->
     <!--<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>-->
@@ -35,6 +42,7 @@
     <!-- AngularFire -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.min.js"></script>
     
+
     <!--Quill Editor-->
     
     <!-- Theme included stylesheets -->
@@ -51,6 +59,10 @@
     <!--fb plugin-->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
     
+    <!-- smtp -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script> 
+
+    <script src="./social/index.js" type="text/javascript"></script>
     <script src="./index.js" type="text/javascript"></script>
     <script src="./homepage/index.js" type="text/javascript"></script>
     <script src="./blog/index.js" type="text/javascript"></script>
@@ -61,6 +73,9 @@
     <script src="./about/index.js" type="text/javascript"></script>
     <script src="./school/index.js" type="text/javascript"></script>
     <script src="./college/index.js" type="text/javascript"></script>
+    <script src="./coaching/index.js" type="text/javascript"></script>
+    <script src="./mentoring/index.js" type="text/javascript"></script>
+    <script src="./speaking/index.js" type="text/javascript"></script>
     <script src="./oneOnOne/index.js" type="text/javascript"></script>
   </head>
   <body ng-app="rohitMittal">
@@ -69,32 +84,37 @@
         <div id="top-header" style="" class="">
           <div class="container clearfix">
             <div class="et-social-media">
-              <span><i class="fab fa-facebook-square"></i></span>
-              <span><i class="fab fa-youtube-square"></i></span>
+              <span><a href="https://www.facebook.com/dreamwithrohit/"><i class="fab fa-facebook-square"></i></a></span>
+              <span><a href="https://www.youtube.com/channel/UCdebLq8jvcbum3mLQUAe2xQ"><i class="fab fa-youtube-square"></i></a></span>
               <span id="et-info-phone">
                 <i class="fas fa-phone-alt"></i>
-                +91 99999 99999
+                759-759-78-78
               </span>
               <a href="mailto:mail@mail.com&mailfrom:dc4n999@gmail.com">
                 <span id="et-info-email">
                   <i class="fas fa-envelope"></i>
-                  mail@mail.com
+                  contact@rohitmittal.in
                 </span>
               </a>
             </div>
     
           </div> <!-- .container -->
         </div>
-        <div class="rm-menu-items">
-          <div ng-click="redirectToUrl('/modifyData')"  onclick="toggleMenu();" ng-if="isLoggedIn" class="rm-topnav-title">
-              Modify Data
+        <div>
+          <div class="header-tile logo-tile">
+            <img src='./img/logo.jpg'/>
           </div>
-          <div ng-repeat="path in paths" ng-click="redirectTo(path)"  onclick="toggleMenu();" ng-if="(path.title=='Connect Results' &&  isLoggedIn) || path.title!=='Connect Results'" class="rm-topnav-title">
-              {{path.title}}
-              <span style="font-size: 12px;" ng-if="path.subs" onclick="document.getElementById('sub-paths-visible').style.display = document.getElementById('sub-paths-visible').style.display=='block'?'none':'block';event.stopPropagation()" class="fa fa-chevron-down fa-2x"></span>
-              <div ng-if="path.subs" id="sub-paths-visible" class="sub-paths">
-                <div class="sub-path" ng-repeat="subpath in path.subs"  ng-click="redirectTo(subpath)" onclick="event.stopPropagation();">{{subpath.title}}</div>
-              </div>
+          <div class="rm-menu-items header-tile">
+            <div ng-click="redirectToUrl('/modifyData')"  onclick="toggleMenu();" ng-if="isLoggedIn" class="rm-topnav-title">
+                Modify Data
+            </div>
+            <div ng-repeat="path in paths" ng-click="redirectTo(path)"  onclick="toggleMenu();" ng-if="(path.title=='Log Out' &&  isLoggedIn) || (path.title=='Connect Results' &&  isLoggedIn) || (path.title!=='Connect Results' && path.title!=='Log In')" class="rm-topnav-title">
+                {{path.title}}
+                <span style="font-size: 12px;" ng-if="path.subs" onclick="document.getElementById('sub-paths-visible').style.display = document.getElementById('sub-paths-visible').style.display=='block'?'none':'block';event.stopPropagation()" class="fa fa-chevron-down fa-2x"></span>
+                <div ng-if="path.subs" id="sub-paths-visible" class="sub-paths">
+                  <div class="sub-path" ng-repeat="subpath in path.subs"  ng-click="redirectTo(subpath)" onclick="event.stopPropagation();">{{subpath.title}}</div>
+                </div>
+            </div>
           </div>
         </div>
         <div onclick="toggleMenu();" class="rm-menu-icon"><i class="fas fa-bars"></i></div>
@@ -110,7 +130,7 @@
                               <div class=" banner-content-rsp" ng-controller="homeController">
                                   <h1 style="word-break: break-word;" class="text-normal">{{mainHeader}}</h1>
                                   <h2 style="word-break: break-word;" class="sub-heading" ng-model="subHeader">{{subHeader}}</h2>
-                                  <a href="/#!/personnal_mentoring" class="btn btn-primary btn-ghost " style="color: #fff;">
+                                  <a href="/#!/personal_mentoring" class="btn btn-primary btn-ghost " style="color: #fff;">
                                       {{headerButton}} <!--<span class="fa fa-chevron-right"></span>-->
                                   </a>
                               </div>
@@ -119,7 +139,7 @@
                   </div>
               </div>
           </div>
-          <img class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal">
+          <img class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fnewhome.jpg?alt=media&token=8ff4690f-beeb-4318-9a41-224d068a1dfd" alt="Rohit Mittal">
         </section>
         <div ng-click="shouldScrollDown()" class="scroll-down-please text-center" id="scrollDownPlease">
             <!--<a href="#">-->
@@ -140,6 +160,21 @@
       </div>
       <div class="rm-popup-parent" ng-if="canBook">
         <div class="rm-popup-container">
+            <div class="rm-popup-header">Book a one-to-one session with Rohit...</div>
+            <input placeholder="Name*" type="text" required ng-model="newBook.author">
+            <input placeholder="Phone No.*" type="text" required ng-model="newBook.phone">
+            <input placeholder="Email*" type="text" required ng-model="newBook.email">
+            <input placeholder="City*" type="text" required ng-model="newBook.city">
+            <!-- <input placeholder="Institution Name*" type="text" required ng-model="newBook.institute"> -->
+            <input placeholder="Message*" required type="text" ng-model="newBook.message">
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="toggleBooking()">Cancel</button>
+                <button class="btn btn-primary btn-ghost" ng-click="updateNewBooking()">Send</button>
+            </div>
+        </div>
+      </div>
+      <div class="rm-popup-parent" ng-if="canBook1">
+        <div class="rm-popup-container">
             <div class="rm-popup-header">Connect with us</div>
             <input placeholder="Name*" type="text" required ng-model="newBook.author">
             <input placeholder="Phone No.*" type="text" required ng-model="newBook.phone">
@@ -151,58 +186,86 @@
             </div>
         </div>
       </div>
-      <div aria-live="polite" aria-atomic="true" style="position: fixed;top: 10px;height: 80px;left: 20px;width: 210px;">
+      <div class="rm-popup-parent" ng-if="didSubscribe">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Thank you for scubscribing to our mailing list.</div>
+            <div>Click here to continue creating the life of your dreams.</div>
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="redirectToUrl('/personal_mentoring')">Continue</button>
+            </div>
+        </div>
+      </div>
+      <div class="rm-popup-parent" ng-if="isSuccess">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Do you wish to proceed</div>
+            <!-- <div>Click here to continue creating the life of your dreams.</div> -->
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="toSuccess('no')">No</button>
+                <button class="btn btn-primary btn-primary" ng-click="toSuccess('yes')">Yes</button>
+            </div>
+        </div>
+      </div>
+      <div class="rm-popup-parent" ng-if="didBook">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Thank you for your interest.. </div>
+            <div>Our team will contact you soon… or you can contact us on 759-759-78-78</div>
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="toggleDidBook()">Ok</button>
+            </div>
+        </div>
+      </div>
+      <div class="rm-popup-parent" ng-if="didEbook">
+        <div class="rm-popup-container">
+            <div class="rm-popup-header">Your e-book has been sent to your email...</div>
+            <div>Click here to continue creating the life of your dreams.</div>
+            <div style="text-align: right;">
+                <button class="btn btn-primary btn-ghost" ng-click="redirectToUrl('/personal_mentoring')">Continue</button>
+            </div>
+        </div>
+      </div>
+      <!-- <div aria-live="polite" aria-atomic="true" style="position: fixed;top: 10px;height: 80px;left: 20px;width: 210px;">
         <div data-delay="8000" class="toast" id="toast" style="position: absolute; top: 0; right: 0;">
-          <!--<div class="toast-header">
-            <strong class="mr-auto">Alert&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-            <small>Just Now</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>-->
           <div class="toast-body">
             Hi, please fill all the values to proceed!
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="scroll-top-anchor" ng-click="scrollToTop()" ng-if="canScrollTop"><i class="fas fa-chevron-up"></i></div>
       <footer>
           <div class="container">
               <div class="row">
                   <div class="col-md-4" style="text-align: center;margin-bottom: 40px;">
-                    <div class="fb-page" data-href="https://www.facebook.com/channelvindia/" data-tabs="timeline" data-width="" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                      <blockquote cite="https://www.facebook.com/channelvindia/" class="fb-xfbml-parse-ignore">
-                        <a href="https://www.facebook.com/channelvindia/">Facebook</a>
+                    <div class="fb-page" data-href="https://www.facebook.com/dreamwithrohit/" data-tabs="timeline" data-width="" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                      <blockquote cite="https://www.facebook.com/dreamwithrohit/" class="fb-xfbml-parse-ignore">
+                        <a href="https://www.facebook.com/dreamwithrohit/">Facebook</a>
                       </blockquote>
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div name=iframe style="margin:auto;width:340px; height:200px; border:2px solid grey; overflow:hidden">
-                      <!--<iframe src="https://www.youtube.com/channel/UCP1iRaFlS5EYjJBryFV9JPw" style="width:100%; height:200px; margin-top: -65px" scrolling=true>
-                         If you can see this, your browser doesn't support iframes. Click <a href=http://mychannel.url>here to
-                         see my YouTube channel.</a>-->
+                    <div id="subscribe-youtube" class="mailing-list">Subscribe to my YouTube channel
+                      <div class="g-ytsubscribe" data-channelid="UCdebLq8jvcbum3mLQUAe2xQ" data-layout="full" data-count="default"></div>
+                    </div>
+                    <div class="mailing-list" style="margin-top: 20px;">Subscribe for my mailing list
+                      <input placeholder="add email id" ng-model="emailSub">
+                      <button class="btn btn-primary btn-ghost" style=" margin: 5px 0px;" ng-click="mailSubscribe()">Subscribe</button class="btn btn-primary btn-ghost" ng-click="updateNewTestimonial()">
                     </div> 
                   </div>
                   <div class="col-md-4">
                     <div class="footer-text" style="padding: 0px 0px 0px 70px;">
                       <div id="et-info-phone" style="padding: 5px;">
                         <i class="fas fa-phone-alt"></i>
-                        +91 99999 99999
+                        759-759-78-78
                       </div>
                       <div style="padding: 5px;">
                         <a href="mailto:mail@mail.com" style="color: rgba(255, 255, 255, 0.5);">
                           <span id="et-info-email">
                             <i class="fas fa-envelope"></i>
-                            mail@mail.com
+                            contact@rohitmittal.in
                           </span>
                         </a>
                       </div>
                       <div style="padding: 5px;">
                         © All rights reserved.
-                      </div>
-                      <div class="mailing-list">Subscribe for my mailing list
-                        <input placeholder="email" ng-model="emailSub">
-                        <button class="btn btn-primary btn-ghost" style=" margin: 5px 0px;" ng-click="mailSubscribe()">Subscribe</button class="btn btn-primary btn-ghost" ng-click="updateNewTestimonial()">
                       </div>
                         <!--<a href="/terms-and-conditions">Terms of Use</a> | <a href="/privacy-policy">Privacy Policy</a> | <a href="http://forlogis.com/" target="_blank">Created by Forlogis</a>-->
                     </div>

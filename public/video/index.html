@@ -1,3 +1,4 @@
+<script src="https://apis.google.com/js/platform.js"></script>
 <div ng-controller="videoController" class="rm-blog-page">
     <header class="main-banner main-banner_home clearfix" style=" background-color: #000000;">
         <section class="banner-text banner-home">
@@ -8,16 +9,17 @@
                         <div class="slide-text">
                             <div class="row">
                                 <div class=" banner-content-rsp" ng-controller="homeController">
-                                        <h2 style="word-break: break-word;color: #fff; font-style: normal;" class="sub-heading">
-                                            Rohit Youtube channel is the go-to place for
-                                            anyone with a fire to achieve their dreams.
-                                            Subscribe below to receive some simple yet
-                                            extraordinary insights and powerful tools to
-                                            reach your goals and create the life of your
-                                            dreams.
+                                        <h2 ng-bind-html="pageTitle" ng-if="windowWidth>720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
                                         </h2>
-                                        <div>
-                                            <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="">Subscribe on Youtube</button>
+                                        <h2 ng-bind-html="pageTitleM" ng-if="windowWidth<=720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
+                                        </h2>
+                                        <div style="margin-top: 25px;">
+                                            <!-- <button class="btn btn-primary btn-ghost" style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="ytSubscribe()"> -->
+                                                <span style="padding: 5px;vertical-align: super; color:#fff">Subscribe on Youtube </span>
+                                                <div class="g-ytsubscribe"  data-channelid="UCdebLq8jvcbum3mLQUAe2xQ" data-layout="default" data-count="hidden"></div>
+                                            <!-- </button> -->
                                         </div>
                                 </div>
                             </div>
@@ -38,17 +40,23 @@
                 <iframe width="100%" height="600px" ng-src="{{currentLink}}" allowfullscreen></iframe>
             </div> -->
             <div id="blogItems" class="row" ng-if="visibleTab=='videos'">
-                <div ng-repeat="item in videos" class=" col-sm-6 col-md-4" ng-attr-id="{{'ytvideo'+$index}}">
-                    <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link,$index)">
+                <div ng-repeat="item in videos | orderBy : 'date'" class=" col-sm-6 col-md-4" ng-attr-id="{{'ytvideo'+$index}}">
+                    <div class="item-article" ng-class="{'item-article-auto':isLoggedIn==true}" ng-init="link = getUrl($index)">
                         <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
                         
                         <img ng-src="{{item.thumbnail.url}}">
-                        <i class="fas fa-play rm-play-button"></i>
-                        <div class="yt-video-title">{{item.title}}</div>
+                        <i ng-click="playVideo(link,$index)" class="fas fa-play rm-play-button"></i>
+                        <!-- <div class="yt-video-title">{{item.title}}</div> -->
+                        <div class="item-head">
+                            <div>
+                                {{item.title}}
+                            </div>
+                        </div>
                         <div ng-if="isLoggedIn" style="padding: 10px;">
                             <textarea style="width: 100%;" ng-model="item.url"></textarea>
                         </div>
                         <div ng-if="isLoggedIn" class="edit-delete-buttons">
+                            <span><input type="checkbox" ng-change="editvideo(item,$index,true)" ng-model="item.isEnabled"/>On homepage</span>
                             <button class="btn btn-primary btn-ghost" ng-click="editVideo(item,$index)">Update</button>
                             <button class="btn btn-primary btn-ghost" ng-click="deleteVideo($index)">Delete</button>
                         </div>
@@ -61,13 +69,18 @@
                     <i ng-click="canAddNew()" style="font-size: 70px; margin-top: 145px; margin-left: 80px; background: -webkit-linear-gradient(#EC6C01, #FFAE01);-webkit-background-clip: text;-webkit-text-fill-color: transparent;" class="fas fa-plus"></i>
                 </div>
             </div>
-            <div class="playlist-body" ng-if="visibleTab=='playlists'">
+            <div class="playlist-body row" ng-if="visibleTab=='playlists'">
                 <div ng-show="showPlaylist">
-                    <div ng-repeat = "playlist in playlists" class="col-sm-6 col-md-4 " ng-click="togglePlaylistVideos(playlist)">
+                    <div ng-repeat = "playlist in playlists | orderBy : 'date'" class="col-sm-6 col-md-4 ">
                         <div class="item-article">
-                            <img ng-src="{{playlist.thumbnail}}">
+                            <img ng-src="{{playlist.thumbnail}}"  ng-click="togglePlaylistVideos(playlist)">
                             <i class="fas fa-play rm-play-button"></i>
-                            <div class="yt-video-title">{{playlist.pName}}</div>
+                            <!-- <div class="yt-video-title">{{playlist.pName}}</div> -->
+                            <div class="item-head">
+                                <div>
+                                    {{playlist.pName}}
+                                </div>
+                            </div>
                             <div ng-if="isLoggedIn" style="padding: 10px;">
                                 <textarea style="width: 100%;" ng-model="playlist.url"></textarea>
                             </div>
@@ -90,9 +103,9 @@
                         </div>
                     </div>
                 </div>
-                <!--<div ng-if="isLoggedIn">-->
+                <div ng-if="isLoggedIn">
                     <i ng-click="canAddNewPlaylist()" style="font-size: 70px; margin-top: 145px; margin-left: 80px; background: -webkit-linear-gradient(#EC6C01, #FFAE01);-webkit-background-clip: text;-webkit-text-fill-color: transparent;" class="fas fa-plus"></i>
-                <!--</div>-->
+                </div>
             </div>
         </div>
     </section>

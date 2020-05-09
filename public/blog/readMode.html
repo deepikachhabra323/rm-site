@@ -3,14 +3,16 @@
         <div class="container blog-read-container">
             <div class="row">
                 <div class="blog-container">
-                    <a href="blog/index">
+                    <div class="title-container">
+                        <div class="main-title">
+                            {{blog.title}}
+                        </div>
                         <img ng-src={{blog.imgUrl}}>
-                    </a>
+                    </div>    
+                    
                     <div class="blog-text blog-body">
                         <div class="title">
-                            <a href="blog/indexl">
-                                {{blog.title}}
-                            </a>
+                            {{blog.title}}
                         </div>
                         <div id="toolbar" style="display: none;"></div>
                         <div id="editor-view" style="border: none;"></div>
@@ -19,6 +21,43 @@
                         </span>-->
                     </div>
                 </div>
+            </div>
+            </div>
+            <div class="social">
+                <div>Share via:</div>
+                <!-- Branded Twitter button -->
+                <a class="share-btn share-btn-branded share-btn-twitter"
+                href="https://twitter.com/share?url=http%3A%2F%2Fcodepen.io%2Fsunnysingh%2Fpen%2FOPxbgq&text=Share Buttons Demo&via=sunnyismoi"
+                ng-click="shareUrl('Twitter')"
+                title="Share on Twitter">
+                 <span class="share-btn-icon"></span>
+                 <span class="share-btn-text">Twitter</span>
+                </a>
+            
+                <!-- Branded Facebook button -->
+                <a class="share-btn share-btn-branded share-btn-facebook"
+                    title="Share on Facebook"
+                    ng-click="shareUrl('Facebook')">
+                    <span class="share-btn-icon"></span>
+                    <span class="share-btn-text">Facebook</span>
+                </a>
+
+                <!-- Branded LinkedIn button -->
+                <a class="share-btn share-btn-branded share-btn-linkedin"
+                    ng-click="shareUrl('LinkedIn')"
+                    title="Share on LinkedIn"
+                    >
+                    <span class="share-btn-icon"></span>
+                    <span class="share-btn-text">LinkedIn</span>
+                </a>
+            
+                <!-- Branded Google+ button -->
+                <a class="share-btn share-btn-branded share-btn-googleplus"
+                    title="Copy"
+                    ng-click="shareUrl('Copy')">
+                    <span class="share-btn-icon"></span>
+                    <span class="share-btn-text">Copy</span>
+                </a>
             </div>
     </section>
 </div>

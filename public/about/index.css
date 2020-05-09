@@ -39,6 +39,7 @@
 .rm-sub-title{
     font-weight: bold;
     padding: 10px;
+    font-size: 18px;
 }
 
 /*html,
@@ -150,7 +151,7 @@ body {
 .icon-box {
     padding: 20px;
     border-radius: 6px;
-    height: 261px !important;
+    height: 280px !important;
 }
 .icon-box-title{
     font-weight: bold;
@@ -162,9 +163,13 @@ body {
     width: 60px;
     border-radius: 100%;
     margin: 15px auto;
-    background-color: #c4c4c4;
+    background-color: #fca000;
 }
-
+.rm-icon-span img{
+  height: 65%;
+    width: 65%;
+    margin: 0px;
+}
 
 /*plans*/
 .planGrid div{

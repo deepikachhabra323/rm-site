@@ -14,6 +14,7 @@
                         <option ng-repeat = "cat in blogCats" ng-if="cat!=='All'" value={{cat}}>{{cat}}</option>
                     </select>
                 </div>
+                <span><input type="checkbox" ng-change="toggleEnable()" ng-model="isEnabled"/>On homepage</span>
             </div>
             <button class="btn btn-primary btn-ghost" ng-click="saveBlog()">Save</button>
     </section>

@@ -1,8 +1,11 @@
 <div ng-controller="homeController" class="modify-page-container">
+    <h1>Home Page</h1>
     <div>
         <div>My Story Quote</div>
         <textarea ng-model="myStory.title"></textarea>
         <textarea ng-model="myStory.quote"></textarea>
+        <div>Mobile My Story Quote</div>
+        <textarea ng-model="myStory.quoteM"></textarea>
     </div>
     <div>
         <div>Home Header Section</div>
@@ -32,6 +35,130 @@
         <input type="file" ng-model="speakerImage" accept="image/*" app-filereader>
         <textarea ng-model="speakerButton" placeholder="Button Text"></textarea>
     </div>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="aboutController" class="modify-page-container">
+    <h1>About Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="top"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="topM"></textarea>
+    <div>Desktop Giving back text</div>
+    <textarea ng-model="givingBack"></textarea>
+    <div>Mobile Giving back text</div>
+    <textarea ng-model="givingBackM"></textarea>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="blogController" class="modify-page-container">
+    <h1>Blog Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="pageTitle"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="pageTitleM"></textarea>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="videoController" class="modify-page-container">
+    <h1>Video Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="pageTitle"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="pageTitleM"></textarea>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="speakingController" class="modify-page-container">
+    <h1>Speaking Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="pageTitle"></textarea>
+    <div>Desktop School Text</div>
+    <textarea ng-model="school"></textarea>
+    <div>Desktop College Text</div>
+    <textarea ng-model="college"></textarea>
+    <div>Desktop Coaching Text</div>
+    <textarea ng-model="coaching"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="pageTitleM"></textarea>
+    <div>Mobile School Text</div>
+    <textarea ng-model="schoolM"></textarea>
+    <div>Mobile College Text</div>
+    <textarea ng-model="collegeM"></textarea>
+    <div>Mobile Coaching Text</div>
+    <textarea ng-model="coachingM"></textarea>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="mentoringController" class="modify-page-container">
+    <h1>Mentoring Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="pageTitle"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="pageTitleM"></textarea>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="schoolController" class="modify-page-container">
+    <h1>School Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="pageTitle"></textarea>
+    <div>Desktop Student Text</div>
+    <textarea ng-model="student"></textarea>
+    <div>Desktop Teacher Text</div>
+    <textarea ng-model="teacher"></textarea>
+    <div>Desktop Parent Text</div>
+    <textarea ng-model="parent"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="pageTitleM"></textarea>
+    <div>Mobile Student Text</div>
+    <textarea ng-model="studentM"></textarea>
+    <div>Mobile Teacher Text</div>
+    <textarea ng-model="teacherM"></textarea>
+    <div>Mobile Parent Text</div>
+    <textarea ng-model="parentM"></textarea>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="collegeController" class="modify-page-container">
+    <h1>College Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="pageTitle"></textarea>
+    <div>Desktop Student Text</div>
+    <textarea ng-model="student"></textarea>
+    <div>Desktop Teacher Text</div>
+    <textarea ng-model="teacher"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="pageTitleM"></textarea>
+    <div>Mobile Student Text</div>
+    <textarea ng-model="studentM"></textarea>
+    <div>Mobile Teacher Text</div>
+    <textarea ng-model="teacherM"></textarea>
+    <div>
+        <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
+    </div>
+</div>
+<div ng-controller="coachingController" class="modify-page-container">
+    <h1>Coaching Page</h1>
+    <div>Desktop Top Text</div>
+    <textarea ng-model="pageTitle"></textarea>
+    <div>Desktop Student Text</div>
+    <textarea ng-model="student"></textarea>
+    <div>Desktop Teacher Text</div>
+    <textarea ng-model="teacher"></textarea>
+    <div>Mobile Top Text</div>
+    <textarea ng-model="pageTitleM"></textarea>
+    <div>Mobile Student Text</div>
+    <textarea ng-model="studentM"></textarea>
+    <div>Mobile Teacher Text</div>
+    <textarea ng-model="teacherM"></textarea>
     <div>
         <button class="btn btn-primary btn-ghost" ng-click="saveData()">Save</button>
     </div>

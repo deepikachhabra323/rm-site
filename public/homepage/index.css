@@ -9,14 +9,14 @@
     /*padding-right: 430px;*/
     color:#fff;
     font-size: 18px;
-    padding-right: 300px;
+    padding-left: 300px;
     max-height: 240px;
     box-sizing: border-box;
     height: 160px;
     overflow: hidden;
 }
 .rm-home-ebook img{
-    max-height: 150px;
+    max-height: 100px;
 }
 .rm-home-ebook .header{
     font-size: 30px;
@@ -62,8 +62,9 @@
 .ebook-img-cntnr{
     position: absolute;
     left: 0px;
-    text-align: center;
+    text-align: left;
     width: 300px;
+    top: 0px;
 }
 /*.rm-home-ebook .social-media .youtube:hover{
     background-color: #CE1312;
@@ -101,7 +102,7 @@
     max-height: 150px;
     height: 150px;
     width: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 .item-article .item-head {
     padding: 15px 15px;
@@ -166,6 +167,7 @@
 .my-story img{
     height: 100%;
     width: 33%;
+    right: 0;
     object-fit: contain;
     bottom: 0px;
     position: absolute;
@@ -174,6 +176,8 @@
     position: absolute;
     top: 10%;
     text-align: center;
+    padding-right: 33%;
+    padding-left: 8%;
     /* left: 44%; */
     width: 100%;
     text-transform: uppercase;
@@ -181,20 +185,45 @@
 .my-story .quote{
     font-size: 23px;
     text-align: center;
-    padding-left: 35%;
-    padding-right: 1%;
+    padding-right: 33%;
+    padding-left: 7%;
+}
+.test-pic{
+    width: 78px;
+    overflow: hidden;
+    text-align: center;
+    /* max-height: none; */
+    max-height: 85px !important;
+    border-radius: 100%;
+    padding: 0px;
+}
+.test-pic img{
+    height: 85px !important;
+}
+.quote-font{
+    position: absolute;
+    top: -6%;
+    background: linear-gradient(to left, #EC6C01, #FFAE01);
+    background: -webkit-linear-gradient(right, #EC6C01, #FFAE01);
+    padding: 10px;
+    font-size: 10px;
+    color: #fff;
 }
 .my-story .download-btns{
     position: absolute;
     bottom: 3%;
     /* right: 5%; */
-    left: calc(50% - 80px);
+    right: calc(64% - 80px);
     /* right: calc((100% - 600px)/2); */
 }
 .my-story .download-btns div{
     display: inline-block;
     /* margin-right: 102px; */
     text-transform: uppercase;
+}
+.testimonials-right img,.testimonials-left img {
+    max-height: auto !important;
+    margin-left: auto !important;
 }
 .rm-testimonial-text{
     text-align: center;
@@ -304,14 +333,18 @@
     position: relative;
     width: 100%;
 }
-.col-lg-10.col-md-10.col-xs-12.testimonials-rights {
+.col-lg-10.col-md-10.col-xs-12.testimonials{
+    padding: 0px !important;
+}
+.col-lg-10.col-md-10.col-xs-12.testimonials-rights,.col-lg-10.col-md-10.col-xs-12.testimonials {
     background: rgba(0, 0, 0, 0) url(../images/cord.jpg) no-repeat scroll left top;
     font-family: robotoslab-regular;
-    font-size: 19px;
+    font-size: 15px;
     font-style: italic;
     padding-left: 12%;
     transition: all 1s;
 }
+
 .names {
     color: goldenrod;
     font-size: 15px;
@@ -321,7 +354,7 @@
 .clnt-name {
     color: black;
     font-family: robotoslab-regular;
-    font-size: 25px;
+    font-size: 18px;
 }
 .names.rights {
     text-align: right;
@@ -329,10 +362,16 @@
 .rm-section-home{
     height:350px;
 }
+.testimonials-rights div,.testimonials-left div{
+    height: auto !important;
+}
 @media only screen and (max-width: 767px){
 .rm-section-home{
     height:auto !important;
     text-align: center;
+}
+.ebook-img-cntnr{
+    position: relative;
 }
 .testimonials-right {
     text-align: center!important;
@@ -373,14 +412,15 @@
 
 
 .testimonials {
-    padding: 40px;
+    padding: 40px 0;
+    background-color: #fb9f005c;
 }
 .testimonials .item .content{
     height: 245px;
-    background-color:#e7eaec;
+    background-color:unset;
     border-radius: 6px;
     margin: auto;
-    max-width: 780px;
+    /* max-width: 780px; */
     padding: 50px 25px;
 }
 .testimonials .indicator{
@@ -464,11 +504,15 @@
     padding: 8px;
     border-radius: 4px;
 }
-.ebook-form button{
+.ebook-form button, .ebook-img-cntnr button{
     padding: 6px 20px !important;
     border: solid 2px #fff !important;
     color: #fff !important;
     border-radius: 4px;
+}
+.ebook-edit{
+    position: absolute;
+    top: 45%;
 }
 .mobile-event{
     display: none;
@@ -492,9 +536,19 @@
     padding: 10px;
     min-height: 200px;
 }
+.my-story-container{
+    /* padding: 7em 0 5px 0 !important; */
+    z-index: 1;
+}
+.my-story-container img{
+    z-index: -1;
+}
+.my-story-text-container{
+    z-index: 2;
+}
 @media (min-width: 1400px){
     .rm-home-ebook{
-        /* text-align: right; */
+        text-align: right;
     }
     .ebook-div{
       max-width: 1400px;
@@ -507,7 +561,7 @@
       padding: 60px 0px;
     }
     .testimonials .item .content{
-        max-width: 950px;
+        /* max-width: 950px; */
     }
     .videos .item-article, .videos-page .item-article{
         height: 370px;
@@ -523,6 +577,8 @@
   }
   .rm-home-ebook{
     height: auto;
+    max-height: unset;
+    text-align: center;
     /* padding-top: 170px; */
     padding-left: 20px;
     padding-right: 20px;
@@ -542,8 +598,8 @@
     margin: 5px;    
   }
   .ebook-form .btn {
-    display: inline-block;
-    margin: 5px;
+    display: block;
+    margin: auto;
   }
   .ebook-div {
       padding: 0px !important;
@@ -561,12 +617,12 @@
       background-color: #e7eaec;
   }
   .my-story-container{
-    padding: 7em 0 5px 0 !important;
+    padding: 7em 0 0px 0 !important;
     z-index: 1;
   }
   .my-story-container img{
     z-index: 1;
-    width: 90%;
+    width: 100%;
     top: 0px;
   }
   .my-story-text-container{
@@ -576,10 +632,12 @@
   .my-story-text-container h1{
     font-size: 28px;
     top: -3em;
+    padding-left: 0;
+    padding-right: 0;
   }
   .my-story .quote{
-    padding: 130px 5% 0px 5%;
-    font-size: 23px;
+    padding: 160px 5% 0px 5%;
+    font-size: 19px;
     text-align: center;
   }
   .my-story .download-btns{
@@ -603,6 +661,7 @@
   }
   .testimonials{
     padding: 40px 20px;
+    background-color: #fb9f005c;
   }
   .testimonials .col-md-10{
     padding: 0px;

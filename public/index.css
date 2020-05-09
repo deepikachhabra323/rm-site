@@ -37,6 +37,18 @@ iframe{
   padding-top: 120px;
   /* padding-bottom: 50px; */
 }
+.header-tile{
+  display: inline-block;
+}
+.logo-tile{
+  float: left;
+  padding-top: 10px;
+  height: 70px;
+  overflow: hidden;
+}
+.logo-tile img{
+  height: 80px;
+}
 .mailing-list input{
   padding: 5px;
   border-radius: 4px;
@@ -460,12 +472,20 @@ footer .social-icons li a .fa {
     text-align: center;
     font-size: 12px;;
   }
+  .logo-tile{
+    height: 26px;
+    padding-left: 10px;
+    padding-top: 0;
+  }
+  .logo-tile img {
+    height: 38px;
+}
   .sub-paths {
     position: relative;
     text-align:center;
   }
   .main-banner{
-    margin-top: 24px;
+    margin-top: 38px;
   }
   .main-banner .person-banner{
     height: 460px;
@@ -517,7 +537,7 @@ footer .social-icons li a .fa {
     margin-top: 15px;
     font-size: 15px;
     letter-spacing: 1px;
-    padding: 10px 45px 10px 10px;
+    padding: 10px 10px 10px 10px;
   }
   .main-banner_home .slide-text .btn .fa {
     height: 40px;

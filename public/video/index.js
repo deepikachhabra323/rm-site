@@ -1,6 +1,15 @@
 myApp.controller("videoController",['$sce','$scope','$http','$location','$timeout','$rootScope',function($sce,$scope,$http,$location,$timeout,$rootScope){
+    window.scrollTo(0, 0);
+    $(window).resize(function() {
+        $scope.windowWidth = $( window ).width();
+        $timeout(function(){
+            $scope.$apply();
+        },1);
+    });
+    $scope.windowWidth = $( window ).width();
     var db = firebase.firestore();
-    $scope.videos = [];$scope.addNew = false;$scope.newUrl = {};
+    var batch = db.batch();
+    $scope.videos = [];$scope.addNew = false;$scope.newUrl = {};$scope.pageTitle='';
     $scope.visibleTab = "videos";$scope.addNewPlaylist = false;
     $scope.newPlaylist = {};$scope.currentPlaylist = {};
     $scope.shouldPlay = false;$scope.showPlaylist = true;
@@ -27,22 +36,25 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
             $scope.$apply();
         },1);
     });
-    db.collection("playlists").get().then(function(querySnapshot) {
-        $scope.playlists = [];
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.data().url)
-            $http.get('https://www.googleapis.com/youtube/v3/playlists?id='+youtube_playlist_parser(doc.data().url)+'&key=AIzaSyDyURH-EjyXA2-TItNWjyJSRV4KRr6_9f0&part=snippet&maxResults=50').then(function(res){
-            //$http.get('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj&key=AIzaSyDyURH-EjyXA2-TItNWjyJSRV4KRr6_9f0&part=snippet&maxResults=50').then(function(res){
-                console.log(res,doc.data());
-                $scope.playlists.push({...doc.data(),id:doc.id,pName:res.data.items[0].snippet.title,thumbnail:res.data.items[0].snippet.thumbnails.medium.url});
+    $scope.getPL = () => {
+        db.collection("playlists").get().then(function(querySnapshot) {
+            $scope.playlists = [];
+            querySnapshot.forEach(function(doc) {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.data().url)
+                $http.get('https://www.googleapis.com/youtube/v3/playlists?id='+youtube_playlist_parser(doc.data().url)+'&key=AIzaSyDyURH-EjyXA2-TItNWjyJSRV4KRr6_9f0&part=snippet&maxResults=50').then(function(res){
+                //$http.get('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj&key=AIzaSyDyURH-EjyXA2-TItNWjyJSRV4KRr6_9f0&part=snippet&maxResults=50').then(function(res){
+                    console.log(res,doc.data());
+                    $scope.playlists.push({...doc.data(),id:doc.id,pName:res.data.items[0].snippet.title,thumbnail:res.data.items[0].snippet.thumbnails.medium.url});
+                });
+                
             });
-            
+            $timeout(function(){
+                $scope.$apply();
+            },1);
         });
-        $timeout(function(){
-            $scope.$apply();
-        },1);
-    });
+    } 
+    $scope.getPL();
     $scope.deleteVideo = (index) =>{
         db.collection("videos").doc($scope.videos[index].id).delete().then(function() {
             $scope.videos.splice(index,1);
@@ -53,6 +65,10 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
         }).catch(function(error) {
             console.error("Error removing document: ", error);
         });
+    };
+    $scope.ytSubscribe = () => {
+        document.getElementById('subscribe-youtube').click();
+        //console.log(document.getElementById('subscribe-youtube'));
     };
     $scope.deletePlaylist = (index) =>{
         db.collection("playlists").doc($scope.playlists[index].id).delete().then(function() {
@@ -95,10 +111,16 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
           behavior: 'smooth',
         });
     };
-    $scope.editVideo = (item,index) => {
+    $scope.editVideo = (item,index,toggleEnable) => {
         //$location.url('/editBlog/'+$scope.blogs[index].id)
+        if(toggleEnable){
+            item.isEnabled = !item.isEnabled;
+        }
         db.collection("videos").doc(item.id).update({
-            url : item.url
+            url : item.url,
+            date:new Date(),
+            isEnabled:item.isEnabled?item.isEnabled:false,
+            uid:sessionStorage.uid || true,
             }).then(function() {
             $scope.videos[index] = item;
             $timeout(function(){
@@ -112,7 +134,9 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
     $scope.editPlaylist = (item,index) => {
         //$location.url('/editBlog/'+$scope.blogs[index].id)
         db.collection("playlists").doc(item.id).update({
-            url : item.url
+            url : item.url,
+            date:new Date(),
+            uid:sessionStorage.uid || true
             }).then(function() {
             $scope.playlists[index] = item;
             $timeout(function(){
@@ -134,10 +158,16 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
     $scope.canAddNew = () => {
         $scope.addNew = !$scope.addNew;
         $scope.newUrl = {};
+        $timeout(function(){
+            $scope.$apply()
+        },1);
     };
     $scope.canAddNewPlaylist = () => {
         $scope.addNewPlaylist = !$scope.addNewPlaylist;
         $scope.newUrl = {};
+        $timeout(function(){
+            $scope.$apply()
+        },1);
     };
     $scope.changeTab = (visible) =>{
         $scope.visibleTab = visible;
@@ -149,7 +179,9 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
     $scope.updateNewUrl = function() {
         if(isValidated([$scope.newUrl.url])){
             db.collection("videos").add({
-                url: $scope.newUrl.url
+                url: $scope.newUrl.url,
+                date:new Date(),
+                uid:sessionStorage.uid || true
             })
             .then(function(docRef) {
                 $scope.videos.push({url:$scope.newUrl.url,id:docRef.id});
@@ -171,11 +203,14 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
         if(isValidated([$scope.newPlaylist.url,$scope.newPlaylist.name])){
             db.collection("playlists").add({
                 name : $scope.newPlaylist.name,
-                url: $scope.newPlaylist.url
+                url: $scope.newPlaylist.url,
+                date:new Date(),
+                uid:sessionStorage.uid || true
             })
             .then(function(docRef) {
                 //$scope.videos.push({url:$scope.newUrl.url,id:docRef.id});
                 $scope.canAddNewPlaylist();
+                $scope.getPL();
                 $timeout(function(){
                     $scope.$apply()
                 },1);
@@ -191,7 +226,8 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
     };
     $scope.togglePlaylistVideos = function(playlist){
         $scope.currentPlaylist = playlist;
-        $http.get('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PLMC9KNkIncKtPzgY-5rmhvj7fax8fdxoj&key=AIzaSyDyURH-EjyXA2-TItNWjyJSRV4KRr6_9f0&part=snippet&maxResults=50').then(function(res){
+        console.log(playlist)
+        $http.get('https://www.googleapis.com/youtube/v3/playlistItems?playlistId='+youtube_playlist_parser(playlist.url)+'&key=AIzaSyDyURH-EjyXA2-TItNWjyJSRV4KRr6_9f0&part=snippet&maxResults=50').then(function(res){
             console.log(res)
             $scope.showPlaylist = false;
             $scope.currentPlaylist.videos = res.data.items;
@@ -203,12 +239,42 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
     }
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn;
+            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
             $timeout(function(){
                 $scope.$apply()
             },1);
         }
     });
+
+    //editables
+    db.collection("videoPageTitle").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            $scope[doc.id] = doc.data().text;
+            console.log(doc,$scope)
+            $timeout(function(){
+                    $scope.$apply()
+            },1);
+            console.log(doc.id, " => ", doc.data());
+        });
+      });
+      $scope.saveData = () => {
+        var about = db.collection("videoPageTitle");
+        batch.update(about.doc('pageTitle'),{
+            text:$scope.pageTitle,
+            uid:sessionStorage.uid || true
+        });
+        batch.update(about.doc('pageTitle'),{
+            text:$scope.pageTitleM,
+            uid:sessionStorage.uid || true
+        });
+    
+        batch.commit().then(function () {
+          $timeout(function(){
+            $scope.$apply()
+          },1);
+          $location.url("/");
+        });
+      };
 }]);
 
 function youtube_validate(url) {

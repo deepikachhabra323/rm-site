@@ -10,7 +10,7 @@ var config = {
   appId: "1:101261058346:web:d4839e32f6f0cfaedc3e53"
 };
 firebase.initializeApp(config);
-var myApp = angular.module('rohitMittal', ['ngRoute','firebase']);
+var myApp = angular.module('rohitMittal', ['ngRoute','firebase','ngSanitize']);
  
 function uuidv4() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
@@ -36,11 +36,18 @@ function isValidated(vals){
 }
 
 myApp.controller("appController",function($scope,$http,$document,$window,$location,$rootScope,$timeout){
+    window.scrollTo(0, 0);
+    $(window).resize(function() {
+        $scope.windowWidth = $( window ).width();
+    });
     $scope.pixelsScrolled = true ;
+    $scope.isSuccess = false;
     var db = firebase.firestore();
+    var user = firebase.auth().currentUser;
+    console.log(user)
     $scope.canConnect = false;$scope.canBook = false;
     $scope.confirm = false;$scope.emailSub = '';
-    $scope.canScrollTop = false;
+    $scope.canScrollTop = false;$scope.didBook  = false;
     $scope.scrollToContent = false;
     $scope.shouldScrollDown = ()=>{
       var ele = document.getElementById('main-content');
@@ -81,12 +88,21 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
       });
       $scope.canScrollTop = false;
     };
+    $scope.toggleDidBook = function(){
+        $scope.didBook  =!$scope.didBook;
+    };
+    $scope.redirectToUrl=(path)=>{
+        $location.url(path);
+        $scope.didSubscribe = false;
+    };
     $scope.mailSubscribe = function(){
         db.collection("mail-subscription").add({
-            'email':$scope.emailSub
+            'email':$scope.emailSub,
+            uid:sessionStorage.uid || true
         })
         .then(function(docRef) {
-            $scope.emailSub = ''
+            $scope.emailSub = '';
+            $scope.didSubscribe = true;
             $timeout(function(){
                 $scope.$apply()
             },1);
@@ -100,16 +116,19 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
       $scope.canBook = !$scope.canBook;
       $rootScope.canBook = !$rootScope.canBook;
       $scope.newBook = {};
+      $scope.toggleDidBook();
       $timeout(function(){
         $scope.$apply()
     },1);
     };
     $rootScope.toggleConnect=$scope.toggleConnect;
     $scope.updateNewConnect = function(){
-      if(isValidated([$scope.newConnect.author,$scope.newConnect.occupation,$scope.newConnect.phone,$scope.newConnect.message])){
+    //   if(isValidated([$scope.newConnect.author,$scope.newConnect.occupation,$scope.newConnect.phone,$scope.newConnect.message,$scope.newConnect.city,$scope.newConnect.institute])){
+        if(isValidated([$scope.newConnect.author,$scope.newConnect.occupation,$scope.newConnect.phone,$scope.newConnect.message,$scope.newConnect.city])){
         console.log($scope);
         db.collection("connect").add({
-        ...$scope.newConnect
+        ...$scope.newConnect,
+        uid:sessionStorage.uid || true
         })
         .then(function(docRef) {
           $scope.toggleConnect();
@@ -131,6 +150,8 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
           console.log($scope);
           db.collection(window.location.hash.split('#!/')[1]).add({
           ...$scope.newBook,
+          uid:sessionStorage.uid || true,
+          date:new Date()
           //page:window.location.hash
           })
           .then(function(docRef) {
@@ -148,9 +169,33 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
             $('#toast').toast('show');
         }
       };
-    $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
+      $rootScope.sendEmail = function () {
+        Email.send({
+            Host: "",
+            Username : "",
+            Password : "",
+            To : '',
+            From : "",
+            Subject : "test",
+            Body : "test",
+        })
+        .then(function(message){
+            //alert("mail sent successfully")
+        });
+    }
+    $scope.toSuccess = (val) => {
+        $rootScope.isSuccess = val;
+        //$rootScope.toSuccess();
+    };
+    $rootScope.$watch('isSuccess', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn;
+            //$scope.isSuccess = !isSuccess;
+            if($rootScope.isSuccess === ''){
+                $scope.isSuccess = false;
+            }
+            else if($rootScope.isSuccess=='getSuccess'){
+                $scope.isSuccess = true;
+            }
             $timeout(function(){
                 $scope.$apply()
             },1);
@@ -198,16 +243,6 @@ myApp.directive('appFilereader', function($q) {
             } //link
     }; //return
 });
-//
-//myApp.controller("connectController",function($scope,$http,$document,$window,$location,$rootScope){
-//    $scope.canConnect = false;
-//    $scope.newConnect = {};
-//    $scope.toggleConnect = function(){
-//      $scope.canConnect = !$scope.canConnect;
-//      $scope.newConnect = {};
-//    };
-//    
-//});
 
 myApp.config(function($routeProvider){
                 $routeProvider
@@ -269,7 +304,7 @@ myApp.config(function($routeProvider){
                     })
                 .when("/personal_mentoring",{
                     templateUrl:"/mentoring/index.html",
-                    controller:"schoolController"
+                    controller:"mentoringController"
                     })
                 .when("/college",{
                     templateUrl:"/college/index.html",
@@ -277,11 +312,11 @@ myApp.config(function($routeProvider){
                     })
                 .when("/coaching",{
                     templateUrl:"/coaching/index.html",
-                    controller:"collegeController"
+                    controller:"coachingController"
                     })
                 .when("/speaking",{
                     templateUrl:"/speaking/index.html",
-                    controller:"collegeController"
+                    controller:"speakingController"
                     })
                 .when("/one-on-one",{
                     templateUrl:"/oneOnOne/index.html",
@@ -293,6 +328,7 @@ myApp.config(function($routeProvider){
             });
 
 myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
+    window.scrollTo(0, 0);
     $scope.paths = [
                     {
                         title:"Home",
@@ -309,10 +345,6 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
                     {
                         title:"Videos",
                         path:"/videos"
-                    },
-                    {
-                        title:"Testimonials",
-                        path:"/testimonials"
                     },
                     // {
                     //     title:"One on One",
@@ -341,20 +373,29 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
                        path:"/personal_mentoring"
                     },
                     {
+                        title:"Testimonials",
+                        path:"/testimonials"
+                    },
+                    {
                         title:"Contact",
                         path:"/connect"
                     },
                     {
                         title:"Connect Results",
-                        path:"/connections"
+                        path:"/connections",
                     },
-                    //{
-                    //    title:"Log In",
-                    //    path:"/login"
-                    //}
+                    {
+                       title:"Log In",
+                       path:"/login",
+                    }
                     ];
     $scope.redirectTo=(path)=>{
-      if(path.path )
+      if(path.title=='Log Out'){
+        $rootScope.isLoggedIn=false;
+        delete sessionStorage.uid;
+        $location.url(path.path);
+      }
+      else if(path.path )
         $location.url(path.path);
       //else if(path.title=="Connect"){
       //  $rootScope.toggleConnect();
@@ -372,7 +413,7 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
     };
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn;
+            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
             var paths = $scope.paths;
             if($rootScope.isLoggedIn){
                 paths[paths.length-1].title = 'Log Out';
@@ -385,7 +426,7 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
             },1);
         }
     });
-    $scope.isLoggedIn=$rootScope.isLoggedIn;
+    $scope.isLoggedIn=$rootScope.isLoggedIn || sessionStorage.uid!==undefined;
 });
 
 myApp.directive('appFilereader', function($q) {

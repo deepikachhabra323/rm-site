@@ -6,6 +6,9 @@
     width: 100%;
     object-fit: cover;
 }
+.videos-page .item-article {
+    height: auto;
+}
 .articles {
     padding-top: 100px;
     padding-bottom: 150px;
@@ -14,6 +17,9 @@
 .item-article.edit-blog .item-head {
     padding: 20px 30px;
     height: 105px;
+}
+.item-article-auto{
+    height: auto;
 }
 .blog-container .blog-text {
     padding: 20px 30px 50px 30px;

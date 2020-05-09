@@ -1,18 +1,23 @@
 <div ng-controller="homeController">
     <div class="rm-home-about"></div>
     <div id="sample3" class="rm-home-ebook">
+        <div class="ebook-img-cntnr">
+            <img class="" ng-src="{{imgBook.img}}" alt="Rohit Mittal">
+            <div class="ebook-edit" ng-if='isLoggedIn'>
+                <input accept="image/*" type="file" ng-model='imgBook.img' app-filereader/>
+                <button class="btn btn-primary btn-ghost" ng-click="saveBook()">Save</button>
+            </div>
+        </div>
+        <div><div class="sub-header">{{courseSubheader}}</div></div>
         <div class="ebook-div">
             <!--<div class="header">{{courseHeader}}</div>-->
-            <div class="sub-header">{{courseSubheader}}</div>
+            <!-- <div class="sub-header">{{courseSubheader}}</div> -->
             <div class="ebook-form">
                 <input placeholder="Name">
                 <input placeholder="Email">
                 <input placeholder="Contact">
-                <button class="btn btn-primary btn-ghost" ng-click="">Send</button>
+                <button class="btn btn-primary btn-ghost" ng-click="sendEmail()">Submit</button>
             </div>
-        </div>
-        <div class="ebook-img-cntnr">
-            <!-- <img class="" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fhome.jpg?alt=media&token=8f9b9edb-11e0-4ebf-8666-7cbcfbcd13af" alt="Rohit Mittal"> -->
         </div>
         <!--<div class="social-media">
             <a class="facebook"><span class="without-hover">{{fb}}</span><span class="with-hover"><img style="height: 50px;margin-top: -10px;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Ffb.png?alt=media&token=d2c75877-9a89-4540-9628-bcff8c283b4a">Facebook</span></a>
@@ -37,13 +42,18 @@
                 </div>
             </div>
             <div class="row videos">
-                <div ng-repeat="tile in videos" class="col-sm-6 col-md-4ths" ng-if="$index<3">
+                <div ng-repeat="tile in videos" class="col-sm-6 col-md-4ths" ng-if="tile.isEnabled">
                     <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link,$index)">
                         <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
                         
                         <img style="height: auto;max-height: initial;" ng-src="{{tile.thumbnail.url}}">
                         <i class="fas fa-play rm-play-button"></i>
-                        <div class="yt-video-title">{{tile.title}}</div>
+                        <div class="item-head">
+                            <div>
+                                {{tile.title}}
+                            </div>
+                        </div>
+                        <!-- <div class="yt-video-title">{{tile.title}}</div> -->
                     </div>
                     
                     <!-- <div class="item-article" ng-init="link = getUrl($index)" >
@@ -61,9 +71,9 @@
                     </div>
                 </div>
             <div class="row">
-                <div ng-repeat="tile in blogs" class="col-sm-6 col-md-5ths" ng-if="$index<4">
+                <div ng-repeat="tile in blogs" class="col-sm-6 col-md-5ths" ng-if="tile.isEnabled">
                     <div class="item-article">
-                        <a ng-href="/#!/blog/{{$index}}">
+                        <a ng-href="/#!/blog/{{tile.id}}">
                             <div class="item-img_md">
                                 <img ng-src={{tile.imgUrl}}>
                             </div>
@@ -82,7 +92,7 @@
                     </a>
                 </div>-->
             </div>
-            <div style="text-align: center; font-size: 20px;"><a style="cursor: pointer;" href="/#!/blog">Read all blogs</a></div>
+            <div style="text-align: center; font-size: 20px;"><a style="cursor: pointer;" href="/#!/blog">Read all articles</a></div>
         </div>
     </section>
     <section class="my-story">
@@ -92,9 +102,12 @@
                 <h1 style="font-size: 36px;">
                     <span>{{myStory.title}}</span>
                 </h1>
-                <div class="quote">
-                     {{myStory.quote}}
+                <div ng-bind-html="myStory.quote" ng-if="windowWidth>720" class="quote">
+                     <!-- {{myStory.quote}} -->
                 </div>
+                <div ng-bind-html="myStory.quoteM" ng-if="windowWidth<=720" class="quote">
+                    <!-- {{myStory.quoteM}} -->
+               </div>
                 <!--<div class="download-btns">
                     <div class="stry-btn">
                         <a href="/#!/comming_soon" class="btn btn-primary btn-ghost">My Story</a>
@@ -114,49 +127,54 @@
             </div>
         </div>
     </section>
-    <section class="row rm-section rm-section-home" style="min-height:550px;max-width: 1200px;
-    margin: auto;">
-        <div class="col-md-7" style="padding: 100px 0px;padding-left: 10%;height: auto;">
-            <div class="sub-heading" style="height: auto;">Personnal Mentoring</div>
-            <div class="content" style="height: auto;">Are you a <b>Student</b> who has big dreams?
-                Do you have the courage to pursue your dreams?
-                Do you want to become so good that your success becomes inevitable?
+    <section class="row rm-section rm-section-home" style="min-height:480px;
+    ">
+    <div style="max-width: 1200px;margin: auto;">
+        <div class="col-md-5" style="padding: 70px 0px;padding-left: 5%;height: auto;">
+            <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;margin-left: auto;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2F06.png?alt=media&token=4e2beb9e-40d1-4a1f-b968-bcc7c5eca75d" alt="" class="landing-bulletin-img"></div>
+        </div>
+        <div class="col-md-7" style="padding: 70px 0px;height: auto;    padding-right: 80px;">
+            <div class="sub-heading" style="height: auto;text-align: center;">Personal Mentoring</div>
+            <div class="content" style="height: auto;">Are you a <b>Student</b> who has big dreams?<br/>
+                Do you have the courage to pursue your dreams?<br/>
+                Do you want to become so good that your success becomes inevitable?<br/>
                 If Yes, I can help you. I can help in making your dreams come true.
             </div>
-        </div>
-        <div class="col-md-5" style="padding: 50px 0px;height: auto;">
-            <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4079%20copy%20(1).jpg?alt=media&token=5251d557-5ab4-4aae-bab4-67e8d485417a" alt="" class="landing-bulletin-img"></div>
-        </div>
-        <div class="testimonials-right" style="height: auto;"> 
-            <div class="col-lg-10 col-md-10 col-xs-12 testimonials-rights">“Rohit Sir made me believe I can become an officer. He showed me the way to success” 
-              <div class="names rights"><span class="clnt-name rights">Arpit Sharma</span><br>
-                Probationary Officer, SBI</div>
+            <div class="testimonials-right" style="height: auto;"> 
+                <div class="col-lg-10 col-md-10 col-xs-12 testimonials-rights">“Rohit Sir made me believe I can become an officer. He showed me the way to success” 
+                    <div class="names rights"><span class="clnt-name rights">Arpit Sharma</span><br>
+                    Probationary Officer, SBI</div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-12 test-pic"><img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FArpit%20Sharma%20(home-mentoring%20and%20personal%20mentoring%20page)%20.JPG?alt=media&token=9e918a71-beb0-4a22-8e35-a7b0f72ae787" alt="Ahmed"></div>
             </div>
-            <div class="col-lg-2 col-md-2 col-xs-12"><img src="images/ahmed.png" alt="Ahmed"></div>
         </div>
+    </div>
     </section>
-    <section class="row rm-section rm-section-home rm-section-home-speaking" style="min-height:550px;max-width: 1200px;
-    margin: auto;">
-        <div class="col-md-5" style="padding: 50px 0px;height: auto;">
-            <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4037%20a%20copy%20(1).jpg?alt=media&token=a049995e-bbeb-429f-b6b2-b140a60484b1" alt="" class="landing-bulletin-img"></div>
-        </div>
-        <div class="col-md-7" style="padding: 100px;padding-left: 10%;height: auto;">
-            <div class="sub-heading" style="height: auto;">Speaking</div>
-            <div class="content" style="height: auto;">Are you an institute who wants to increase its business by giving more
-                selections?
-                Are you a school looking for an improvement in your X/XII standard result?
-                Are you a college who wants to give your students an edge in building a
-                dream career?
-                If Yes, I can help you. I can get you the results you want.
+    <section class="row rm-section rm-section-home rm-section-home-speaking" style="min-height: 380px;background-color:#E7EAEC;
+    ">
+        <div style="max-width: 1200px;margin: auto;">
+            <div class="col-md-7" style="padding: 0px 0px 50px 0px;padding-left: 80px;height: auto;">
+                <div class="sub-heading" style="height: auto;text-align: center;">Speaking</div>
+                <div class="content" style="height: auto;">Are you an institute who wants to increase its business by giving more
+                    selections?<br/>
+                    Are you a school looking for an improvement in your X/XII standard result?<br/>
+                    Are you a college who wants to give your students an edge in building a
+                    dream career?<br/>
+                    If Yes, I can help you. I can get you the results you want.
+                </div>
+                <div class="testimonials-left"> 
+                    <div class="col-lg-2 col-md-2 col-xs-12 test-pic"><img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FMeetu%20Sharma%20(home-speaking%2C%20speaking%20and%20schools).JPG?alt=media&token=82d46512-f465-4669-b1f6-3361953f4e16" alt="Mark"></div>
+                    <div class="col-lg-10 col-md-10 col-xs-12 testimonials">“Rohit is just WOW. He made us laugh and delivered what was promised. My students
+                        are highly inspired to do their best and yield great results.” 
+                      <div class="names"><span class="clnt-name">Meetu Sharma</span><br>
+                        Principal, Blooming Dales International School, Sri Ganganagar <br>
+                      </div>
+                    </div>
+                  </div>
             </div>
-        </div>
-        <div class="testimonials-right" style="height: auto;"> 
-            <div class="col-lg-10 col-md-10 col-xs-12 testimonials-rights">“Rohit is just WOW. He made us laugh and delivered what was promised. My students
-                are highly inspired to do their best and yield great results.” 
-              <div class="names rights"><span class="clnt-name rights">Meetu Sharma</span><br>
-                Principal, Blooming Dales International School, Sri Ganganagar</div>
+            <div class="col-md-5" style="padding: 15px 80px 80px 80px;padding-left: 5%;height: auto;">
+                <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2F04.png?alt=media&token=2860316e-af81-4643-a976-fb5440372ba9" alt="" class="landing-bulletin-img"></div>
             </div>
-            <div class="col-lg-2 col-md-2 col-xs-12"><img src="images/ahmed.png" alt="Ahmed"></div>
         </div>
     </section>
     <!--<section class="speaker-mentor">
@@ -279,28 +297,28 @@
         </div>
     </div>
     </section>-->
-    <section id="carousel" class="testimonials">
+    <section id="carousel" style="background-color: unset;" class="testimonials">
         <h1>
             <span><a style="color:#333333;" href="/#!/testimonials">Testimonials</a></span>
         </h1>
         <div class="container"> 
           <div class="row"> 
-            <div class="col-md-10 offset-md-1"> 
+            <div class=""> 
               <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel carousel-home slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                      <li ng-repeat="testimonial in testimonials" data-target="#carouselExampleIndicators" data-slide-to={{$index}} ng-if="$index<9" class="indicator" ng-class="{'active':$index==0}"></li>
+                      <li ng-repeat="testimonial in testimonials" data-target="#carouselExampleIndicators" data-slide-to={{$index}} class="indicator" ng-class="{'active':$index==0}"></li>
                     </ol>
                     <div class="carousel-inner">
-                      <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" ng-if="$index<9">
-                        <div class="content">
+                      <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" >
+                        <div class="content" style="background-color: #E7EAEC;">
                             <div style="height: 60%;overflow-y: hidden;padding-bottom: 20px;">
                                 <span class="rm-testimonial-text">{{testimonial.text.substring(0,250)}}</span>
-                                <a href="/#!/testimonials" ng-if="testimonial.text.length>250">read more...</a>
+                                <a href="" ng-click="toggleReadMode(testimonial)" ng-if="testimonial.text.length>250">read more...</a>
                             </div>
                             <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
                             <div style="text-align: center;">{{testimonial.author}}</div>
-                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">designation</div>
+                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
                         </div>
                       </div>
                     </div>
@@ -309,4 +327,19 @@
           </div>
         </div>
     </section>
+    <div class="rm-popup-parent" ng-if="canRead" style="z-index: 1004">
+        <div class="rm-popup-container" style="width: 600px;height: 500px;position: relative;">
+            <div class="close" ng-click="toggleReadMode()">&times;</div>
+            <!-- <div class="rm-popup-header">Testimonial</div> -->
+            <div class="quote-font" style="position: absolute;top: -6%;">
+                <!-- <img src="../img/quote.jpg"> -->
+                <i class="fa fa-quote-left fa-4x"></i>
+            </div>
+            <div class="testi-1" style="margin-top: 30px;"><img alt="" src={{testimonial.img}}></div>
+            <div style="text-align: center;">{{testimonial.author}}</div>
+            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
+            <div style="height: calc(100% - 150px); overflow: auto;">{{testimonial.text}}</div>
+            
+        </div>
+    </div>
 </div>

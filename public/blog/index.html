@@ -9,14 +9,11 @@
                         <div class="slide-text">
                             <div class="row">
                                 <div class=" banner-content-rsp" ng-controller="homeController">
-                                        <h2 style="word-break: break-word;color: #fff; font-style: normal;" class="sub-heading">
-                                            Rohit’s blog is one of the best resources for a
-                                            young mind with a fire to become something. It is
-                                            an absolute must for an aspirant of any competitive
-                                            exam. Here you can learn how to manage your
-                                            inner self for the highest levels of productivity,
-                                            enhanced creativity, roaring confidence and
-                                            everlasting happiness.
+                                        <h2 ng-bind-html="pageTitle" ng-if="windowWidth>720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
+                                        </h2>
+                                        <h2 ng-bind-html="pageTitleM" ng-if="windowWidth<=720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
                                         </h2>
                                         <!-- <div>
                                             <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="">Subscribe on Youtube</button>
@@ -35,26 +32,26 @@
     <section class="articles latest-articles" id="blogdiv" data-page="1" data-category="">
         <div class="container">
             <div id="blogItems" class="row">
-                <div ng-repeat="blog in loadedBlogs" class="col-sm-6 col-md-4">
+                <div ng-repeat="blog in loadedBlogs | orderBy : 'date'" class="col-sm-6 col-md-4">
                     <div class="item-article-blog edit-blog">
                         <!--<a ng-href="/#!/blog/{{$index}}">-->
                             <img ng-src={{blog.imgUrl}}>
                         <!--</a>-->
                         <div class="item-head">
-                            <!--<a >-->
+                            <a >
                                {{blog.title}}
-                            <!--</a>-->
+                            </a>
                         </div>
                         <div class="rm-blog-sub-body">
-                            <div></div>
+                            <!-- <div>{{blog.date}}</div> -->
                             <div>
-                                {{blog.text.substring(0,200)+"..."}}
+                                {{blog.textString.substring(0,200)+"..."}}
                             </div>
                             <span class="rm-blog-readmore"><a ng-href="/#!/blog/{{blog.id}}">Read more</a></span>
                         </div>
                         <div class="edit-delete-buttons" ng-if="isLoggedIn">
-                            <button class="btn btn-primary btn-ghost" ng-click="editBlog($index)">Edit</button>
-                            <button class="btn btn-primary btn-ghost" ng-click="deleteBlog($index)">Delete</button>
+                            <button class="btn btn-primary btn-ghost" ng-click="changeSuccess('edit',blog.id)">Edit</button>
+                            <button class="btn btn-primary btn-ghost" ng-click="changeSuccess('delete',blog.id)">Delete</button>
                         </div>
                     </div>
                 </div>

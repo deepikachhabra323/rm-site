@@ -4,24 +4,61 @@
         <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">#</th>
+                <th scope="col">Resolved</th>
                 <th scope="col">Author</th>
                 <th scope="col">Occupation</th>
                 <th scope="col">Phone Number</th>
+                <th scope="col">Date</th>
                 <th scope="col">Message</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="res in result">
+              <tr ng-repeat="res in result | orderBy : '-ts'">
+                <td class="delete" ng-click="changeSuccess(res,'connect','delete')"><i class="far fa-trash-alt"></i></td>
                 <th scope="row">{{$index+1}}</th>
+                <th class="resolved" scope="row" ng-click="changeSuccess(res,'connect','resolved')"><i ng-if="res.resolved" class="fas fa-check"></i><i ng-if="!res.resolved" class="fas fa-times"></i></th>
                 <td>{{res.author}}</td>
                 <td>{{res.occupation}}</td>
                 <td>{{res.phone}}</td>
+                <td>{{res.date}}</td>
                 <td style="width: 50%">{{res.message}}</td>
               </tr>
             </tbody>
         </table>
     </div>
+    <div class="row page">
+      <div>Responses for About Collaborate</div>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">#</th>
+              <th scope="col">Resolved</th>
+              <th scope="col">Author</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">City</th>
+              <th scope="col">Date</th>
+              <th scope="col">Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="res in aCollaborate | orderBy : '-ts'">
+              <td class="delete" ng-click="changeSuccess(res,'aboutCollaborate','delete')"><i class="far fa-trash-alt"></i></td>
+              <th scope="row">{{$index+1}}</th>
+              <th class="resolved" scope="row" ng-click="changeSuccess(res,'aboutCollaborate','resolved')"><i ng-if="res.resolved" class="fas fa-check"></i><i ng-if="!res.resolved" class="fas fa-times"></i></th>
+              <td>{{res.author}}</td>
+              <td>{{res.email}}</td>
+              <td>{{res.phone}}</td>
+              <td>{{res.city}}</td>
+              <td>{{res.date}}</td>
+              <td style="width: 50%">{{res.message}}</td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
     <div ng-repeat="page in readable">
       <hr><hr>
       !--!
@@ -31,21 +68,29 @@
         <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">#</th>
+                <th scope="col">Resolved</th>
                 <th scope="col">Author</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone Number</th>
-                <th scope="col">Page</th>
-                <th scope="col">Preparing For</th>
+                <th scope="col">City</th>
+                <th scope="col">Institution Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="res in data[page]">
+              <tr ng-repeat="res in data[page] | orderBy : '-ts'">
+                <td class="delete" ng-click="changeSuccess(res,page,'delete')"><i class="far fa-trash-alt"></i></td>
                 <th scope="row">{{$index+1}}</th>
+                <th class="resolved" scope="row" ng-click="changeSuccess(res,page,'resolved')"><i ng-if="res.resolved" class="fas fa-check"></i><i ng-if="!res.resolved" class="fas fa-times"></i></th>
                 <td>{{res.author}}</td>
                 <td>{{res.email}}</td>
                 <td>{{res.phone}}</td>
-                <td>{{res.page}}</td>
+                <td>{{res.city}}</td>
+                <td>{{res.institute}}</td>
+                <td>{{res.date}}</td>
                 <td style="width: 50%">{{res.message}}</td>
               </tr>
             </tbody>
@@ -56,17 +101,55 @@
       !--!
       <hr><hr>
       <div class="row page">
+        <div>Responses for Presonnal Mentoring Ask</div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">#</th>
+                <th scope="col">Resolved</th>
+                <th scope="col">Author</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">City</th>
+                <th scope="col">Date</th>
+                <th scope="col">Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="res in askData | orderBy : '-ts'">
+                <td class="delete" ng-click="changeSuccess(res,'mentoring_ask','delete')"><i class="far fa-trash-alt"></i></td>
+                <th scope="row">{{$index+1}}</th>
+                <th class="resolved" scope="row" ng-click="changeSuccess(res,'mentoring_ask','resolved')"><i ng-if="res.resolved" class="fas fa-check"></i><i ng-if="!res.resolved" class="fas fa-times"></i></th>
+                <td>{{res.author}}</td>
+                <td>{{res.email}}</td>
+                <td>{{res.phone}}</td>
+                <td>{{res.city}}</td>
+                <td>{{res.date}}</td>
+                <td style="width: 50%">{{res.message}}</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    <hr><hr>
+      !--!
+      <hr><hr>
+      <div class="row page">
         <div>Mailing List</div>
         <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">#</th>
+                <th scope="col">Resolved</th>
                 <th scope="col">Email</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="res in bookings">
+                <td class="delete" ng-click="changeSuccess(res,'mail-subscription','delete')"><i class="far fa-trash-alt"></i></td>
                 <th scope="row">{{$index+1}}</th>
+                <th class="resolved" scope="row" ng-click="changeSuccess(res,'mail-subscription','resolved')"><i ng-if="res.resolved" class="fas fa-check"></i><i ng-if="!res.resolved" class="fas fa-times"></i></th>
                 <td>{{res.email}}</td>
               </tr>
             </tbody>

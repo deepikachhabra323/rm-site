@@ -13,3 +13,125 @@
     width: 100%;
     background-color: whitesmoke;
 }
+.contact-container{
+    max-width: 1300px;
+    margin: auto;
+    margin-top: 112px;
+}
+.contact-section{
+    display: inline-block;
+    width: 49.83%;
+    vertical-align: top
+}
+.contact-section img{
+    width: 100%;
+}
+.imp-colored{
+    color: #EC6C01;
+    font-weight: 600;
+}
+.conl{
+    float: left;
+    width: 45%;
+    margin: 5px 5px 5px 0px;
+    /* border-right: 1px solid #999; */
+}
+.conr{
+    float: right;
+    width: 50%;
+    margin: 5px 5px 5px 5px;
+}
+.contact-section input{
+    /* background-image: url(https://priya-kumar.com/wp-content/uploads/2018/08/name.jpg); */
+    background-repeat: no-repeat;
+    padding-top: 7px!important;
+    padding-bottom: 7px!important;
+    padding-left: 10px!important;
+    background-size: contain;
+    font-size: 15.4px;
+    background-color: #edf0f7!important;
+    border: none!important;
+}
+.contact-section .conforml{
+    float: left;
+    width: 44%;
+    margin-right: 0.4%;
+    margin-bottom: 20px;
+}
+.contact-section .conformr{
+    float: left;
+    width: 45%;
+    margin-left: 5%;
+    margin-bottom: 20px;
+}
+.contact-section .form-div {
+    clear: none;
+    overflow: hidden;
+    padding: 1px;
+    margin: 0 0 10px 0;
+}
+.contactr03 {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+.conformlr {
+    float: left;
+    width: 89%;
+    height: 90px;
+    margin-bottom: 20px;
+}
+.msg {
+    background-repeat: no-repeat;
+    padding-top: 7px!important;
+    padding-bottom: 7px!important;
+    font-size: 15.4px;
+    background-color: #edf0f7!important;
+    border: none!important;
+    width: 100%;
+    padding-left: 10px;
+}
+.conformbt {
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+.contact-section input[type=button] {
+    padding: 8px 30px;
+    background: #000;
+    border: 0 none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    float: left;
+    height: 35px;
+    border-radius: 8px;
+}
+.delete{
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}
+.resolved{
+    cursor: pointer;
+}
+@media (max-width: 652px) and (min-width: 0px){
+    .contact-section{
+        width: 100%;
+        text-align: center;
+    }
+    .conl {
+        float: unset;
+        width: 100%;
+    }
+    .imp-colored{
+        margin: 0;
+    }
+    p{
+        margin: 0;
+    }
+    .contact-section .conforml,.contact-section .conformr,.conformlr{
+        float: unset;
+        width: 100%;
+    }
+}

@@ -8,11 +8,11 @@
                         <div class="slide-text">
                             <div class="row">
                                 <div class=" banner-content-rsp" ng-controller="homeController">
-                                        <h2 style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
-                                            If you want your students to excel at such a level that their success becomes
-                                            inevitable, invite Rohit for a workshop. His deep and transformative yet simple
-                                            insights when delivered in his riveting humorous way have the power to make
-                                            dreams come true.
+                                        <h2 ng-bind-html="pageTitle" ng-if="windowWidth>720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
+                                        </h2>
+                                        <h2 ng-bind-html="pageTitleM" ng-if="windowWidth<=720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
                                         </h2>
                                         <div>
                                             <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="book()">Book Rohit</button>
@@ -43,65 +43,36 @@
         </h1>
         <div class="col-md-4 bigsc" style="position: relative;">
             <div class="rm-sub-title" style="height: auto;">For Schools</div>
-            <div style="text-align: justify;-moz-text-align-last: justify;">Our education system
-            surprisingly misses some key
-            components of a child&#39;s
-            education when it comes to
-            preparing her for a happy
-            successful life.
-            There are some simple principles
-            which when understood and
-            applied can lead to surprising
-            academic results and also lead to
-            holistic development of a child.
-            Rohit can act as an instrument to
-            bring these principles to life at
-            you school.</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth>720">
+                {{school}}
+            </div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth<=720">
+                {{schoolM}}
+            </div>
             <div class="sp-bigsc">
                 <a  href="/#!/school" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Know more</a>
             </div >
         </div>
         <div class="col-md-4 bigsc help-middle-section" style="  position: relative;  ">
             <div class="rm-sub-title" style="height: auto;">For Coaching Institutions</div>
-            <div style="text-align: justify;-moz-text-align-last: justify;">A coaching&#39;s success is
-            measured by the selection
-            ratio of its students. In this
-            world of cut-throat
-            competition your students
-            need to be better prepared
-            than anyone else.
-            Along with studying, they need
-            to learn all the skills needed for
-            success. They need to have the
-            right attitude and the right
-            belief system if they want to
-            succeed.
-            Rohit can help your students
-            take leaps where others are
-            only walking.</div style="text-align: justify;-moz-text-align-last: justify;">
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth>720">
+                {{coaching}}
+            </div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth<=720">
+                {{coachingM}}
+            </div>
             <div class="sp-bigsc">
                 <a  href="/#!/coaching" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Know more</a>
             </div>
         </div>
         <div class="col-md-4 bigsc" style="position: relative;">
             <div class="rm-sub-title" style="height: auto;">For Colleges</div>
-            <div style="text-align: justify;-moz-text-align-last: justify;">Today, students are very
-            intelligent but don&#39;t know
-            what to do with it.
-            They are full of energy but
-            waste it on unproductive
-            endeavours.
-            They want to be successful
-            but don&#39;t understand what it
-            takes to get there.
-            They need somebody to guide
-            them, to bring clarity of
-            thought so that they can be
-            what they want to be and do
-            what they want to do.
-            Rohit can help your students
-            get that clarity and create a
-            world-class life.</div style="text-align: justify;-moz-text-align-last: justify;">
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth>720">
+                {{college}}
+            </div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth<=720">
+                {{collegeM}}
+            </div>
             <div class="sp-bigsc">
                 <a  href="/#!/college" class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Know more</a>
             </div>
@@ -110,10 +81,10 @@
             <button class="btn btn-primary btn-ghost"style="margin: 50px 0px 0px 0px;padding: 8px 80px;" ng-click="">Book Rohit</button>
         </div>-->
     </section>
-    <section ng-controller="homeController" id="carousel" class="testimonials">
-        <h1>
+    <section id="carousel" class="testimonials">
+        <!-- <h1>
             <span><a style="color:#333333;" href="/#!/testimonials">Testimonials</a></span>
-        </h1>
+        </h1> -->
         <div class="container"> 
           <div class="row"> 
             <div class="col-md-10 offset-md-1"> 
@@ -126,12 +97,13 @@
                       <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" ng-if="$index<9">
                         <div class="content">
                             <div style="height: 60%;overflow-y: hidden;padding-bottom: 20px;">
-                                <span>{{testimonial.text.substring(0,250)}}</span>
-                                <a href="/#!/testimonials" ng-if="testimonial.text.length>250">read more...</a>
+                                <!-- <span>{{testimonial.text.substring(0,250)}}</span> -->
+                                <span>{{testimonial.text}}</span>
+                                <a  ng-click="toggleReadMode(testimonial)" href="" ng-if="testimonial.text.length>250 && false">read more...</a>
                             </div>
                             <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
                             <div style="text-align: center;">{{testimonial.author}}</div>
-                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">designation</div>
+                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
                         </div>
                       </div>
                     </div>
@@ -146,7 +118,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Flaugh%20and%20learn%20.png?alt=media&token=54a7a820-a41f-44ca-8b96-6270cbdb93f5"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Laugh and Learn</h4>
@@ -158,7 +133,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fparticipative%20learning.png?alt=media&token=86871947-0af2-4269-8c73-bd87f2e156a9"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Participative Learning</h4>
@@ -171,7 +149,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fcapactiy%20building.png?alt=media&token=004fd91c-59b5-4781-93c1-dffce5fe4cc4"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Capacity Building</h4>
@@ -184,7 +165,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fknowledge%20that%20sticks.png?alt=media&token=b372ec3c-6f39-4fe6-af4c-d545f7c4c319"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Knowledge that sticks</h4>
@@ -197,7 +181,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fimplementable%20knowledge.png?alt=media&token=9f209164-7318-4027-bec4-2593550d35f4"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Implementable knowledge</h4>
@@ -210,7 +197,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fmultifaceted%20evolution%20(1).png?alt=media&token=913e8553-8c71-4d5c-80fa-011964697daa"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Multifaceted evolution</h4>
@@ -259,4 +249,20 @@
             <button class="btn btn-primary btn-ghost" ng-click="">Book Rohit</button>
         </div>
     </section>-->
+
+    <div class="rm-popup-parent" ng-if="canRead" style="z-index: 1004">
+        <div class="rm-popup-container" style="width: 600px;height: 500px;position: relative;">
+            <div class="close" ng-click="toggleReadMode()">&times;</div>
+            <!-- <div class="rm-popup-header">Testimonial</div> -->
+            <div class="quote-font" style="position: absolute;top: -6%;">
+                <!-- <img src="../img/quote.jpg"> -->
+                <i class="fa fa-quote-left fa-4x"></i>
+            </div>
+            <div class="testi-1" style="margin-top: 30px;"><img alt="" src={{testimonial.img}}></div>
+            <div style="text-align: center;">{{testimonial.author}}</div>
+            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
+            <div style="height: calc(100% - 150px); overflow: auto;">{{testimonial.text}}</div>
+            
+        </div>
+    </div>
 </div>

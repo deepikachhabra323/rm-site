@@ -1,16 +1,18 @@
 myApp.controller("testimonialController",['$scope','$http','$location','$rootScope','$timeout',function($scope,$http,$location,$rootScope,$timeout){
+    window.scrollTo(0, 0);
     var db = firebase.firestore();
     var storage = firebase.storage().ref();
     $scope.testimonials = [];$scope.addNew = false;
     $scope.newTestimonial = {};$scope.canRead = false;
-    if($rootScope.testimonials==undefined){
+    $scope.visibleOn = [];
+    // if($rootScope.testimonials==undefined){
             db.collection("testimonials").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var data = doc.data();
                 if(doc.data().img){
                     storage.child('img/'+doc.data().img).getDownloadURL().then((url)=>{
-                        data.img = url;
-                        $scope.testimonials.push({...data,id:doc.id});
+                        //data.img = url;
+                        $scope.testimonials.push({...data,id:doc.id,image:url});
                     });
                 }
                 else $scope.testimonials.push({...doc.data(),id:doc.id});
@@ -20,18 +22,58 @@ myApp.controller("testimonialController",['$scope','$http','$location','$rootSco
                 $scope.$apply()
             },1);
         });
-    }
-    else{
-        $scope.testimonials = $rootScope.testimonials;
+    // }
+    // else{
+    //     $scope.testimonials = $rootScope.testimonials;
+    //     $timeout(function(){
+    //         $scope.$apply()
+    //     },1);
+    // }
+    $scope.visiblity = {};
+    var arr =['homepage','testimonial','college','coaching','school','speaking','personal','about']
+    arr.forEach(ele =>{
+        $scope.visiblity[ele]  =false;
+    });
+    $scope.toggleEnable = ($event) => {
+        
+        
+        var array = $scope.visibleOn;
+        arr.forEach(ele =>{
+            var index = array.indexOf(ele);
+            if($scope.visiblity[ele]){
+                
+
+                if (index === -1) {
+                    array.push(ele);
+                } 
+                console.log(array,$scope,index)
+            }
+            else if(index>=0){
+                array.splice(index, 1);
+            }
+        })
+        
+        $scope.visibleOn = array;
+        console.log(array,$scope)
         $timeout(function(){
             $scope.$apply()
         },1);
-    }
+    };
     $scope.canAddNew = (item) => {
         $scope.addNew = !$scope.addNew;
         $scope.newTestimonial = {};
+        $scope.visibleOn = [];
+        console.log(item)
         if(item){
             $scope.newTestimonial = item;
+            // $scope.visibility = item.visibleOn;
+            var arr =['homepage','testimonial','college','coaching','school','speaking','personal','about']
+            arr.forEach(ele =>{
+                $scope.visiblity[ele]  =false;
+            });
+            item.visibleOn.forEach(ele =>{
+                $scope.visiblity[ele]  =true;
+            });
         }
     };
     $scope.toggleReadMode = (testimonial) => {
@@ -44,7 +86,9 @@ myApp.controller("testimonialController",['$scope','$http','$location','$rootSco
         if(isValid){
             if($scope.newTestimonial.id){
                 db.collection("testimonials").doc($scope.newTestimonial.id).update({
-                    ...$scope.newTestimonial
+                    ...$scope.newTestimonial,
+                    visibleOn : $scope.visibleOn,
+                    uid:sessionStorage.uid
                 })
                 .then(function() {
                     //$scope.events.push({...$scope.newEvent});
@@ -73,7 +117,9 @@ myApp.controller("testimonialController",['$scope','$http','$location','$rootSco
                     console.log('Uploaded a base64url string!',snapshot);
                     $scope.newTestimonial.img = fileName;
                     db.collection("testimonials").add({
-                        ...$scope.newTestimonial
+                        ...$scope.newTestimonial,
+                        visibleOn : $scope.visibleOn,
+                        uid:sessionStorage.uid || true
                     })
                     .then(function(docRef) {
                         $scope.testimonials.push({...$scope.newTestimonial,id:docRef.id});
@@ -110,7 +156,7 @@ myApp.controller("testimonialController",['$scope','$http','$location','$rootSco
     };
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn;
+            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
             $timeout(function(){
                 $scope.$apply()
             },1);

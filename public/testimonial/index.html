@@ -1,21 +1,25 @@
 <div ng-controller="testimonialController" class="container">
-    <section class="rm-section" style="margin-top: 150px;">
+    <!-- <section class="rm-section" style="margin-top: 150px;">
         <iframe width="100%" height="500px" src="http://www.youtube.com/embed/6nFYtsQBKAk?autoplay=1&mute=1"></iframe>
-    </section>
+    </section> -->
     <div class="row page">
-        <div ng-repeat="testimonial in testimonials track by $index" class=" item col-4">
+        <div ng-repeat="testimonial in testimonials track by $index" ng-if="testimonial.visibleOn.includes('testimonial') || isLoggedIn" class=" item test-item col-4">
+            <div class="quote-font" style="position: absolute;top: -6%;">
+                <!-- <img src="../img/quote.jpg"> -->
+                <i class="fa fa-quote-left fa-4x"></i>
+            </div>
             <div class="testimonial-card testimonial-card-container " style="width:100%;">
                 <div class="et_pb_text_inner" ng-click="toggleReadMode(testimonial)">
-                    <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
-                    <div class="testi-2"style="margin-bottom:10px;">“{{testimonial.text.substring(0,250)}}<a href="" ng-if="testimonial.text.length>20"> read more...</a>”</div>
+                    <div class="testi-1"><img alt="" src={{testimonial.image}}></div>
+                    <div class="testi-2"style="margin-bottom:10px;">“{{testimonial.text.substring(0,200)}}”<div><a href="" ng-if="testimonial.text.length>200"> read more...</a></div></div>
                     <div class="blank"></div>
                     <div class="testi-3"> - {{testimonial.author}}</div>
                     <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
                 </div>
                 <div ng-if="isLoggedIn" class="edit-delete-buttons">
                     <button class="btn btn-primary btn-ghost" ng-click="canAddNew(testimonial,$index)">Edit</button>
-                    <!--<button class="btn btn-primary btn-ghost" ng-click="deleteTestimonial($index)">Delete</button>-->
-                    <button class="btn btn-primary btn-ghost" ng-click="getConfirmation()">Delete</button>
+                    <button class="btn btn-primary btn-ghost" ng-click="deleteTestimonial($index)">Delete</button>
+                    <!-- <button class="btn btn-primary btn-ghost" ng-click="getConfirmation()">Delete</button> -->
                 </div>
             </div>
         </div>
@@ -31,6 +35,13 @@
             <input placeholder="Enter Designation" type="text" ng-model="newTestimonial.designation">
             <span ng-if="!newTestimonial.id">Add Photo</span>
             <input ng-if="!newTestimonial.id" type="file" ng-model="newTestimonial.img" accept="image/*" app-filereader >
+            <span><input style="width: auto;" type="checkbox" ng-change="toggleEnable()" ng-model="visiblity.homepage" />On homepage</span>
+            <span><input style="width: auto;" type="checkbox" ng-change="toggleEnable()" ng-model="visiblity.testimonial" />On Testimonial Page</span>
+            <span><input style="width: auto;" type="checkbox" ng-change="toggleEnable()" ng-model="visiblity.personal"  />On Personal Mentoring</span>
+            <span><input style="width: auto;" type="checkbox" ng-change="toggleEnable()" ng-model="visiblity.speaking" />On Speaking</span>
+            <span><input style="width: auto;" type="checkbox" ng-change="toggleEnable()" ng-model="visiblity.school" />On School</span>
+            <span><input style="width: auto;" type="checkbox" ng-change="toggleEnable()" ng-model="visiblity.coaching" />On Coaching</span>
+            <span><input style="width: auto;" type="checkbox" ng-change="toggleEnable()" ng-model="visiblity.college" />On College</span>
             <div style="text-align: right;">
                 <button class="btn btn-primary btn-ghost" ng-click="canAddNew()">Cancel</button>
                 <button class="btn btn-primary btn-ghost" ng-click="updateNewTestimonial()">Add</button>
@@ -38,10 +49,13 @@
         </div>
     </div>
     <div class="rm-popup-parent" ng-if="canRead" style="z-index: 1004">
-        <div class="rm-popup-container" style="width: 700px;height: 500px;position: relative;">
+        <div class="rm-popup-container" style="width: 600px;height: 500px;position: relative;">
             <div class="close" ng-click="toggleReadMode()">&times;</div>
             <!-- <div class="rm-popup-header">Testimonial</div> -->
-            <div style="position: absolute;top: -6%;"><img src="../img/quote.jpg"></div>
+            <div class="quote-font" style="position: absolute;top: -6%;">
+                <!-- <img src="../img/quote.jpg"> -->
+                <i class="fa fa-quote-left fa-4x"></i>
+            </div>
             <div class="testi-1" style="margin-top: 30px;"><img alt="" src={{testimonial.img}}></div>
             <div style="text-align: center;">{{testimonial.author}}</div>
             <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>

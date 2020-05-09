@@ -8,16 +8,11 @@
                         <div class="slide-text">
                             <div class="row">
                                 <div class=" banner-content-rsp" ng-controller="homeController">
-                                        <h2 style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
-                                            Imagine a coaching institute
-                                            Where success is a habit. Where the students understand why is it that even
-                                            after the same hard work, only a few succeed. Where the students know how
-                                            to break free from their inner barriers and perform better than what they think
-                                            they can.<br/>
-                                            Where the teaches understand their role as not just academic tutors but as
-                                            mentors, as guiding light houses to the dream ships of so many students.
-                                            <br/><br/>
-                                            If you want your Institution to move in that direction.. Rohit can help you…
+                                        <h2 ng-bind-html="pageTitle" ng-if="windowWidth>720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
+                                        </h2>
+                                        <h2 ng-bind-html="pageTitleM" ng-if="windowWidth<=720" style="word-break: break-word;color: #fff;font-style: normal;" class="sub-heading">
+                                            <!-- {{pageTitle}} -->
                                         </h2>
                                         <div>
                                             <button class="btn btn-primary btn-ghost"style="margin: 20px 0px 0px 0px;padding: 12px 30px;" ng-click="book()">Book Rohit</button>
@@ -53,54 +48,22 @@
         </h1>
         <div class="col-md-6">
             <div class="rm-sub-title">For Students</div>
-            <div style="text-align: justify;-moz-text-align-last: justify;">Most students want to get a selection but
-            don’t want to study and those who do study
-            don’t know how to maximise their
-            productivity and study consistently.
-            That is where Rohit comes in.
-            With more than 3000 hours of study and
-            experience in understanding the dynamics of
-            the human mind and 11 years of experience
-            in preparing and coaching for various
-            competitive exams, he has simplified and
-            decoded the principles of peak performance
-            in any exam. These principles when applied
-            meticulously have proved to yield great
-            results.
-            If you want your students to have that edge
-            over everybody else, Book a workshop with
-            Rohit and feel the difference.</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth>720">{{student}}</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth<=720">{{studentM}}</div>
         </div>
         <div class="col-md-6" style="border-left: solid 2px #d6d6d6;">
             <div class="rm-sub-title">For Teachers</div>
-            <div style="text-align: justify;-moz-text-align-last: justify;">A teacher in a coaching institute bears the
-            huge responsibility of making or breaking a
-            child&#39;s future.
-            Every teacher does the best he thinks he
-            can.
-            But is it enough?
-            Competition is increasing day by day. More
-            and more students are joining the race.
-            If you want your institute to stand out, you
-            need to have teachers who want a student&#39;s
-            selection more than the student himself.
-            And more importantly they need to know
-            how to inspire the student to aim for
-            selection as a hungry lion aims for a deer.
-            A session with Rohit can truly entertain your
-            faculty. High morale, increased sincerity,
-            selfless commitment to results and an
-            increase in team spirit are some side
-            effects.</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth>720">{{teacher}}</div>
+            <div style="text-align: justify;-moz-text-align-last: justify;" ng-if="windowWidth<=720">{{teacherM}}</div>
         </div>
         <div>
             <button class="btn btn-primary btn-ghost"style="margin: 30px 0px 0px 0px;padding: 8px 80px;" ng-click="book()">Book Rohit</button>
         </div>
     </section>
-    <section ng-controller="homeController" id="carousel" class="testimonials">
-        <h1>
+    <section id="carousel" class="testimonials">
+        <!-- <h1>
             <span><a style="color:#333333;" href="/#!/testimonials">Testimonials</a></span>
-        </h1>
+        </h1> -->
         <div class="container"> 
           <div class="row"> 
             <div class="col-md-10 offset-md-1"> 
@@ -113,12 +76,13 @@
                       <div ng-repeat="testimonial in testimonials" class="carousel-item item" ng-class="{'active':$index==0}" ng-if="$index<9">
                         <div class="content">
                             <div style="height: 60%;overflow-y: hidden;padding-bottom: 20px;">
-                                <span>{{testimonial.text.substring(0,250)}}</span>
-                                <a href="/#!/testimonials" ng-if="testimonial.text.length>250">read more...</a>
+                                <!-- <span>{{testimonial.text.substring(0,250)}}</span> -->
+                                <span>{{testimonial.text}}</span>
+                                <a  ng-click="toggleReadMode(testimonial)" href="" ng-if="testimonial.text.length>250 && false">read more...</a>
                             </div>
                             <div class="testi-1"><img alt="" src={{testimonial.img}}></div>
                             <div style="text-align: center;">{{testimonial.author}}</div>
-                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">designation</div>
+                            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
                         </div>
                       </div>
                     </div>
@@ -133,7 +97,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Flaugh%20and%20learn%20.png?alt=media&token=54a7a820-a41f-44ca-8b96-6270cbdb93f5"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Laugh and Learn</h4>
@@ -145,7 +112,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fparticipative%20learning.png?alt=media&token=86871947-0af2-4269-8c73-bd87f2e156a9"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Participative Learning</h4>
@@ -158,7 +128,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fcapactiy%20building.png?alt=media&token=004fd91c-59b5-4781-93c1-dffce5fe4cc4"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Capacity Building</h4>
@@ -171,7 +144,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fknowledge%20that%20sticks.png?alt=media&token=b372ec3c-6f39-4fe6-af4c-d545f7c4c319"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Knowledge that sticks</h4>
@@ -184,7 +160,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fimplementable%20knowledge.png?alt=media&token=9f209164-7318-4027-bec4-2593550d35f4"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Implementable knowledge</h4>
@@ -197,7 +176,10 @@
             <div class="icon-box iconbox-theme-colored bg-white p-15 mb-30 border-1px">
                 <!--<a class="icon icon-light  pull-left flip mt-5" href="#"> -->
                 <!--<img class="media-object" src="https://jbclasses.com/img/jbclasses.com/why_us/DEMO%20CLASS_1.png" alt="Free demo classes"> -->
-                <div class="rm-icon-span"><i class="fas fa-user-tie"></i></div>
+                <div class="rm-icon-span">
+                    <!-- <i class="fas fa-user-tie"></i> -->
+                    <img src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fmultifaceted%20evolution%20(1).png?alt=media&token=913e8553-8c71-4d5c-80fa-011964697daa"/>
+                </div>
                 <!--</a>-->
                 <div class="icon-box-details">
                     <h4 class="icon-box-title font-16 font-weight-600 m-0 mb-3">Multifaceted evolution</h4>
@@ -246,4 +228,19 @@
             <button class="btn btn-primary btn-ghost" ng-click="">Book Rohit</button>
         </div>
     </section>-->
+    <div class="rm-popup-parent" ng-if="canRead" style="z-index: 1004">
+        <div class="rm-popup-container" style="width: 600px;height: 500px;position: relative;">
+            <div class="close" ng-click="toggleReadMode()">&times;</div>
+            <!-- <div class="rm-popup-header">Testimonial</div> -->
+            <div class="quote-font" style="position: absolute;top: -6%;">
+                <!-- <img src="../img/quote.jpg"> -->
+                <i class="fa fa-quote-left fa-4x"></i>
+            </div>
+            <div class="testi-1" style="margin-top: 30px;"><img alt="" src={{testimonial.img}}></div>
+            <div style="text-align: center;">{{testimonial.author}}</div>
+            <div style="text-align: center;font-style: italic;font-size: 14px;opacity: 0.7;">{{testimonial.designation}}</div>
+            <div style="height: calc(100% - 150px); overflow: auto;">{{testimonial.text}}</div>
+            
+        </div>
+    </div>
 </div>

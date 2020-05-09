@@ -1,7 +1,8 @@
 
 
 var blogCats = ['All','Productivity','Mind Management','Relationships','Miscellaneous'];
-myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeout){
+myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeout,$location){
+    window.scrollTo(0, 0);
     var db = firebase.firestore();
     var storage = firebase.storage().ref();
     $scope.blogs = [{"imgUrl":"./img/blog.jpg","text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.","title":"1Lorem Ipsum is simply dummy text of the printing and typesetting industry."}];
@@ -17,6 +18,19 @@ myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeou
         readOnly: true,
         theme: 'snow'
     };
+    $scope.shareUrl = (type) => {
+        console.log(type)
+        if(type=='LinkedIn')
+        return window.location.href = 'https://www.linkedin.com/shareArticle?mini=true&url='+window.location.href;
+        else if(type=='Facebook')
+        return window.location.href = 'https://www.facebook.com/sharer/sharer.php?u='+'https%3A%2F%2Frohit-mittal.firebaseapp.com%2F#!%2Fblog%2FaeFlmc6sewG0FCaDBsHV';
+        else if(type=="Twitter"){
+            return window.location.href = "https://twitter.com/share?url="+window.location.href;
+        }
+        else if(type=='Copy'){
+            $scope.shareLink = true;
+        }
+    }
     var editor = new Quill(container,options);
     db.collection("blogs").doc($routeParams.topicId).get().then(function(doc) {
         
@@ -38,8 +52,9 @@ myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeou
 });
 
 
-myApp.controller("blogEditController",function($scope,$http,$routeParams,$location,$timeout){
-    $scope.title="";$scope.text="";$scope.imgUrl={img:""};
+myApp.controller("blogEditController",function($scope,$http,$routeParams,$location,$timeout,$rootScope){
+    window.scrollTo(0, 0);
+    $scope.title="";$scope.text="";$scope.imgUrl={img:""};$scope.isEnabled=false;$scope.textString="";
     $scope.blogCats = blogCats;$scope.categ = blogCats[0];
     var db = firebase.firestore();
     var storage = firebase.storage().ref();
@@ -79,30 +94,53 @@ myApp.controller("blogEditController",function($scope,$http,$routeParams,$locati
     var editor = new Quill(container,options);
     editor.on('text-change', function(delta, oldDelta, source) {
        $scope.text = editor.getContents().ops;
+       console.log(editor.getText())
     });
+    //$scope.text = editor.getContents().ops;
     if($routeParams.topicId!=undefined){
         db.collection("blogs").doc($routeParams.topicId).get().then((doc) => {
             var obj = doc.data();
+            console.log(obj,editor)
+            
             $scope.id = doc.id;
             $scope.title = obj.title;
             $scope.text = obj.text;
             $scope.categ = obj.categ;
             $scope.imgUrl = {img:obj.imgUrl};
+            editor.setContents($scope.text);
             $timeout(function(){
                 $scope.$apply();
             },1);
         });
     }
+    $scope.toggleEnable = () => {
+        //$scope.isEnabled = !$scope.isEnabled;
+    }
     
-    $scope.saveBlog = () => {
+    $scope.saveBlog = (toggleEnable) => {
         if(isValidated([$scope.title,$scope.text,$scope.categ,$scope.categ!=='All'])){
             // Add a new document with a generated id.
+            $scope.textString = editor.getText();
             if($routeParams.topicId!=undefined){
                 db.collection("blogs").doc($routeParams.topicId).update({
                     title: $scope.title,
                     text: $scope.text,
+                    textString:$scope.textString,
                     categ:$scope.categ,
-                    imgUrl: $scope.imgUrl.img
+                    imgUrl: $scope.imgUrl.img,
+                    isEnabled:$scope.isEnabled?$scope.isEnabled:false,
+                    date:new Date(),
+                    uid:sessionStorage.uid||true
+                }).then(function(docRef) {
+                    $location.url("/blog");
+                    window.location.reload();
+                    $timeout(function(){
+                        $scope.$apply()
+                    },1);
+                    console.log("Document written with ID: ", docRef.id,docRef);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
                 });
             }
             else {
@@ -118,11 +156,16 @@ myApp.controller("blogEditController",function($scope,$http,$routeParams,$locati
                     db.collection("blogs").add({
                         title: $scope.title,
                         text: $scope.text,
+                        textString:$scope.textString,
                         imgUrl: fileName,
-                        categ:$scope.categ
+                        categ:$scope.categ,
+                        date:new Date(),
+                        isEnabled:$scope.isEnabled?$scope.isEnabled:false,
+                        uid:sessionStorage.uid||true
                     })
                     .then(function(docRef) {
                         $location.url("/blog");
+                        window.location.reload();
                         $timeout(function(){
                             $scope.$apply()
                         },1);
@@ -152,11 +195,21 @@ myApp.controller("blogEditController",function($scope,$http,$routeParams,$locati
 
 
 myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebaseArray','$location','$timeout','$rootScope',function($scope,$http,$firebaseObject,$firebaseArray,$location,$timeout,$rootScope){
+    window.scrollTo(0, 0);
+    $(window).resize(function() {
+        $scope.windowWidth = $( window ).width();
+        $timeout(function(){
+            $scope.$apply();
+        },1);
+    });
+    $scope.windowWidth = $( window ).width();
     var db = firebase.firestore();
+    var batch = db.batch();
     var storage = firebase.storage().ref();
     $scope.blogs = [{"imgUrl":"./img/blog.jpg","text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.","title":"1Lorem Ipsum is simply dummy text of the printing and typesetting industry."}];
-    $scope.blogCats = blogCats;$scope.loadedBlogs=[];
+    $scope.blogCats = blogCats;$scope.loadedBlogs=[];$scope.pageTitle='';
     $scope.filteredBlogs = {All:[]};$scope.catFilter = 'All';
+    $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
     db.collection("blogs").get().then(function(querySnapshot) {
         $scope.blogs = []; $scope.filteredBlogs = {All:[]};
         querySnapshot.forEach(function(doc) {
@@ -199,7 +252,7 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
                 },1);
             }
             
-            console.log(doc.id, " => ", doc.data());
+            console.log(doc.id, " => ", doc.id);
             
         });
         //$scope.loadedBlogs = $scope.blogs.slice(0,6);
@@ -211,22 +264,60 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
         },1);
     });
     $scope.deleteBlog = (index) =>{
-        db.collection("blogs").doc($scope.blogs[index].id).delete().then(function() {
+        db.collection("blogs").doc(index).delete().then(function() {
             $scope.blogs.splice(index,1);
+            window.location.reload();
             $timeout(function(){
                 $scope.$apply()
+                //$rootScope.isSuccess = '';
             },1);
+            
             console.log("Document successfully deleted!");
         }).catch(function(error) {
             console.error("Error removing document: ", error);
         });
     };
-    
+    $scope.key='',$scope.val = '';
+    $scope.changeSuccess = (key,val) => {
+        
+        console.log(key,val,$rootScope);
+        $scope.key=key,$scope.val = val;
+        $rootScope.isSuccess='getSuccess';
+        $timeout(function(){
+            $scope.$apply()
+        },1);
+    }
+    $rootScope.$watch('isSuccess', (newVal,oldVal)=>{
+        if(newVal!=oldVal){
+            //$scope.isSuccess = !isSuccess;
+            console.log($rootScope,$scope)
+            if($rootScope.isSuccess === 'yes'){
+                //$rootScope.isSuccess = false;
+                //$scope.saveBlog();
+                if($scope.key === 'delete'){
+                    $scope.deleteBlog($scope.val)
+                }
+                else if($scope.key === 'edit'){
+                    $scope.editBlog($scope.val)
+                }
+                
+            }
+            else if($rootScope.isSuccess=='no'){
+                $rootScope.isSuccess = '';
+                window.location.reload();
+            }
+            
+            $timeout(function(){
+                $scope.$apply()
+            },1);
+        }
+    });
     $scope.editBlog = (index) => {
         if(index)
-        $location.url('/editBlog/'+$scope.blogs[index].id)
+        $location.url('/editBlog/'+index)
         else
         $location.url('/editBlog/')
+        $rootScope.isSuccess = '';
     };
     $scope.loadBlogs = () => {
         if($scope.loadedBlogs.length<$scope.filteredBlogs[$scope.catFilter].length){
@@ -239,9 +330,10 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
         }
     };
     $scope.getFilteredBlogs = (cat) => {
+        console.log(cat,$scope)
         $scope.blogs = $scope.filteredBlogs[cat];
         $scope.catFilter = cat;
-        $scope.loadedBlogs = $scope.filteredBlogs[cat].slice(0,6);
+        $scope.loadedBlogs = $scope.filteredBlogs[cat]?$scope.filteredBlogs[cat].slice(0,6):[];
         console.log($scope);
         $timeout(function(){
             $scope.$apply()
@@ -249,11 +341,42 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
     };
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn;
+            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
             $timeout(function(){
                 $scope.$apply()
             },1);
         }
     });
+
+
+    //editables
+    db.collection("blogPageTitle").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            $scope[doc.id] = doc.data().text;
+            console.log(doc,$scope)
+            $timeout(function(){
+                    $scope.$apply()
+            },1);
+            console.log(doc.id, " => ", doc.data());
+        });
+      });
+      $scope.saveData = () => {
+        var about = db.collection("blogPageTitle");
+        batch.update(about.doc('pageTitle'),{
+            text:$scope.pageTitle,
+            uid:sessionStorage.uid || true
+        });
+        batch.update(about.doc('pageTitleM'),{
+            text:$scope.pageTitleM,
+            uid:sessionStorage.uid || true
+        });
+    
+        batch.commit().then(function () {
+          $timeout(function(){
+            $scope.$apply()
+          },1);
+          $location.url("/");
+        });
+      };
 }]);
 
