@@ -1,3 +1,16 @@
+.vision-text-parent{
+  padding: 55px 150px;
+  padding-left: 10%;
+  height:auto;
+  text-align: center;
+  font-style: italic;
+}
+.vision-text{
+  height:auto !important;
+  letter-spacing: 0.5px !important;
+  font-weight: bold !important;
+  font-size: 30px !important;
+}
 .rm-section{
     max-height: 570px;
     min-height: 500px;
@@ -446,6 +459,12 @@ body {
   border-left: solid 2px #d6d6d6;
   border-right: solid 2px #d6d6d6;
 }
+.message-collaborate{
+  width: 100%;
+  height: calc(100% - 10px); 
+  border-radius: 6px; 
+  padding: 10px;
+}
 @media only screen and  (min-width:992px){
   .bigsc{
     height: 354px!important;
@@ -487,5 +506,35 @@ body {
     border-bottom: solid 2px #d6d6d6;
     margin: 10px 0px;
     padding: 10px 0px;
+  }
+  .vision-text-parent{
+    padding: 25px;
+    height:auto;
+    text-align: center;
+    font-style: italic;
+  }
+  .vision-text{
+    height:auto !important;
+    letter-spacing: normal !important;
+    font-weight: bold !important;
+    font-size: 17px !important;
+    line-height: 21px;
+  }
+  .col-xs-10{
+    max-width: 75%;
+    flex: 0 0 75%;
+    font-size: 10px;
+  }
+  .h5, h5 {
+    font-size: 1rem;
+  }
+.circle {
+  padding: 4px 12px;
+  }
+  .rm-section img {
+    margin-left: auto;
+}
+  .message-collaborate{
+    height: calc(100% - 50px);
   }
 }

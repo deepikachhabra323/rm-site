@@ -2,7 +2,7 @@
     padding-bottom: 50px;
 }
 .rm-blog-page{
-    margin-top: 112px;
+    /* margin-top: 112px; */
 }
 .rm-blog-page .item-article-blog img{
     height: 225px;
@@ -117,5 +117,22 @@
     .blog-cat {
         padding: 10px;
         font-size: 11px;
+    }
+    .blog-container img {
+        height: 250px !important;
+    }
+    .blog-container .blog-text {
+        padding: 5px 0px 0px 0px;
+    }
+    .blog-container .blog-body #editor-view {
+        max-width: 100%;
+    }
+    .ql-container {
+        font-size: 9px !important;
+    }
+    .blog-container .main-title {
+        padding: 15px 10px;
+        text-align: center;
+        font-size: 20px;
     }
 }

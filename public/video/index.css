@@ -77,3 +77,11 @@
     /*display: block;*/
     opacity: 1;
 }
+.video-banner{
+    margin-left: 40%;
+}
+@media only screen and  (max-width:768px){
+    .video-banner{
+        margin-left: 0;
+    }
+}

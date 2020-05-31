@@ -1,5 +1,5 @@
 <div ng-controller="aboutController" class="">
-    <div class="page" style="padding-top: 112px;">
+    <div class="page">
         <header class="main-banner main-banner_home clearfix" style="margin-top: 0px; background-color: #000000;">
             <section class="banner-text banner-home">
                 <img style="z-index: auto;top: 0px;" class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FNN4A4060%20copy%20(1).jpg?alt=media&token=715e207c-e4f9-40cd-a44a-7511d4152111" alt="Rohit Mittal">
@@ -43,9 +43,10 @@
             <iframe width="100%" height="550px" src="http://www.youtube.com/embed/6nFYtsQBKAk?autoplay=1&mute=1" allow="autoplay; encrypted-media"></iframe>
         </section> -->
         <section class="row rm-section" style="min-height:150px">
-            <div class="col-12" style="padding: 55px 150px;padding-left: 10%;height:auto;text-align: center;font-style: italic;">
+            <div class="col-12 vision-text-parent">
                 
-                <div class="content" style="height:auto;letter-spacing: 0.5px;font-weight: bold;font-size: 30px;">Imagine an India where the youth have clear
+                <div class="vision-text content ">
+                    Imagine an India where the youth have clear
                     dreams,courage to pursue them and
                     skills to make them come true, making this
                     world a better place in the process.
@@ -69,7 +70,7 @@
                     <div class="col-2 text-center bottom">
                         <div class="circle">1</div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 col-xs-10">
                         <h5 style="font-weight: bold;">April 2007</h5>
                         <p>Learned for the first time the importance of mind
                             management in competitive exams. Failed in the IIT-JEE I gave on
@@ -92,7 +93,7 @@
                 </div>
                 <!--second section-->
                 <div class="row align-items-center justify-content-end how-it-works">
-                    <div class="col-6 text-right">
+                    <div class="col-6 col-xs-10 text-right">
                         <h5 style="font-weight: bold;">August 2008</h5 style="font-weight: bold;">
                         <p>delivered my first motivational seminar to First
                             year students at my college, MNNIT-Allahabad.
@@ -119,7 +120,7 @@
                     <div class="col-2 text-center full-left">
                         <div class="circle">3</div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 col-xs-10">
                         <h5 style="font-weight: bold;">2008-2014</h5 style="font-weight: bold;">
                         <p>
                             Took up a humongous self-development challenge
@@ -144,7 +145,7 @@
                     </div>
                 </div>
                 <div class="row align-items-center justify-content-end how-it-works">
-                    <div class="col-6 text-right">
+                    <div class="col-6 col-xs-10 text-right">
                         <h5 style="font-weight: bold;">December 2014 - April 2015:</h5 style="font-weight: bold;">
                         <p>put everything I learned into
                             practice. Applied all my techniques. Scored an AIR #5 in SSC CGL
@@ -171,7 +172,7 @@
                     <div class="col-2 text-center full-left">
                         <div class="circle">5</div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 col-xs-10">
                         <h5 style="font-weight: bold;">April 2016 - May 2017</h5 style="font-weight: bold;">
                         <p>
                             worked as an Inspector in Mumbai
@@ -192,7 +193,7 @@
                     </div>
                 </div>
                 <div class="row align-items-center justify-content-end how-it-works">
-                    <div class="col-6 text-right">
+                    <div class="col-6 col-xs-10 text-right">
                         <h5 style="font-weight: bold;">January 2018</h5 style="font-weight: bold;">
                         <p>Became an Art of Living &#39;Happiness Program&#39;
                             Teacher with my wife and started teaching the secrets of a happy
@@ -219,7 +220,7 @@
                     <div class="col-2 text-center full-left">
                         <div class="circle">7</div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 col-xs-10">
                         <h5 style="font-weight: bold;">2018-2020</h5 style="font-weight: bold;">
                         <p>
                             Taught what I have learned about competitive exams
@@ -240,7 +241,7 @@
                     </div>
                 </div>
                 <div class="row align-items-center justify-content-end how-it-works">
-                    <div class="col-6 text-right">
+                    <div class="col-6 col-xs-10 text-right">
                         <h5 style="font-weight: bold;">January 2020</h5 style="font-weight: bold;">
                         <p>Formally launched my motivational speaking and
                             personal mentoring venture.
@@ -253,15 +254,24 @@
             </div>
         </div>
         <!--timeline-->
-        <section class="row rm-section">
+        <section ng-if="windowWidth>720" class="row rm-section">
             <div class="col-7" style="padding: 85px 0px;padding-left: 10%;">
                 <div class="sub-heading">Giving Back</div>
-                <div ng-bind-html = "givingBack" class="content" ng-if="windowWidth>720"></div>
-                <div ng-bind-html = "givingBackM" class="content" ng-if="windowWidth<=720"></div>
+                <div ng-bind-html = "givingBack" class="content"></div>
             </div>
             <div class="col-5" style="padding: 100px 0px;">
                 <div class="logo-center"><img height="370px" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FGiving%20back.jpg?alt=media&token=47173acb-56b1-4909-b67d-2f85d27c3a5f" alt="" class="landing-bulletin-img"></div>
             </div>
+        </section>
+        <section ng-if="windowWidth<=720" class="row rm-section" style="text-align: center;">
+            <div class="col-12">
+                <div class="sub-heading">Giving Back</div>
+                <div class="logo-center"><img height="270px" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2FGiving%20back.jpg?alt=media&token=47173acb-56b1-4909-b67d-2f85d27c3a5f" alt="" class="landing-bulletin-img"></div>
+            </div>
+            <div class="col-12" style="margin-top: 10px;">
+                <div ng-bind-html = "givingBackM" class="content"></div>
+            </div>
+            
         </section>
         <section id="carousel" class="testimonials">
             <!-- <h1>
@@ -321,9 +331,9 @@
                     <div><input placeholder="City*" type="text" style="margin: 10px;" required ng-model="newConnect.city"></div>
                 </div>
                 <div style="width: 50%;display: inline-block;">
-                    <div style="height: calc(100% - 50px);padding-top: 10px;padding-left: 30px;"><textarea style="width: 100%;height: calc(100% - 10px); border-radius: 6px; padding: 10px;" placeholder="Message" required type="text" ng-model="newConnect.message"></textarea></div>
-                    <div style="text-align: canter;">
-                        <button class="btn btn-primary btn-ghost"style="padding: 8px 50px;" ng-click="book()">Submit</button>
+                    <div style="height: calc(100% - 50px);padding-top: 10px;padding-left: 30px;"><textarea class="message-collaborate" placeholder="Message" required type="text" ng-model="newConnect.message"></textarea></div>
+                    <div style="text-align: center;padding-left: 30px;">
+                        <button class="btn btn-primary btn-ghost"style="padding: 8px 30px;" ng-click="book()">Submit</button>
                     </div>
                 </div>
               </div>

@@ -32,6 +32,7 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
         },1);
     });
     $scope.windowWidth = $( window ).width();
+    $rootScope.loading = true;
     const db = firebase.firestore();
     const storage = firebase.storage().ref();
     var batch = db.batch();
@@ -102,6 +103,7 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
                 if(data.visibleOn.includes('homepage'))
                     $scope.testimonials.push({...data,id:doc.id});
             }
+            $rootScope.loading = false;
             //$scope.testimonials= testimonial;
             $timeout(function(){
                 $scope.$apply();
