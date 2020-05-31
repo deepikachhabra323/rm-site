@@ -80,7 +80,7 @@
   </head>
   <body ng-app="rohitMittal">
     <div ng-controller="appController">
-      <div ng-controller="topnav" ng-show="isVisible()" class="rm-topnav-container" ng-class="{'rm-topnav-fixed': !pixelsScrolled}">
+      <div ng-controller="topnav" ng-show="isVisible()" class="rm-topnav-container">
         <div id="top-header" style="" class="">
           <div class="container clearfix">
             <div class="et-social-media">
@@ -223,6 +223,9 @@
             </div>
         </div>
       </div>
+      <div ng-if="loading" class="rm-loader">
+        <img src="./img/loader.svg" />
+      </div>
       <!-- <div aria-live="polite" aria-atomic="true" style="position: fixed;top: 10px;height: 80px;left: 20px;width: 210px;">
         <div data-delay="8000" class="toast" id="toast" style="position: absolute; top: 0; right: 0;">
           <div class="toast-body">
@@ -246,6 +249,7 @@
                       <div class="g-ytsubscribe" data-channelid="UCdebLq8jvcbum3mLQUAe2xQ" data-layout="full" data-count="default"></div>
                     </div>
                     <div class="mailing-list" style="margin-top: 20px;">Subscribe for my mailing list
+                      <br/>
                       <input placeholder="add email id" ng-model="emailSub">
                       <button class="btn btn-primary btn-ghost" style=" margin: 5px 0px;" ng-click="mailSubscribe()">Subscribe</button class="btn btn-primary btn-ghost" ng-click="updateNewTestimonial()">
                     </div> 

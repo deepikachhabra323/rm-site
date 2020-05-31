@@ -16,7 +16,7 @@
     overflow: hidden;
 }
 .rm-home-ebook img{
-    max-height: 100px;
+    max-height: 150px;
 }
 .rm-home-ebook .header{
     font-size: 30px;
@@ -62,7 +62,7 @@
 .ebook-img-cntnr{
     position: absolute;
     left: 0px;
-    text-align: left;
+    text-align: center;
     width: 300px;
     top: 0px;
 }
@@ -571,6 +571,37 @@
   }*/
 }
 @media (max-width: 768px){
+    .blogs-videos {
+        padding-bottom: 30px;
+    }
+    .blogs-videos .item-article-heading {
+        margin-top: 20px;
+    }
+    .rm-collaborate .col-xs-6 {
+        width: 49%;
+        margin: 0;
+        font-size: 10px;
+        height: 100% !important;
+        display: inline-block;
+        vertical-align: top;
+        padding: 0;
+    }
+    .rm-collaborate .col-xs-6 .icon-box{
+        height: 200px !important;
+        padding: 5px;
+    }
+    .icon-box-title {
+        font-size: 12px;
+        margin-bottom: 5px !important;
+        margin-top: -10px !important;
+    }
+    .rm-icon-span{
+        height: inherit;
+    }
+    
+    .rm-testimonial-text {
+        font-size: 9px;
+    }
   .rm-home-ebook .social-media{
     width: auto;
     left: 0px;
@@ -595,9 +626,11 @@
     font-size: 18px;
   }
   .ebook-form input {
-    margin: 5px;    
+    margin: 5px 0;    
+    width: 100%;
   }
   .ebook-form .btn {
+    width: 100%;
     display: block;
     margin: auto;
   }
@@ -611,7 +644,17 @@
     padding-left: 7px;
   }
   .videos .col-sm-6{
-    width: 100% !important;
+    /* width: 100% !important; */
+  }
+  .videos .item-article, .videos-page .item-article{
+      height: auto;
+  }
+  .item-article .item-head{
+      font-size: 11px;
+  }
+  .rm-play-button{
+    top: 38% !important;
+    font-size: 32px !important;
   }
   .rm-section-home-speaking{
       background-color: #e7eaec;
@@ -660,7 +703,7 @@
     top: 0px;
   }
   .testimonials{
-    padding: 40px 20px;
+    padding: 0px 20px 40px;
     background-color: #fb9f005c;
   }
   .testimonials .col-md-10{
@@ -675,4 +718,32 @@
   .modify-page-container{
     padding: 50px;
   }
+  .rm-section {
+      margin:0;
+  }
+  .rm-section .sub-heading{
+      font-size: 25px !important;
+      line-height: 25px !important;
+  }
+  .rm-section .content {
+    font-size: 13px !important;
+    line-height: 25px !important;
+    }
+    .mobile-testimonial{
+        display: inline-block;
+        max-width: 70%;
+        font-size: 10px;
+        font-style: italic;
+    }
+    .mobile-testimonial .names{
+        font-size: 11px;
+    }
+    .test-pic img {
+        height: 50px !important;
+    }
+    .mobile-testimonial-pic{
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+    }
 }

@@ -7,6 +7,7 @@ myApp.controller("aboutController",function($scope,$location,$rootScope,$timeout
     },1);
 });
 $scope.windowWidth = $( window ).width();
+$rootScope.loading = true;
   $scope.top='';
   $scope.givingBack='';
   $scope.newConnect={};
@@ -67,7 +68,8 @@ $scope.windowWidth = $( window ).width();
   db.collection("aboutPageTitle").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
         $scope[doc.id] = doc.data().text;
-        console.log(doc,$scope)
+        // console.log(doc,$scope)
+        $rootScope.loading = false;
         $timeout(function(){
           $scope.$apply()
         },1);
