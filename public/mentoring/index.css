@@ -17,3 +17,14 @@
     font-weight: bold;
     padding: 10px;
 }
+.mentor-btn{
+    margin: 10px 0px 0px 0px;
+    padding: 8px 10px
+}
+@media only screen and  (max-width:768px){
+    .mentor-btn{
+        margin: 10px 0px 0px 0px;
+        padding: 2px 5px;
+        font-size: 12px;
+    }
+}

@@ -42,6 +42,7 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
     });
     $scope.pixelsScrolled = true ;
     $scope.isSuccess = false;
+    // $scope.loading = false;
     var db = firebase.firestore();
     var user = firebase.auth().currentUser;
     console.log(user)
@@ -72,6 +73,12 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
     $rootScope.$watch('confirm', (newVal,oldVal)=>{
         if(newVal!=oldVal){
             $scope.confirm = $rootScope.confirm;
+            
+        }
+    });
+    $rootScope.$watch('loading', (newVal,oldVal)=>{
+        if(newVal!=oldVal){
+            $scope.loading = $rootScope.loading;
             
         }
     });
@@ -108,6 +115,7 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
             },1);
         });
     }
+
     //connect
     
     $scope.newConnect = {};$scope.newBook = {};
@@ -171,12 +179,14 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
       };
       $rootScope.sendEmail = function () {
         Email.send({
-            Host: "",
-            Username : "",
-            Password : "",
-            To : '',
-            From : "",
-            Subject : "test",
+            // Host: "smtpout.secureserver.net",
+            Username : "Rohit",
+            // Password : "MEntorRohit123",
+            SecureToken:"0281e989-98c5-423e-9007-ebdf3c2c2e4a",
+            To : 'vipul7877279420@gmail.com',
+            From : "contact@rohitmittal.in",
+            Bcc : "contact@rohitmittal.in",
+            Subject : "test3",
             Body : "test",
         })
         .then(function(message){

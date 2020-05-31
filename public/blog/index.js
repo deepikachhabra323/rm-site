@@ -43,6 +43,9 @@ myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeou
         if($scope.blog.imgUrl){
             storage.child('img/'+$scope.blog.imgUrl).getDownloadURL().then((url)=>{
                 $scope.blog.imgUrl = url;
+                $timeout(function(){
+                    $scope.$apply();
+                },1);
             });
         }
         $timeout(function(){
@@ -203,6 +206,7 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
         },1);
     });
     $scope.windowWidth = $( window ).width();
+    $rootScope.loading = true;
     var db = firebase.firestore();
     var batch = db.batch();
     var storage = firebase.storage().ref();
@@ -230,7 +234,8 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
                         console.log("filtered",$scope.filteredBlogs);
                     }
                     $scope.loadedBlogs = $scope.filteredBlogs[$scope.catFilter].slice(0,6);
-                    console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs);
+                    // console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs);
+                    $rootScope.loading = false;
                     $timeout(function(){
                         $scope.$apply();
                     },1);

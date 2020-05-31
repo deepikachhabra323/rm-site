@@ -42,5 +42,9 @@
         width: 100%;
         max-width: 100%;
         flex: auto;
+        font-size: 10px;
+    }
+    .testimonials .item .content div:last-child{
+        font-size: 10px !important;
     }
 }
