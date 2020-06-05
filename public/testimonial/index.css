@@ -47,4 +47,8 @@
     .testimonials .item .content div:last-child{
         font-size: 10px !important;
     }
+    .testimonial-card-container{
+        padding-bottom: 10px!important;
+        height: 240px;
+    }
 }

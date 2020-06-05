@@ -13,9 +13,9 @@
             <!--<div class="header">{{courseHeader}}</div>-->
             <!-- <div class="sub-header">{{courseSubheader}}</div> -->
             <div class="ebook-form">
-                <input placeholder="Name">
-                <input placeholder="Email">
-                <input placeholder="Contact">
+                <input placeholder="Name" ng-model='email.name'>
+                <input placeholder="Email" ng-model='email.email'>
+                <input placeholder="Contact" ng-model='email.contact'>
                 <button class="btn btn-primary btn-ghost" ng-click="sendEmail()">Submit</button>
             </div>
         </div>
@@ -130,11 +130,11 @@
     <section class="row rm-section rm-section-home" style="min-height:480px;
     ">
     <div ng-if="windowWidth>720" style="max-width: 1200px;margin: auto;">
-        <div class="col-md-5" style="padding: 70px 0px;padding-left: 5%;height: auto;">
-            <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;margin-left: auto;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fcompressed%20imgs%2Ftrue%20png.png?alt=media&token=38b2ae6b-5c1a-4694-9141-212f88c3be27" alt="" class="landing-bulletin-img"></div>
+        <div class="col-md-5" style="padding: 40px 0px;padding-left: 5%;height: auto;">
+            <div class="logo-center"><img height="442px" width="300px" style="object-fit: cover;margin-left: auto;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fcompressed%20imgs%2Ftrue%20png.png?alt=media&token=f173bd0c-5f22-478b-b63c-ce4f9ce4cf76" alt="" class="landing-bulletin-img"></div>
         </div>
         <div class="col-md-7" style="padding: 70px 0px;height: auto;    padding-right: 80px;">
-            <div class="sub-heading" style="height: auto;text-align: center;">Personal Mentoring</div>
+            <a href="/#!/personal_mentoring"><div class="sub-heading" style="height: auto;text-align: center;">Personal Mentoring</div></a>
             <div class="content" style="height: auto;">Are you a <b>Student</b> who has big dreams?<br/>
                 Do you have the courage to pursue your dreams?<br/>
                 Do you want to become so good that your success becomes inevitable?<br/>
@@ -151,7 +151,7 @@
     </div>
     <div ng-if="windowWidth<=720" style="max-width: 1200px;margin: auto;">
         <div class="col-md-12" style="padding: 20px 10px;height: auto;">
-            <div class="sub-heading" style="height: auto;text-align: center;">Personal Mentoring</div>
+            <a href="/#!/personal_mentoring"><div class="sub-heading" style="height: auto;text-align: center;">Personal Mentoring</div></a>
             <div class="content" style="height: auto;">Are you a <b>Student</b> who has big dreams?<br/>
                 Do you have the courage to pursue your dreams?<br/>
                 Do you want to become so good that your success becomes inevitable?<br/>
@@ -171,7 +171,7 @@
     ">
         <div ng-if="windowWidth>720" style="max-width: 1200px;margin: auto;">
             <div class="col-md-7" style="padding: 0px 0px 50px 0px;padding-left: 80px;height: auto;">
-                <div class="sub-heading" style="height: auto;text-align: center;">Speaking</div>
+                <a href="/#!/speaking"><div class="sub-heading" style="height: auto;text-align: center;">Speaking</div></a>
                 <div class="content" style="height: auto;">Are you an institute who wants to increase its business by giving more
                     selections?<br/>
                     Are you a school looking for an improvement in your X/XII standard result?<br/>
@@ -189,13 +189,13 @@
                     </div>
                   </div>
             </div>
-            <div class="col-md-5" style="padding: 15px 80px 80px 80px;padding-left: 5%;height: auto;">
-                <div class="logo-center"><img height="300px" width="300px" style="object-fit: cover;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fcompressed%20imgs%2Fnew%20png%201.png?alt=media&token=d4ff089f-0d23-4b9b-ab44-59b02d6d7440" alt="" class="landing-bulletin-img"></div>
+            <div class="col-md-5" style="padding: 0px 80px 80px 80px;padding-left: 5%;height: auto;">
+                <div class="logo-center"><img height="420px" width="400px" style="object-fit: cover;margin-top: -39px;" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fcompressed%20imgs%2Fnew%20png%201.png?alt=media&token=ff4e289b-4618-496d-b29b-b0d281ee9fc3" alt="" class="landing-bulletin-img"></div>
             </div>
         </div>
         <div ng-if="windowWidth<=720" style="max-width: 1200px;margin: auto;">
             <div class="col-md-12" style="padding: 0px 0px 20px 0px;height: auto;">
-                <div class="sub-heading" style="height: auto;text-align: center;">Speaking</div>
+                <a href="/#!/speaking"><div class="sub-heading" style="height: auto;text-align: center;">Speaking</div></a>
                 <div class="content" style="height: auto;">Are you an institute who wants to increase its business by giving more
                     selections?<br/>
                     Are you a school looking for an improvement in your X/XII standard result?<br/>

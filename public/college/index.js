@@ -15,7 +15,7 @@ myApp.controller("collegeController",function($scope,$location,$rootScope,$timeo
         },1);
     });
     $scope.windowWidth = $( window ).width();
-    $scope.pageTitle = '';
+    $scope.pageTitle = '';$scope.pageTitleM = ''
     //$scope.testimonials= testimonial;
     const db = firebase.firestore();
     const storage = firebase.storage().ref();
@@ -76,11 +76,11 @@ myApp.controller("collegeController",function($scope,$location,$rootScope,$timeo
       $scope.saveData = () => {
         var about = db.collection("collegePageTitle");
         batch.update(about.doc('pageTitle'),{
-            pageTitle:$scope.pageTitle,
+            text:$scope.pageTitle,
             uid:sessionStorage.uid || true
         });
         batch.update(about.doc('pageTitleM'),{
-            pageTitleM:$scope.pageTitleM,
+            text:$scope.pageTitleM,
             uid:sessionStorage.uid || true
         });
         var texts = db.collection("collegeTexts");

@@ -32,7 +32,7 @@
     <section class="articles latest-articles" id="blogdiv" data-page="1" data-category="">
         <div class="container">
             <div id="blogItems" class="row">
-                <div ng-repeat="blog in loadedBlogs | orderBy : 'date'" class="col-sm-6 col-md-4">
+                <div ng-repeat="blog in loadedBlogs | orderBy : '-ts'" class="col-sm-6 col-md-4">
                     <div class="item-article-blog edit-blog">
                         <!--<a ng-href="/#!/blog/{{$index}}">-->
                             <img ng-src={{blog.imgUrl}}>

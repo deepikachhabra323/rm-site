@@ -509,6 +509,9 @@ footer .social-icons li a .fa {
   .main-banner .person-banner{
     height: 460px;
   }
+  .about-banner{
+    top: -50px !important;
+  }
   .container-fluid{
     position: relative;
     z-index: 11;
@@ -519,6 +522,7 @@ footer .social-icons li a .fa {
   .rm-menu-icon{
     display: block;
     padding: 10px 0px;
+    padding-right: 17px;
   }
   .rm-menu-items{
     display: none;

@@ -13,6 +13,7 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
     $scope.visibleTab = "videos";$scope.addNewPlaylist = false;
     $scope.newPlaylist = {};$scope.currentPlaylist = {};
     $scope.shouldPlay = false;$scope.showPlaylist = true;
+    if(window.location.hash==='#!/videos')
     db.collection("videos").get().then(function(querySnapshot) {
         $scope.videos = [];
         videos = [];
@@ -37,6 +38,7 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
         },1);
     });
     $scope.getPL = () => {
+        if(window.location.hash==='#!/videos')
         db.collection("playlists").get().then(function(querySnapshot) {
             $scope.playlists = [];
             querySnapshot.forEach(function(doc) {
@@ -263,7 +265,7 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
             text:$scope.pageTitle,
             uid:sessionStorage.uid || true
         });
-        batch.update(about.doc('pageTitle'),{
+        batch.update(about.doc('pageTitleM'),{
             text:$scope.pageTitleM,
             uid:sessionStorage.uid || true
         });

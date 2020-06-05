@@ -7,6 +7,7 @@ myApp.controller("loginController",['$scope','$location','$rootScope','$firebase
     ////var ref = new Firebase();
     //this.object = $firebaseObject(ref);
     const auth = firebase.auth();
+    
     $scope.onLogin=()=>{
         console.log('login2')
         var promise = auth.signInWithEmailAndPassword($scope.email, $scope.password)
@@ -17,18 +18,28 @@ myApp.controller("loginController",['$scope','$location','$rootScope','$firebase
             sessionStorage.uid = $rootScope.user.uid;
             console.log('login1',user,auth.currentUser)
             $location.url('/');
-            ti = setTimeout(()=>{
-                $rootScope.user = null;
-                delete sessionStorage.uid;
-            },100000)
+            // ti = setTimeout(()=>{
+            //     $rootScope.user = null;
+            //     delete sessionStorage.uid;
+            // },100000)
             $timeout(function(){
                 $scope.$apply()
             },1);
         })
         .catch(function(error) {$rootScope.isLoggedIn = false; delete  sessionStorage.uid});
     };
-}]);
 
-var ti = setTimeout(()=>{
-    //delete sessionStorage.uid;
-},10000)
+    var ti = setTimeout(()=>{
+        //delete sessionStorage.uid;
+        console.log($rootScope.isLoggedIn,'1')
+        if($rootScope.isLoggedIn===true){
+            console.log($rootScope.isLoggedIn,'2')
+            $location.url("/");
+            window.location.hash="#!"
+        }
+        
+        $rootScope.isLoggedIn = false;
+        console.log('logging out ...')
+    },180000);
+    
+}]);

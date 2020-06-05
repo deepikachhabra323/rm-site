@@ -213,7 +213,7 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
     $scope.blogs = [{"imgUrl":"./img/blog.jpg","text":"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.","title":"1Lorem Ipsum is simply dummy text of the printing and typesetting industry."}];
     $scope.blogCats = blogCats;$scope.loadedBlogs=[];$scope.pageTitle='';
     $scope.filteredBlogs = {All:[]};$scope.catFilter = 'All';
-    $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
+    $scope.isLoggedIn = $rootScope.isLoggedIn ;
     db.collection("blogs").get().then(function(querySnapshot) {
         $scope.blogs = []; $scope.filteredBlogs = {All:[]};
         querySnapshot.forEach(function(doc) {
@@ -224,17 +224,18 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
                 storage.child('img/'+doc.data().imgUrl).getDownloadURL().then((url)=>{
                     data.imgUrl = url;
                     $scope.blogs.push({...data,id:doc.id});
-                    $scope.filteredBlogs['All'].push({...data,id:doc.id});
+                    let date = doc.data().date?new Date(doc.data().date.seconds*1000).toDateString():null;
+                    $scope.filteredBlogs['All'].push({...data,id:doc.id,date:date,ts:data.date && data.date.seconds?data.date.seconds:0});
                     if($scope.filteredBlogs[data.categ]==undefined && data.categ!==undefined){
                         $scope.filteredBlogs[data.categ] = [];
-                        console.log(1);
+                        // console.log(1);
                     }
                     if(data.categ!==undefined && data.categ!=='All'){
-                        $scope.filteredBlogs[data.categ].push({...data,id:doc.id});
-                        console.log("filtered",$scope.filteredBlogs);
+                        $scope.filteredBlogs[data.categ].push({...data,id:doc.id,date:date,ts:data.date && data.date.seconds?data.date.seconds:0});
+                        console.log(data.date && data.date.seconds?data.date.seconds:0);
                     }
                     $scope.loadedBlogs = $scope.filteredBlogs[$scope.catFilter].slice(0,6);
-                    // console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs);
+                    console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs);
                     $rootScope.loading = false;
                     $timeout(function(){
                         $scope.$apply();
@@ -248,7 +249,7 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
                     $scope.filteredBlogs[data.categ] = [];
                 }
                 if(data.categ!==undefined){
-                    $scope.filteredBlogs[data.categ].push({...data,id:doc.id});
+                    $scope.filteredBlogs[data.categ].push({...data,id:doc.id,ts:data.date?data.date.seconds:0});
                 }
                 $scope.loadedBlogs = $scope.filteredBlogs[$scope.catFilter].slice(0,6);
                 console.log($scope.loadedBlogs,$scope.blogs,$scope.filteredBlogs);
@@ -346,7 +347,7 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
     };
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
+            $scope.isLoggedIn = $rootScope.isLoggedIn;
             $timeout(function(){
                 $scope.$apply()
             },1);

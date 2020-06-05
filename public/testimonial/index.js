@@ -156,7 +156,7 @@ myApp.controller("testimonialController",['$scope','$http','$location','$rootSco
     };
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
+            $scope.isLoggedIn = $rootScope.isLoggedIn;
             $timeout(function(){
                 $scope.$apply()
             },1);

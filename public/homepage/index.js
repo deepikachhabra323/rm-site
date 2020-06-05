@@ -36,6 +36,7 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
     const db = firebase.firestore();
     const storage = firebase.storage().ref();
     var batch = db.batch();
+    $scope.isLoggedIn=false;
     $scope.videoTitle = "";$scope.blogTitle = "";
     $scope.testimonials = [];$scope.myStory = {};$scope.blogs = [];
     $scope.events = [];$scope.canModifyEvent = false;
@@ -65,6 +66,7 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
             console.log(doc.id, " => ", doc.data());
         });
     });
+    if(window.location.hash=="#!")
     db.collection("videos").get().then(function(querySnapshot) {
         $scope.videos = [];
         querySnapshot.forEach(function(doc) {
@@ -356,7 +358,12 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
         //   });
         });
     };
-    $scope.sendEmail = $rootScope.sendEmail;
+    $scope.email = {name:'',email:'',contact:''};
+    $scope.sendEmail = ()=>{
+        if(isValidated([$scope.email.name,$scope.email.email,$scope.email.contact]))
+        $rootScope.sendEmail($scope.email);
+        $scope.email = {name:'',email:'',contact:''};
+    };
     $scope.addFileUrl = (e) => {
         //console.log(e);
     };
@@ -435,12 +442,15 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
     });
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
+            $scope.isLoggedIn = $rootScope.isLoggedIn;
             $timeout(function(){
                 $scope.$apply()
             },1);
         }
     });
+    if($rootScope.isLoggedIn==false && window.location.hash==="#!/modifyData"){
+        $location.url("/");
+    }
 });
 
 function getVideoId(url) {

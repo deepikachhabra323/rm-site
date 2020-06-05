@@ -45,6 +45,7 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
     // $scope.loading = false;
     var db = firebase.firestore();
     var user = firebase.auth().currentUser;
+    $rootScope.isLoggedIn = false;
     console.log(user)
     $scope.canConnect = false;$scope.canBook = false;
     $scope.confirm = false;$scope.emailSub = '';
@@ -177,17 +178,26 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
             $('#toast').toast('show');
         }
       };
-      $rootScope.sendEmail = function () {
+      $rootScope.sendEmail = function (user) {
         Email.send({
-            // Host: "smtpout.secureserver.net",
             Username : "Rohit",
-            // Password : "MEntorRohit123",
             SecureToken:"0281e989-98c5-423e-9007-ebdf3c2c2e4a",
-            To : 'vipul7877279420@gmail.com',
+            To : user.email,
             From : "contact@rohitmittal.in",
             Bcc : "contact@rohitmittal.in",
-            Subject : "test3",
-            Body : "test",
+            Subject : "[Important] Congratulations on taking your first steps to success",
+            Body : `Hello ${user.name},
+            <br/>Thank you for subscribing to my emial-list. 
+            <br/>
+            You will get all the updates regarding my new Video updates, blog updates, workshops etc. via email now.
+            <br/>
+            If you wish to ask me something or get my guidance, you may mail to contact@rohitmittal.in or just drop a whatsapp message at 759-759-78-78
+            <br/>
+            Lets together create a happy and successful life for you!
+            <br/>
+            Love + Respect,
+            <br/>
+            Rohit Mittal`,
         })
         .then(function(message){
             //alert("mail sent successfully")
@@ -423,7 +433,7 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
     };
     $rootScope.$watch('isLoggedIn', (newVal,oldVal)=>{
         if(newVal!=oldVal){
-            $scope.isLoggedIn = $rootScope.isLoggedIn || sessionStorage.uid!==undefined;
+            $scope.isLoggedIn = $rootScope.isLoggedIn ;
             var paths = $scope.paths;
             if($rootScope.isLoggedIn){
                 paths[paths.length-1].title = 'Log Out';
@@ -431,12 +441,16 @@ myApp.controller("topnav",function($scope,$location,$rootScope,$timeout){
             else{
                 paths[paths.length-1].title = 'Log In';
             }
+            $scope.paths  =paths
             $timeout(function(){
                 $scope.$apply()
             },1);
         }
     });
-    $scope.isLoggedIn=$rootScope.isLoggedIn || sessionStorage.uid!==undefined;
+    console.log($scope,$rootScope)
+    $scope.isLoggedIn=$rootScope.isLoggedIn ;
+
+    // console.log = ()=> {}
 });
 
 myApp.directive('appFilereader', function($q) {
