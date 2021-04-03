@@ -24,6 +24,7 @@ myApp.controller("collegeController",function($scope,$location,$rootScope,$timeo
         $rootScope.canBook = true;
     }
     $scope.testimonials = [];
+    if(window.location.hash=="#!/college")
     db.collection("testimonials").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             var data = doc.data();

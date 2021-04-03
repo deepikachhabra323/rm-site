@@ -1,5 +1,17 @@
 {
   "projects": {
     "dev": "rohit-mittal"
+  },
+  "targets": {
+    "rohit-mittal": {
+      "hosting": {
+        "test": [
+          "test-rohit"
+        ],
+        "app": [
+          "rohit-mittal"
+        ]
+      }
+    }
   }
 }

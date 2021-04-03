@@ -98,12 +98,13 @@ myApp.controller("connectController",function($scope,$rootScope,$timeout){
             },1);
         });
     });
-    db.collection("mail-subscription").get().then((querySnapshot) => {
+    db.collection("emailsSubscribes").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            $scope.bookings.push({...doc.data(),id:doc.id});
+            $scope.bookings.push({users:doc.data().users,emails:doc.data().emails,id:doc.id});
         });
         $timeout(function(){
             $scope.$apply()
+            console.log($scope.bookings);
         },1);
     });
     db.collection("aboutCollaborate").get().then((querySnapshot) => {

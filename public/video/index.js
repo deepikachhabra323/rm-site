@@ -28,6 +28,9 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
                 $timeout(function(){
                     $scope.$apply();
                 },1);
+            })
+            .catch((err)=>{
+                $scope.videos.push({...doc.data(),id:doc.id});
             });
             $timeout(function(){
                 $scope.$apply();
@@ -57,8 +60,8 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
         });
     } 
     $scope.getPL();
-    $scope.deleteVideo = (index) =>{
-        db.collection("videos").doc($scope.videos[index].id).delete().then(function() {
+    $scope.deleteVideo = (item,index) =>{
+        db.collection("videos").doc(item.id).delete().then(function() {
             $scope.videos.splice(index,1);
             $timeout(function(){
                 $scope.$apply()
@@ -101,11 +104,15 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
             ind = index-1;
         }
         var toAdd = document.getElementById('ytvideo'+ind);
+        if(toAdd==null){
+            toAdd = document.getElementById('ytvideo'+index);
+        }
         $scope.ind = ind;
         if(ele){
             ele.parentNode.removeChild(ele);
         }
-        ele = toAdd.insertAdjacentHTML('afterend','<div class="rm-video-player" style="width:100%;" id="rm-video-player"><iframe width="100%" height="600px" src="'+link+'" allowfullscreen></iframe></div>')
+        console.log(ind,index)
+        ele = toAdd.insertAdjacentHTML('afterend','<div class="rm-video-player" style="width:100%;" id="rm-video-player"><iframe width="100%" height="600px" src="'+link+'?autoplay=1&mute=1" allowfullscreen></iframe></div>')
         console.log(toAdd,toAdd.getBoundingClientRect());
         window.scrollTo({
           //top: toAdd.getBoundingClientRect().y+toAdd.getBoundingClientRect().height+50,
@@ -150,7 +157,8 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
         });
     };
     $scope.getUrl = (index) => {
-        var key  = getVideoId($scope.videos[index].url);
+        // var key  = getVideoId($scope.videos[index].url);
+        var key  = getVideoId(index);
         return $sce.trustAsResourceUrl('//www.youtube.com/embed/' + key);
     };
     $scope.getPlaylistVideoUrl = (index) => {
@@ -179,14 +187,15 @@ myApp.controller("videoController",['$sce','$scope','$http','$location','$timeou
         },1);
     };
     $scope.updateNewUrl = function() {
-        if(isValidated([$scope.newUrl.url])){
+        if(isValidated([$scope.newUrl.url,$scope.newUrl.title])){
             db.collection("videos").add({
                 url: $scope.newUrl.url,
+                title: $scope.newUrl.title,
                 date:new Date(),
                 uid:sessionStorage.uid || true
             })
             .then(function(docRef) {
-                $scope.videos.push({url:$scope.newUrl.url,id:docRef.id});
+                $scope.videos.push({url:$scope.newUrl.url,id:docRef.id,title:$scope.newUrl.title});
                 $scope.canAddNew();
                 $timeout(function(){
                     $scope.$apply()

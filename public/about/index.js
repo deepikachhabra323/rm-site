@@ -15,6 +15,7 @@ $rootScope.loading = true;
   var batch = db.batch();
   const storage = firebase.storage().ref();
   $scope.testimonials = [];
+  if(window.location.hash=="#!/about")
   db.collection("testimonials").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         var data = doc.data();
@@ -65,6 +66,7 @@ $rootScope.loading = true;
         $('#toast').toast('show');
     }
   }
+  // if(window.location.hash=="#!/about")
   db.collection("aboutPageTitle").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
         $scope[doc.id] = doc.data().text;

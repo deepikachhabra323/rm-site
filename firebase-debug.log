@@ -1,0 +1,27 @@
+[debug] [2021-04-03T11:16:09.539Z] ----------------------------------------------------------------------
+[debug] [2021-04-03T11:16:09.541Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2021-04-03T11:16:09.541Z] CLI Version:   7.12.0
+[debug] [2021-04-03T11:16:09.541Z] Platform:      darwin
+[debug] [2021-04-03T11:16:09.541Z] Node Version:  v12.14.1
+[debug] [2021-04-03T11:16:09.542Z] Time:          Sat Apr 03 2021 16:46:09 GMT+0530 (India Standard Time)
+[debug] [2021-04-03T11:16:09.542Z] ----------------------------------------------------------------------
+[debug] [2021-04-03T11:16:09.542Z] 
+[debug] [2021-04-03T11:16:09.552Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-03T11:16:09.552Z] > authorizing via signed-in user
+[debug] [2021-04-03T11:16:09.552Z] [iam] checking project rohit-mittal for permissions ["firebase.projects.get"]
+[debug] [2021-04-03T11:16:09.557Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/rohit-mittal:testIamPermissions  
+
+[debug] [2021-04-03T11:16:11.349Z] <<< HTTP RESPONSE 200
+[debug] [2021-04-03T11:16:11.351Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/rohit-mittal  
+ 
+[debug] [2021-04-03T11:16:11.843Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/melorra/Desktop/web/rohitmittal'...
+[info] 
+[debug] [2021-04-03T11:16:11.847Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/rohit-mittal/webApps/-/config  
+ 
+[debug] [2021-04-03T11:16:13.374Z] <<< HTTP RESPONSE 200
+[info] i  hosting[app]: Serving hosting files from: public
+[info] ✔  hosting[app]: Local server: http://localhost:5000
+[info] i  hosting[test]: Serving hosting files from: public
+[info] ✔  hosting[test]: Local server: http://localhost:5005

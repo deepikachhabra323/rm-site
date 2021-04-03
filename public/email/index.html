@@ -1,0 +1,58 @@
+<div ng-controller="emailController" class="container">
+    <div class="row page"><br/>
+        <div>Subscribers</div>
+        <table height='200px' class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">#</th>
+                <th scope="col">Notify</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="email in emails" ng-init="res=users[email]">
+                <td class="delete" ng-click="changeSuccess(email,'subscriber','delete')"><i class="far fa-trash-alt"></i></td>
+                <th scope="row">{{$index+1}}</th>
+                <th class="resolved" scope="row" ng-click="changeSuccess(email,'subscriber','active')"><i ng-if="res.active" class="fas fa-check"></i><i ng-if="!res.active" class="fas fa-times"></i></th>
+                <td>{{res.name}}</td>
+                <td>{{res.email}}</td>
+                <td>{{res.phone}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        <br/>
+        <div>Email Subject</div>
+        <textarea placeholder="Subject..." class="ta" ng-model='subject'></textarea>
+        <br/>
+        <div>Email Body</div>
+        <textarea placeholder="Body..." class="ta" ng-model='body' cols="50" id="area1"></textarea>
+        <br/>
+        Add image to email:
+        <input  accept="image/*" type="file" ng-model="image" app-filereader/>
+        <br/><br/>
+        <img ng-src="{{image}}"/>
+        <br/><br/>
+        <button class="btn btn-primary btn-ghost" ng-click="sendSubEmail()">Send Email</button>
+        <br/><br/>
+        <button class="btn btn-primary btn-ghost" ng-click="sendSubEmail('self')">Send Email to Self</button>
+        <br/><br/>
+    </div>
+    <div class="rm-popup-parent" ng-if="emailSent" style="z-index: 1004">
+        <div class="rm-popup-container" style="width: 600px;height: 500px;position: relative;">
+            <div class="close" ng-click="toggleReadMode()">&times;</div>
+            <!-- <div class="rm-popup-header">Testimonial</div> -->
+            <div>Email Sent</div>
+            <div class="email-status">Success {{success.length}} : 
+                <span class="emailids" ng-repeat="s in success">{{s}}</span>
+            </div>
+            <div class="email-status">Failed {{fails.length}} : 
+                <span class="emailids emailidf" ng-repeat="s in fails">{{s}}</span>
+            </div>
+        </div>
+    </div>
+</div>

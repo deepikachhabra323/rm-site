@@ -24,6 +24,7 @@ myApp.controller("coachingController",function($scope,$location,$rootScope,$time
         $rootScope.canBook = true;
     }
     $scope.testimonials = [];
+    if(window.location.hash=="#!/coaching")
     db.collection("testimonials").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             var data = doc.data();

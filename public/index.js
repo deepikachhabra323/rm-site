@@ -104,17 +104,35 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
         $scope.didSubscribe = false;
     };
     $scope.mailSubscribe = function(){
-        db.collection("mail-subscription").add({
-            'email':$scope.emailSub,
-            uid:sessionStorage.uid || true
-        })
-        .then(function(docRef) {
-            $scope.emailSub = '';
-            $scope.didSubscribe = true;
-            $timeout(function(){
-                $scope.$apply()
-            },1);
-        });
+        $rootScope.sendEmail({email:$scope.emailSub,name:''});
+        $scope.didSubscribe = true;
+        $scope.emailSub = '';
+        // let emails = $scope.emails;
+        // let users = $scope.users;
+        // if(emails.indexOf($scope.emailSub)<0){
+        //     emails.push($scope.emailSub);
+        //     users[$scope.emailSub]={email:$scope.emailSub,active:true};
+        // db.collection("emailsSubscribes").doc("emails").update({
+        //     'emails':emails,
+        //     users:users,
+        //     uid:sessionStorage.uid || true
+        // })
+        // .then(function(docRef) {
+        //     $scope.emailSub = '';
+        //     $scope.didSubscribe = true;
+        //     $timeout(function(){
+        //         $scope.$apply()
+        //     },1);
+        // })
+        // .catch(function(error) {
+        //     console.error("Error adding document: ", error);
+        //     $scope.emailSub = '';
+        //     $scope.didSubscribe = true;
+        //     $timeout(function(){
+        //         $scope.$apply()
+        //     },1);
+        // });
+    // }
     }
 
     //connect
@@ -178,16 +196,24 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
             $('#toast').toast('show');
         }
       };
+      $scope.users = [];$scope.emails=[];
+      db.collection("emailsSubscribes").get().then(function(querySnapshot) {
+            $scope.users = [];$scope.emails=[];
+            querySnapshot.forEach(function(doc) {
+                // console.log('email',doc.data())
+                $scope.users = doc.data().users;$scope.emails=doc.data().emails;
+            });
+        });
       $rootScope.sendEmail = function (user) {
         Email.send({
             Username : "Rohit",
-            SecureToken:"0281e989-98c5-423e-9007-ebdf3c2c2e4a",
+            SecureToken:"2064eea0-7018-408a-9823-50add40382b2",
             To : user.email,
             From : "contact@rohitmittal.in",
             Bcc : "contact@rohitmittal.in",
             Subject : "[Important] Congratulations on taking your first steps to success",
             Body : `Hello ${user.name},
-            <br/>Thank you for subscribing to my emial-list. 
+            <br/><br/>Thank you for subscribing to my email-list. 
             <br/>
             You will get all the updates regarding my new Video updates, blog updates, workshops etc. via email now.
             <br/>
@@ -201,6 +227,45 @@ myApp.controller("appController",function($scope,$http,$document,$window,$locati
         })
         .then(function(message){
             //alert("mail sent successfully")
+            console.log(message,user,$scope)
+            let emails = $scope.emails;
+            let users = $scope.users;
+            console.log(emails.indexOf(user.email)<0 ,message=='OK')
+            if(emails.indexOf(user.email)<0 && message=='OK'){
+                emails.push(user.email);
+                users[user.email]={...user,active:true};
+                db.collection("emailsSubscribes").doc("emails").update({
+                    emails:emails,
+                    users:users,
+                    uid:sessionStorage.uid||true
+                }).then(function(docRef) {
+                    // window.location.reload();
+                    $timeout(function(){
+                        $scope.$apply()
+                    },1);
+                    // console.log("Document written with ID: ", docRef.id,docRef);
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+            }
+            Email.send({
+                Username : "Rohit",
+                // SecureToken:"0281e989-98c5-423e-9007-ebdf3c2c2e4a",
+                SecureToken:"2064eea0-7018-408a-9823-50add40382b2",
+                From : "contact@rohitmittal.in",
+                To : "contact@rohitmittal.in",
+                Subject : "New Email Subscriber (Homepage)",
+                Body : `Hello Rohit,
+                User Details:<br/>
+                Name ${user.name},<br/>
+                Email ${user.email},<br/>
+                Phone ${user.contact}<br/><br/>
+                Thanks.
+                `,
+            })
+            .then(function(message){});
+            
         });
     }
     $scope.toSuccess = (val) => {
@@ -267,47 +332,58 @@ myApp.directive('appFilereader', function($q) {
 myApp.config(function($routeProvider){
                 $routeProvider
                 .when("/",{
-                    templateUrl:"/homepage/index.html",
+                    // templateUrl:"/homepage/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"homeController"
                     })
                 .when("/modifyData",{
-                    templateUrl:"/homepage/modify.html",
+                    // templateUrl:"/homepage/modify.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"homeController"
                     })
                 .when("/blog/:topicId",{
-                    templateUrl:"/blog/readMode.html",
+                    // templateUrl:"/blog/readMode.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"blogReadController"
                     })
                 .when("/blog",{
-                    templateUrl:"/blog/index.html",
+                    // templateUrl:"/blog/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"blogController"
                     })
                 .when("/editBlog",{
-                    templateUrl:"/blog/editBlog.html",
+                    // templateUrl:"/blog/editBlog.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"blogEditController"
                     })
                 .when("/editBlog/:topicId",{
-                    templateUrl:"/blog/editBlog.html",
+                    // templateUrl:"/blog/editBlog.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"blogEditController"
                     })
                 .when("/videos",{
-                    templateUrl:"/video/index.html",
+                    // templateUrl:"/video/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"videoController"
                     })
                 .when("/login",{
-                    templateUrl:"/login/index.html",
+                    // templateUrl:"/login/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"loginController"
                     })
                 .when("/testimonials",{
-                    templateUrl:"/testimonial/index.html",
+                    // templateUrl:"/testimonial/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"testimonialController"
                     })
                 .when("/connections",{
-                    templateUrl:"/connect/index.html",
+                    // templateUrl:"/connect/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"connectController"
                     })
                 .when("/connect",{
-                    templateUrl:"/connect/connect.html",
+                    // templateUrl:"/connect/connect.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"connectionController"
                     })
                 .when("/comming_soon",{
@@ -315,32 +391,44 @@ myApp.config(function($routeProvider){
                     controller:"appController"
                     })
                 .when("/about",{
-                    templateUrl:"/about/index.html",
+                    // templateUrl:"/about/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"aboutController"
                     })
                 .when("/school",{
-                    templateUrl:"/school/index.html",
+                    // templateUrl:"/school/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"schoolController"
                     })
                 .when("/personal_mentoring",{
-                    templateUrl:"/mentoring/index.html",
+                    // templateUrl:"/mentoring/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"mentoringController"
                     })
                 .when("/college",{
-                    templateUrl:"/college/index.html",
+                    // templateUrl:"/college/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"collegeController"
                     })
                 .when("/coaching",{
-                    templateUrl:"/coaching/index.html",
+                    // templateUrl:"/coaching/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"coachingController"
                     })
                 .when("/speaking",{
-                    templateUrl:"/speaking/index.html",
+                    // templateUrl:"/speaking/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"speakingController"
                     })
                 .when("/one-on-one",{
-                    templateUrl:"/oneOnOne/index.html",
+                    // templateUrl:"/oneOnOne/index.html",
+                    templateUrl:"/comming_soon/index.html",
                     controller:"oneOnOneController"
+                    })
+                .when("/send_email",{
+                    // templateUrl:"/email/index.html",
+                    templateUrl:"/comming_soon/index.html",
+                    controller:"emailController"
                     })
                 .otherwise({
                     redirectTo:'/'

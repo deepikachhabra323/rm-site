@@ -19,7 +19,7 @@ myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeou
         theme: 'snow'
     };
     $scope.shareUrl = (type) => {
-        console.log(type)
+        // console.log(type)
         if(type=='LinkedIn')
         return window.location.href = 'https://www.linkedin.com/shareArticle?mini=true&url='+window.location.href;
         else if(type=='Facebook')
@@ -32,6 +32,7 @@ myApp.controller("blogReadController",function($scope,$http,$routeParams,$timeou
         }
     }
     var editor = new Quill(container,options);
+    // if(window.location.hash=="#!/blog")
     db.collection("blogs").doc($routeParams.topicId).get().then(function(doc) {
         
         $scope.blogId = $routeParams.topicId;
@@ -101,6 +102,7 @@ myApp.controller("blogEditController",function($scope,$http,$routeParams,$locati
     });
     //$scope.text = editor.getContents().ops;
     if($routeParams.topicId!=undefined){
+        if(window.location.hash=="#!/blog")
         db.collection("blogs").doc($routeParams.topicId).get().then((doc) => {
             var obj = doc.data();
             console.log(obj,editor)
@@ -214,6 +216,7 @@ myApp.controller("blogController",['$scope','$http','$firebaseObject','$firebase
     $scope.blogCats = blogCats;$scope.loadedBlogs=[];$scope.pageTitle='';
     $scope.filteredBlogs = {All:[]};$scope.catFilter = 'All';
     $scope.isLoggedIn = $rootScope.isLoggedIn ;
+    if(window.location.hash=="#!/blog")
     db.collection("blogs").get().then(function(querySnapshot) {
         $scope.blogs = []; $scope.filteredBlogs = {All:[]};
         querySnapshot.forEach(function(doc) {

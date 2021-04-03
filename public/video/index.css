@@ -57,7 +57,7 @@
     font-size: 20px;
     font-weight: 600;
 }
-.item-article:hover {
+.item-article:hover, .item-article-iframe:hover {
     box-shadow: 0 0 20px 6px rgba(0, 0, 0, .7);
     cursor: pointer;
 }

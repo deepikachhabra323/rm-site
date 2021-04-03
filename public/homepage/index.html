@@ -25,11 +25,19 @@
         </div>-->
     </div>
     <section id="main-content" class="blogs-videos">
-        <div class="rm-popup-parent" ng-show="shouldPlay">
+        <div ng-if="windowWidth>720" class="rm-popup-parent" ng-show="shouldPlay">
             <div class="rm-popup-container">
                 <div class="close" ng-click="toggleViewMode()">&times;</div>
                 <div style="min-width: 600px;min-height: 350px;">
                     <iframe width="700px" height="350px" ng-src="{{currentLink}}" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div ng-if="windowWidth<=720" class="rm-popup-parent" ng-show="shouldPlay">
+            <div class="rm-popup-container" style="padding: 3px;">
+                <div class="close" ng-click="toggleViewMode()">&times;</div>
+                <div>
+                    <iframe width="400px" height="200px" ng-src="{{currentLink}}" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -43,7 +51,15 @@
             </div>
             <div class="row videos">
                 <div ng-repeat="tile in videos" class="col-sm-6 col-md-4ths" ng-if="tile.isEnabled">
-                    <div class="item-article" ng-init="link = getUrl($index)" ng-click="playVideo(link,$index)">
+                    <div ng-click="playVideo(tile.url,$index)" ng-if="tile.thumbnail==undefined" class="item-article-iframe" style="position: relative;" ng-init="link = getUrl(tile.url)">
+                        <div style="pointer-events: none;"><iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe></div>
+                        <div class="item-head">
+                            <div>
+                                {{tile .title}}
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="tile.thumbnail!=undefined" class="item-article" ng-init="link = getUrl(tile.url)" ng-click="playVideo(tile.url,$index)">
                         <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
                         
                         <img style="height: auto;max-height: initial;" ng-src="{{tile.thumbnail.url}}">

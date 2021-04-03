@@ -66,7 +66,7 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
             console.log(doc.id, " => ", doc.data());
         });
     });
-    if(window.location.hash=="#!")
+    if(window.location.hash=="#!/")
     db.collection("videos").get().then(function(querySnapshot) {
         $scope.videos = [];
         querySnapshot.forEach(function(doc) {
@@ -79,6 +79,9 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
                 $timeout(function(){
                     $scope.$apply();
                 },1);
+            })
+            .catch(err=>{
+                $scope.videos.push({...doc.data(),id:doc.id});
             });// doc.data() is never undefined for query doc snapshots
             //$scope.videos.push({...doc.data(),id:doc.id,title:title.title});
             console.log(doc.id, " => ", {...doc.data(),id:doc.id,});
@@ -170,8 +173,11 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
         if(testimonial)
         $scope.testimonial = testimonial;
     };
-    $scope.getUrl = (index) => {
-        var key  = getVideoId($scope.videos[index].url);
+    $scope.getUrl = (index,auto) => {
+        var key  = getVideoId(index);
+        if(auto){
+            return $sce.trustAsResourceUrl('//www.youtube.com/embed/' + key+'?autoplay=1&mute=1');
+        }
         return $sce.trustAsResourceUrl('//www.youtube.com/embed/' + key);
     };
     
@@ -208,7 +214,8 @@ myApp.controller("homeController",function($sce,$scope,$http,$location,$rootScop
         },1);
     });
     $scope.playVideo = function(link){
-        $scope.currentLink = link;
+        debugger
+        $scope.currentLink = $scope.getUrl(link+'?autoplay=1&mute=1',true);
         $scope.shouldPlay = true;
     }
     $scope.toggleViewMode = function(){

@@ -82,7 +82,7 @@
 .blogs-videos .videos {
     margin-top: 0px;
 }
-.item-article {
+.item-article, .item-article-iframe {
     box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.45);
     margin-bottom: 30px;
     position: relative;
@@ -104,7 +104,7 @@
     width: 100%;
     /* object-fit: cover; */
 }
-.item-article .item-head {
+.item-article .item-head, .item-article-iframe .item-head{
     padding: 15px 15px;
     font-size: 20px;
     line-height: 30px;
@@ -113,10 +113,14 @@
     background-color: #fff;
     position: relative;
 }
-.item-article .item-head > div {
-    height: 43px;
+.item-article-iframe .item-head{
+    margin-top: -5px;
+    /* margin-bottom: 10px; */
+}
+.item-article .item-head > div, .item-article-iframe .item-head > div {
+    height: 50px;
     overflow: hidden;
-    line-height: 20px;
+    line-height: 25px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./testimonial/index.css">
     <link rel="stylesheet" href="./connect/index.css">
     <link rel="stylesheet" href="./about/index.css">
+    <link rel="stylesheet" href="./email/index.css">
 
     <link rel="stylesheet" href="./social/index.css">
     <!--<link rel="stylesheet" href="./school/index.css">
@@ -55,6 +56,9 @@
     <!-- Core build with no theme, formatting, non-essential modules -->
     <!--<link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet">
     <script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script>-->
+
+    <!-- nicedit -->
+    <script src="./nicEdit.js" type="text/javascript"></script>
     
     <!--fb plugin-->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0"></script>
@@ -77,10 +81,11 @@
     <script src="./mentoring/index.js" type="text/javascript"></script>
     <script src="./speaking/index.js" type="text/javascript"></script>
     <script src="./oneOnOne/index.js" type="text/javascript"></script>
+    <script src="./email/index.js" type="text/javascript"></script>
   </head>
   <body ng-app="rohitMittal">
     <div ng-controller="appController">
-      <div ng-controller="topnav" ng-show="isVisible()" class="rm-topnav-container">
+      <!-- <div ng-controller="topnav" ng-show="isVisible()" class="rm-topnav-container">
         <div id="top-header" class="">
           <div class="container clearfix">
             <div class="et-social-media">
@@ -98,7 +103,7 @@
               </a>
             </div>
     
-          </div> <!-- .container -->
+          </div>
         </div>
         <div>
           <div class="header-tile logo-tile">
@@ -107,6 +112,9 @@
           <div class="rm-menu-items header-tile">
             <div ng-click="redirectToUrl('/modifyData')"  onclick="toggleMenu();" ng-if="isLoggedIn" class="rm-topnav-title">
                 Modify Data
+            </div>
+            <div ng-click="redirectToUrl('/send_email')"  onclick="toggleMenu();" ng-if="isLoggedIn" class="rm-topnav-title">
+              Send Email
             </div>
             <div ng-repeat="path in paths" ng-click="redirectTo(path)"  onclick="toggleMenu();" ng-if="(path.title=='Log Out' &&  isLoggedIn) || (path.title=='Connect Results' &&  isLoggedIn) || (path.title!=='Connect Results' && path.title!=='Log In')" class="rm-topnav-title">
                 {{path.title}}
@@ -118,20 +126,20 @@
           </div>
         </div>
         <div onclick="toggleMenu();" class="rm-menu-icon"><i style="font-size:18px;" class="fas fa-bars"></i></div>
-      </div>
-      <header ng-show="isVisible('/')" class="main-banner main-banner_home clearfix" style="    background-color: #000000;">
+      </div> -->
+      <!-- <header ng-show="isVisible('/')" class="main-banner main-banner_home clearfix" style="    background-color: #000000;">
         <section class="banner-text banner-home">
           <div class="container-fluid">
               <div class="row">
                   <div class="col-md-offset-4 col-md-7 ">
                       <div class="slide-text">
-                          <!--<img class="banner-plus" src="assets/images/template/banner-plus.png" alt="">-->
+                         
                           <div class="row">
                               <div class=" banner-content-rsp" ng-controller="homeController">
                                   <h1 style="word-break: break-word;" class="text-normal">{{mainHeader}}</h1>
                                   <h2 style="word-break: break-word;" class="sub-heading" ng-model="subHeader">{{subHeader}}</h2>
                                   <a href="/#!/personal_mentoring" class="btn btn-primary btn-ghost " style="color: #fff;">
-                                      {{headerButton}} <!--<span class="fa fa-chevron-right"></span>-->
+                                      {{headerButton}} 
                                   </a>
                               </div>
                           </div>
@@ -142,11 +150,11 @@
           <img class="person-banner img-responsive center-block" src="https://firebasestorage.googleapis.com/v0/b/rohit-mittal.appspot.com/o/img%2Fcompressed%20imgs%2FNN4A4012%20a%20copy.jpg?alt=media&token=94a17624-0e5f-43fa-855e-7cf4b55f9823" alt="Rohit Mittal">
         </section>
         <div ng-click="shouldScrollDown()" class="scroll-down-please text-center" id="scrollDownPlease">
-            <!--<a href="#">-->
+            <a href="#">
                 <span class="fa fa-chevron-down fa-2x"></span>
-            <!--</a>-->
+            </a>
         </div>
-      </header>
+      </header> -->
       <div ng-view></div>
       <div class="rm-popup-parent" ng-if="confirm">
         <div class="rm-popup-container">
@@ -234,7 +242,7 @@
         </div>
       </div> -->
       <div class="scroll-top-anchor" ng-click="scrollToTop()" ng-if="canScrollTop"><i class="fas fa-chevron-up"></i></div>
-      <footer>
+      <!-- <footer>
           <div class="container">
               <div class="row">
                   <div class="col-md-4" style="text-align: center;margin-bottom: 40px;">
@@ -271,12 +279,12 @@
                       <div style="padding: 5px;">
                         © All rights reserved.
                       </div>
-                        <!--<a href="/terms-and-conditions">Terms of Use</a> | <a href="/privacy-policy">Privacy Policy</a> | <a href="http://forlogis.com/" target="_blank">Created by Forlogis</a>-->
+                        
                     </div>
                   </div>
               </div>
           </div>
-      </footer>
+      </footer> -->
     </div>
   </body>
 </html>

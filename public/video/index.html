@@ -41,7 +41,23 @@
             </div> -->
             <div id="blogItems" class="row" ng-if="visibleTab=='videos'">
                 <div ng-repeat="item in videos | orderBy : 'date'" class=" col-sm-6 col-md-4" ng-attr-id="{{'ytvideo'+$index}}">
-                    <div class="item-article" ng-class="{'item-article-auto':isLoggedIn==true}" ng-init="link = getUrl($index)">
+                    <div ng-click="playVideo(link,$index)" ng-if="item.thumbnail==undefined" class="item-article-iframe" style="position: relative;" ng-init="link = getUrl(item.url)">
+                        <div style="pointer-events: none;"><iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe></div>
+                        <div class="item-head">
+                            <div>
+                                {{item.title}}
+                            </div>
+                        </div>
+                        <div ng-if="isLoggedIn" style="padding: 10px;">
+                            <textarea style="width: 100%;" ng-model="item.url"></textarea>
+                        </div>
+                        <div ng-if="isLoggedIn" onclick="event.stopPropagation();" class="edit-delete-buttons">
+                            <span><input type="checkbox" ng-change="editvideo(item,$index,true)" ng-model="item.isEnabled"/>On homepage</span>
+                            <button class="btn btn-primary btn-ghost" ng-click="editVideo(item,$index)">Update</button>
+                            <button class="btn btn-primary btn-ghost" ng-click="deleteVideo(item,$index)">Delete</button>
+                        </div>
+                    </div>
+                    <div ng-if="item.thumbnail!=undefined" class="item-article" ng-class="{'item-article-auto':isLoggedIn==true}" ng-init="link = getUrl(item.url)">
                         <!--<iframe width="100%" height="260px" ng-bind="item.url" ng-src="{{link}}" allowfullscreen></iframe>-->
                         
                         <img ng-src="{{item.thumbnail.url}}">
@@ -70,7 +86,7 @@
                 </div>
             </div>
             <div class="playlist-body row" ng-if="visibleTab=='playlists'">
-                <div ng-show="showPlaylist">
+                <div ng-show="showPlaylist" style="width:100%">
                     <div ng-repeat = "playlist in playlists | orderBy : 'date'" class="col-sm-6 col-md-4 ">
                         <div class="item-article">
                             <img ng-src="{{playlist.thumbnail}}"  ng-click="togglePlaylistVideos(playlist)">
@@ -92,7 +108,7 @@
                     </div>
                 </div>
                 
-                <div ng-show="!showPlaylist" class="rm-playlist-videos">
+                <div ng-show="!showPlaylist" style="width:100%" class="rm-playlist-videos">
                     <div ng-repeat="video in currentPlaylist.videos" class="col-sm-6 col-md-4"  ng-attr-id="{{'ytvideo'+$index}}" >
                         <div class="item-article" ng-init="link = getPlaylistVideoUrl(video.snippet.resourceId.videoId)"  ng-click="playVideo(link,$index)">
                             <div style="position: absolute;padding: 10px;color: #fff;">{{video.snippet.title}}</div>
@@ -111,7 +127,8 @@
     </section>
     <div class="rm-popup-parent" ng-if="addNew">
         <div class="rm-popup-container">
-            <div class="rm-popup-header">Add new YouTube Url</div>
+            <div class="rm-popup-header">Add new YouTube Video</div>
+            <input placeholder="Enter Title" type="text" ng-model="newUrl.title">
             <input placeholder="Enter Url" type="text" ng-model="newUrl.url">
             <div style="text-align: right;">
                 <button class="btn btn-primary btn-ghost" ng-click="canAddNew()">Cancel</button>

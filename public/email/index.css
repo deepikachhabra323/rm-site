@@ -1,0 +1,19 @@
+.ta{
+    border: solid 2px #b3b1b1;
+    border-radius: 6px;
+    width: 100%;
+}
+.email-status{
+    padding: 5px;
+}
+.emailids{
+    padding: 2px 8px;
+    border-radius: 17px;
+    /* border: solid 1px grey; */
+    margin: 5px;
+    background: grey;
+    color: white;
+}
+.emailidf{
+    background-color: red;
+}
